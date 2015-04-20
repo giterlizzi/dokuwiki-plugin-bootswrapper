@@ -3,7 +3,7 @@
 /**
  * General tests for the bootswrapper plugin
  *
- * @group plugin_bootwrap
+ * @group plugin_bootswrapper
  * @group plugins
  */
 class general_plugin_bootswrapper_test extends DokuWikiTest {
