@@ -26,7 +26,7 @@ class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootst
         if ($mode == 'xhtml') {
 
             /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $classes, $content, $attributes) = $data;
+            list($state, $content, $classes, $attributes) = $data;
 
             switch($state) {
 
