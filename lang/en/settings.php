@@ -7,8 +7,4 @@
  */
  
 // for the configuration manager
-$lang['useMetaDescription']   = 'Add description meta tag';
-$lang['useMetaAuthor']        = 'Add author meta tag';
-$lang['useJSONLD']            = 'Add JSON-LD';
-$lang['defaultSchemaOrgType'] = 'Default Schema.org type for JSON-LD';
-$lang['excludedPages']        = 'Excluded pages (insert a regex)';
+$lang['loadBootstrap'] = "Load the Bootstrap vanilla CSS. Disable it if you have installed a Bootstrap based template.";

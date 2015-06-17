@@ -5,4 +5,4 @@
  * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  */
 
-$meta['loadBootstrap'] = array('onoff');
+$meta['loadBootstrap'] = array('onoff', '_caution' => 'danger');
