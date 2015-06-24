@@ -14,8 +14,8 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<LABEL.*?>(?=.*?</LABEL>)';
-    protected $pattern_end   = '</LABEL>';
+    protected $pattern_start = '<(?:LABEL|label).*?>(?=.*?</(?:LABEL|label)>)';
+    protected $pattern_end   = '</(?:LABEL|label)>';
     protected $tag           = 'LABEL';
 
     function render($mode, Doku_Renderer $renderer, $data) {
