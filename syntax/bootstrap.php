@@ -22,7 +22,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
     function getType(){ return 'formatting'; }
     function getAllowedTypes() { return array('container', 'formatting', 'substition', 'protected', 'disabled', 'paragraphs'); }
-    function getPType(){ return 'normal';}
+    function getPType(){ return 'block';}
     function getSort(){ return 195; }
 
 
