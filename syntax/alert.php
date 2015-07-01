@@ -16,8 +16,6 @@ class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootst
 
     protected $pattern_start = '<(?:ALERT|alert).*?>(?=.*?</(?:ALERT|alert)>)';
     protected $pattern_end   = '</(?:ALERT|alert)>';
-    protected $tag           = 'ALERT';
-
 
     function render($mode, Doku_Renderer $renderer, $data) {
 
@@ -26,7 +24,7 @@ class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootst
         if ($mode == 'xhtml') {
 
             /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $content, $classes, $attributes) = $data;
+            list($state, $match, $attributes) = $data;
 
             switch($state) {
 
@@ -53,7 +51,7 @@ class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootst
                 case DOKU_LEXER_UNMATCHED:
                     $renderer->doc .= sprintf($this->template_content,
                                               str_replace(array('<p>','</p>'), '',
-                                                          p_render("xhtml", p_get_instructions($content), $info)));
+                                                          p_render("xhtml", p_get_instructions($match), $info)));
                     return true;
 
                 case DOKU_LEXER_EXIT:

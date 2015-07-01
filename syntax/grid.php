@@ -16,7 +16,6 @@ class syntax_plugin_bootswrapper_grid extends syntax_plugin_bootswrapper_bootstr
 
     protected $pattern_start = '<(?:GRID|grid).*?>(?=.*?</(?:GRID|grid)>)';
     protected $pattern_end   = '</(?:GRID|grid)>';
-    protected $tag           = 'GRID';
 
     function render($mode, Doku_Renderer $renderer, $data) {
 
@@ -25,7 +24,7 @@ class syntax_plugin_bootswrapper_grid extends syntax_plugin_bootswrapper_bootstr
         if ($mode == 'xhtml') {
 
             /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $content, $classes, $attributes) = $data;
+            list($state, $match, $attributes) = $data;
             $wrap = ($attributes['wrap']) ? $attributes['wrap'] : 'div';
 
             switch($state) {
@@ -38,7 +37,7 @@ class syntax_plugin_bootswrapper_grid extends syntax_plugin_bootswrapper_bootstr
                     return true;
 
                 case DOKU_LEXER_UNMATCHED:
-                    $renderer->doc .= $content;
+                    $renderer->doc .= $match;
                     return true;
 
                 case DOKU_LEXER_EXIT:

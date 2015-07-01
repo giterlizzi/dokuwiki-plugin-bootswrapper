@@ -14,7 +14,6 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
     protected $pattern_start    = '<BOOTSTRAP.+?>';
     protected $pattern_end      = '</BOOTSTRAP>';
-    protected $tag              = 'BOOTSTRAP';
     protected $template_start   = '<div class="%s">';
     protected $template_content = '%s';
     protected $template_end     = '</div>';
@@ -40,21 +39,14 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
             case DOKU_LEXER_ENTER :
 
-                $search  = array('<'.$this->tag.'>', '</'.$this->tag.'>');
-                $content = trim(str_replace($search, '', $match));
-                $classes = (array) explode(' ', trim(str_replace(array('<'.$this->tag, '>'), '', $match)));
                 $attributes = array();
+                $xml        = simplexml_load_string(str_replace('>', '/>', $match));
 
-                //preg_match_all("/([a-z0-9_]+)\s*=\s*[\"\'](.*?)[\"\']/is", trim(str_replace(array('<'.$this->tag, '>'), '', $match)), $out);
-                $xml = simplexml_load_string(str_replace('>', '/>', $match));
-
-                //for ($i=0; $i < count($out[1]); $i++) {
                 foreach ($xml->attributes() as $key => $value) {
-                  //$attributes[$out[1][$i]] = $out[2][$i];
                   $attributes[$key] = (string) $value;
                 }
 
-                return array($state, $content, $classes, $attributes);
+                return array($state, $match, $attributes);
 
             case DOKU_LEXER_UNMATCHED :  return array($state, $match);
             case DOKU_LEXER_EXIT :       return array($state, '');
@@ -71,23 +63,23 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
         if ($mode == 'xhtml') {
 
             /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $content, $classes, ) = $data;
+            list($state, $match) = $data;
 
             switch($state) {
 
                 case DOKU_LEXER_ENTER:
-                    $markup = sprintf($this->template_start, @implode(' ', $classes));
+                    $markup = $this->template_start;
                     $renderer->doc .= $markup;
                     return true;
 
                 case DOKU_LEXER_UNMATCHED:
                     $renderer->doc .= sprintf($this->template_content,
                                               str_replace(array('<p>','</p>'), '',
-                                                          p_render("xhtml", p_get_instructions($content), $info)));
+                                                          p_render("xhtml", p_get_instructions($match), $info)));
                     return true;
 
                 case DOKU_LEXER_EXIT:
-                    $renderer->doc .= sprintf($this->template_end, '');
+                    $renderer->doc .= $this->template_end;
                     return true;
 
             }

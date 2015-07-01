@@ -16,7 +16,6 @@ class syntax_plugin_bootswrapper_caption extends syntax_plugin_bootswrapper_boot
 
     protected $pattern_start = '<(?:CAPTION|caption).*?>(?=.*?</(?:CAPTION|caption)>)';
     protected $pattern_end   = '</(?:CAPTION|caption)>';
-    protected $tag           = 'CAPTION';
 
     function render($mode, Doku_Renderer $renderer, $data) {
 
@@ -25,7 +24,7 @@ class syntax_plugin_bootswrapper_caption extends syntax_plugin_bootswrapper_boot
         if ($mode == 'xhtml') {
 
             /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $content, $classes, $attributes) = $data;
+            list($state, $match, $attributes) = $data;
 
             switch($state) {
 
@@ -39,7 +38,7 @@ class syntax_plugin_bootswrapper_caption extends syntax_plugin_bootswrapper_boot
                 case DOKU_LEXER_UNMATCHED:
                     $renderer->doc .= sprintf($this->template_content,
                                               str_replace(array('<p>','</p>'), '',
-                                                          p_render("xhtml", p_get_instructions($content), $info)));
+                                                          p_render("xhtml", p_get_instructions($match), $info)));
                     return true;
 
                 case DOKU_LEXER_EXIT:

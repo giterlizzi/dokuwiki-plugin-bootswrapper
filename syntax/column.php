@@ -16,7 +16,6 @@ class syntax_plugin_bootswrapper_column extends syntax_plugin_bootswrapper_boots
 
     protected $pattern_start = '<(?:COL|col).*?>(?=.*?</(?:COL|col)>)';
     protected $pattern_end   = '</(?:COL|col)>';
-    protected $tag           = 'COL';
 
     function render($mode, Doku_Renderer $renderer, $data) {
 
@@ -25,7 +24,7 @@ class syntax_plugin_bootswrapper_column extends syntax_plugin_bootswrapper_boots
         if ($mode == 'xhtml') {
 
             /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $content, $classes, $attributes) = $data;
+            list($state, $match, $attributes) = $data;
             $wrap = isset($attributes['wrap']) ? $attributes['wrap'] : 'div';
             $col  = '';
 
@@ -43,7 +42,7 @@ class syntax_plugin_bootswrapper_column extends syntax_plugin_bootswrapper_boots
                     return true;
 
                 case DOKU_LEXER_UNMATCHED:
-                    $renderer->doc .= $content;
+                    $renderer->doc .= $match;
                     return true;
 
                 case DOKU_LEXER_EXIT:

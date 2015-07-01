@@ -16,7 +16,8 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
 
     protected $pattern_start = '<(?:TEXT|text).*?>(?=.*?</(?:TEXT|text)>)';
     protected $pattern_end   = '</(?:TEXT|text)>';
-    protected $tag           = 'TEXT';
+
+    function getPType() { return 'normal';}
 
     function render($mode, Doku_Renderer $renderer, $data) {
 
@@ -25,7 +26,7 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
         if ($mode == 'xhtml') {
 
             /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $content, $classes, $attributes) = $data;
+            list($state, $match, $attributes) = $data;
 
             switch($state) {
 
@@ -40,7 +41,7 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
                 case DOKU_LEXER_UNMATCHED:
                     $renderer->doc .= sprintf($this->template_content,
                                               str_replace(array('<p>','</p>'), '',
-                                                          p_render("xhtml", p_get_instructions($content), $info)));
+                                                          p_render("xhtml", p_get_instructions($match), $info)));
                     return true;
 
                 case DOKU_LEXER_EXIT:

@@ -14,10 +14,8 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start    = '<(?:PANEL|panel).*?>(?=.*?</(?:PANEL|panel)>)';
-    protected $pattern_end      = '</(?:PANEL|panel)>';
-    protected $tag              = 'PANEL';
-
+    protected $pattern_start = '<(?:PANEL|panel).*?>(?=.*?</(?:PANEL|panel)>)';
+    protected $pattern_end   = '</(?:PANEL|panel)>';
 
     function render($mode, Doku_Renderer $renderer, $data) {
 
@@ -26,7 +24,9 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
         if ($mode == 'xhtml') {
 
             /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $content, $classes, $attributes) = $data;
+            list($state, $match, $attributes) = $data;
+
+            global $footer;
 
             switch($state) {
 
@@ -34,6 +34,7 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
 
                     $type     = ($attributes['type'])     ? $attributes['type']     : 'default';
                     $title    = ($attributes['title'])    ? $attributes['title']    : null;
+                    $footer   = ($attributes['footer'])   ? $attributes['footer']   : null;
                     $subtitle = ($attributes['subtitle']) ? $attributes['subtitle'] : null;
                     $icon     = ($attributes['icon'])     ? $attributes['icon']     : null;
 
@@ -46,21 +47,33 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
                         }
 
                         $markup .= sprintf('<div class="panel-heading"><div class="panel-title">%s</div>%s</div>', $title, $subtitle);
+
                     }
 
                     $markup .= '<div class="panel-body">';
 
                     $renderer->doc .= $markup;
+
                     return true;
 
                 case DOKU_LEXER_UNMATCHED:
                     $renderer->doc .= sprintf($this->template_content,
                                               str_replace(array('<p>','</p>'), '',
-                                                          p_render("xhtml", p_get_instructions($content), $info)));
+                                                          p_render("xhtml", p_get_instructions($match), $info)));
                     return true;
 
                 case DOKU_LEXER_EXIT:
-                    $renderer->doc .= '</div></div>';
+
+                    $markup = '</div>';
+
+                    if ($footer) {
+                        $markup .= sprintf('<div class="panel-footer">%s</div>', $footer);
+                    }
+
+                    $markup .= '</div>';
+
+                    $renderer->doc .= $markup;
+
                     return true;
 
             }

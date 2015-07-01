@@ -16,7 +16,6 @@ class syntax_plugin_bootswrapper_thumbnail extends syntax_plugin_bootswrapper_bo
 
     protected $pattern_start = '<(?:THUMBNAIL|thumbnail).*?>(?=.*?</(?:THUMBNAIL|thumbnail)>)';
     protected $pattern_end   = '</(?:THUMBNAIL|thumbnail)>';
-    protected $tag           = 'THUMBNAIL';
 
     function render($mode, Doku_Renderer $renderer, $data) {
 
@@ -25,7 +24,7 @@ class syntax_plugin_bootswrapper_thumbnail extends syntax_plugin_bootswrapper_bo
         if ($mode == 'xhtml') {
 
             /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $content, $classes, $attributes) = $data;
+            list($state, $match, $attributes) = $data;
 
             switch($state) {
 
@@ -37,7 +36,7 @@ class syntax_plugin_bootswrapper_thumbnail extends syntax_plugin_bootswrapper_bo
                     return true;
 
                 case DOKU_LEXER_UNMATCHED:
-                    $renderer->doc .= $content;
+                    $renderer->doc .= $match;
                     return true;
 
                 case DOKU_LEXER_EXIT:
