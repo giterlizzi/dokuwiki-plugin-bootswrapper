@@ -24,24 +24,9 @@ class action_plugin_bootswrapper extends DokuWiki_Action_Plugin {
      */
     public function register(Doku_Event_Handler $controller) {
         $controller->register_hook('TPL_METAHEADER_OUTPUT', 'BEFORE', $this,
-                                   '_hookjs');
-        $controller->register_hook('TPL_METAHEADER_OUTPUT', 'BEFORE', $this,
                                    '_load');
     }
- 
-    /**
-     * Event handler
-     *
-     * @param  Doku_Event  &$event
-     */
-    public function _hookjs(Doku_Event &$event, $param) {
 
-        $event->data['script'][] = array(
-          'type'  => 'text/javascript',
-          '_data' => 'jQuery(document).ready(function() { jQuery(\'[data-toggle="tooltip"]\').tooltip() });'
-        );
-
-    }
 
     /**
      * Event handler
