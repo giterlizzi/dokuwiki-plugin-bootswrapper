@@ -1,7 +1,7 @@
 /*!
  * DokuWiki Bootstrap Wrapper Plugin
  *
- * Home     http://dokuwiki.org/plugin:bootswrap
+ * Home     http://dokuwiki.org/plugin:bootswrapper
  * Author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
@@ -17,6 +17,7 @@ jQuery(document).ready(function() {
             btnLink  = btnWrap.find('a'),
             btnClass = ['btn'];
 
+        // Add Fake link
         if (! btnLink.length) {
 
             btnLabel = btnWrap.html();

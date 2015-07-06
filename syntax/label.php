@@ -35,7 +35,7 @@ class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootst
                     $type     = ($attributes['type']) ? $attributes['type'] : 'info';
                     $icon     = ($attributes['icon']) ? $attributes['icon'] : null;
 
-                    $markup = sprintf('<div class="label label-%s">', $type);
+                    $markup = sprintf('<span class="label label-%s">', $type);
 
                     if ($icon) {
                       $markup .= sprintf('<i class="%s"></i> ', $icon);
@@ -51,7 +51,7 @@ class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootst
                     return true;
 
                 case DOKU_LEXER_EXIT:
-                    $renderer->doc .= '</div>';
+                    $renderer->doc .= '</span>';
                     return true;
 
             }
