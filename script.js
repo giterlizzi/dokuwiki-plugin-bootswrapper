@@ -10,46 +10,89 @@ jQuery(document).ready(function() {
 
     jQuery('[data-toggle="tooltip"]').tooltip();
 
-    jQuery('[data-btn-type]').each(function() {
+    jQuery('[data-nav-type]').each(function() {
 
-        var btnWrap  = jQuery(this),
-            btnData  = btnWrap.data(),
-            btnLink  = btnWrap.find('a'),
-            btnClass = ['btn'];
+        var $nav_wrap = jQuery(this),
+            nav_data  = $nav_wrap.data(),
+            nav_class = ['nav'];
 
-        // Add Fake link
-        if (! btnLink.length) {
+        for (key in nav_data) {
 
-            btnLabel = btnWrap.html();
-            btnWrap.html('');
-
-            btnLink  = jQuery('<a href="#"/>').html(btnLabel);
-            jQuery(this).append(btnLink);
-
-        }
-
-        for (key in btnData) {
-
-            var value = btnData[key];
+            var value = nav_data[key];
 
             switch (key) {
-                case 'btnType':
-                case 'btnSize':
-                    btnClass.push(['btn-', value].join(''));
+                case 'navType':
+                    nav_class.push(['nav-', value].join(''));
                     break;
-                case 'btnBlock':
-                    btnClass.push('btn-block');
+                case 'navStacked':
+                    if (value) nav_class.push('nav-stacked');
                     break;
-                case 'btnIcon':
-                    var icon = ['<i class="', value, '"/> '].join('');
-                    btnLink.prepend(icon);
+                case 'navJustified':
+                    if (value) nav_class.push('nav-justified');
                     break;
             }
 
         }
 
-        btnLink.addClass(btnClass.join(' '));
-        btnLink.attr('role', 'button');
+        $nav_wrap.find('ul:first').addClass(nav_class.join(' '));
+        $nav_wrap.find('div.li *').unwrap();
+        $nav_wrap.find('li').attr('role', 'presentation');
+        $nav_wrap.find('.curid').parent('li').addClass('active');
+
+        // Drop-down menu
+        $nav_wrap.find('ul li ul')
+            .addClass('dropdown-menu')
+            .parent('li')
+            .addClass('dropdown');
+
+        $nav_wrap.find('.dropdown div.li').replaceWith(function() {
+            return jQuery('<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" />')
+                .html(jQuery(this).contents())
+                .append(' <span class="caret"/>');
+        });
+
+    });
+
+    jQuery('[data-btn-type]').each(function() {
+
+        var $btn_wrap = jQuery(this),
+            btn_data  = $btn_wrap.data(),
+            $btn_link = $btn_wrap.find('a'),
+            btn_class = ['btn'];
+
+        // Add Fake link
+        if (! $btn_link.length) {
+
+            btn_label = $btn_wrap.html();
+            $btn_wrap.html('');
+
+            $btn_link  = jQuery('<a href="#"/>').html(btn_label);
+            jQuery(this).append($btn_link);
+
+        }
+
+        for (key in btn_data) {
+
+            var value = btn_data[key];
+
+            switch (key) {
+                case 'btnType':
+                case 'btnSize':
+                    btn_class.push(['btn-', value].join(''));
+                    break;
+                case 'btnBlock':
+                    btn_class.push('btn-block');
+                    break;
+                case 'btnIcon':
+                    var icon = ['<i class="', value, '"/> '].join('');
+                    $btn_link.prepend(icon);
+                    break;
+            }
+
+        }
+
+        $btn_link.addClass(btn_class.join(' '));
+        $btn_link.attr('role', 'button');
 
     });
 
