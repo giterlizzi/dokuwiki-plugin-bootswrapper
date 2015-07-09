@@ -36,12 +36,6 @@ class syntax_plugin_bootswrapper_well extends syntax_plugin_bootswrapper_bootstr
                     $renderer->doc .= $markup;
                     return true;
 
-                case DOKU_LEXER_UNMATCHED:
-                    $renderer->doc .= sprintf($this->template_content,
-                                              str_replace(array('<p>','</p>'), '',
-                                                          p_render("xhtml", p_get_instructions($match), $info)));
-                    return true;
-
                 case DOKU_LEXER_EXIT:
                     $renderer->doc .= '</div>';
                     return true;

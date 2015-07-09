@@ -17,6 +17,8 @@ class syntax_plugin_bootswrapper_thumbnail extends syntax_plugin_bootswrapper_bo
     protected $pattern_start = '<(?:THUMBNAIL|thumbnail).*?>(?=.*?</(?:THUMBNAIL|thumbnail)>)';
     protected $pattern_end   = '</(?:THUMBNAIL|thumbnail)>';
 
+    function getPType(){ return 'block'; }
+
     function render($mode, Doku_Renderer $renderer, $data) {
 
         if (empty($data)) return false;
@@ -33,10 +35,6 @@ class syntax_plugin_bootswrapper_thumbnail extends syntax_plugin_bootswrapper_bo
                     $markup = '<div class="thumbnail">';
 
                     $renderer->doc .= $markup;
-                    return true;
-
-                case DOKU_LEXER_UNMATCHED:
-                    $renderer->doc .= $match;
                     return true;
 
                 case DOKU_LEXER_EXIT:

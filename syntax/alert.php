@@ -17,6 +17,8 @@ class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootst
     protected $pattern_start = '<(?:ALERT|alert).*?>(?=.*?</(?:ALERT|alert)>)';
     protected $pattern_end   = '</(?:ALERT|alert)>';
 
+    function getPType(){ return 'block'; }
+
     function render($mode, Doku_Renderer $renderer, $data) {
 
         if (empty($data)) return false;
@@ -46,12 +48,6 @@ class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootst
                     }
 
                     $renderer->doc .= $markup;
-                    return true;
-
-                case DOKU_LEXER_UNMATCHED:
-                    $renderer->doc .= sprintf($this->template_content,
-                                              str_replace(array('<p>','</p>'), '',
-                                                          p_render("xhtml", p_get_instructions($match), $info)));
                     return true;
 
                 case DOKU_LEXER_EXIT:

@@ -35,12 +35,6 @@ class syntax_plugin_bootswrapper_caption extends syntax_plugin_bootswrapper_boot
                     $renderer->doc .= $markup;
                     return true;
 
-                case DOKU_LEXER_UNMATCHED:
-                    $renderer->doc .= sprintf($this->template_content,
-                                              str_replace(array('<p>','</p>'), '',
-                                                          p_render("xhtml", p_get_instructions($match), $info)));
-                    return true;
-
                 case DOKU_LEXER_EXIT:
                     $renderer->doc .= '</div>';
                     return true;

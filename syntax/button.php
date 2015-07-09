@@ -47,10 +47,6 @@ class syntax_plugin_bootswrapper_button extends syntax_plugin_bootswrapper_boots
                     $renderer->doc .= $markup;
                     return true;
 
-                case DOKU_LEXER_UNMATCHED:
-                    $renderer->doc .= $match;
-                    return true;
-
                 case DOKU_LEXER_EXIT:
                     $renderer->doc .= "</span>";
                     return true;

@@ -17,6 +17,8 @@ class syntax_plugin_bootswrapper_column extends syntax_plugin_bootswrapper_boots
     protected $pattern_start = '<(?:COL|col).*?>(?=.*?</(?:COL|col)>)';
     protected $pattern_end   = '</(?:COL|col)>';
 
+    function getPType(){ return 'block'; }
+
     function render($mode, Doku_Renderer $renderer, $data) {
 
         if (empty($data)) return false;
