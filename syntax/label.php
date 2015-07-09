@@ -32,8 +32,12 @@ class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootst
 
                 case DOKU_LEXER_ENTER:
 
-                    $type     = ($attributes['type']) ? $attributes['type'] : 'info';
+                    $type     = ($attributes['type']) ? $attributes['type'] : 'default';
                     $icon     = ($attributes['icon']) ? $attributes['icon'] : null;
+
+                    if (! in_array($type, array('default', 'primary', 'success', 'info', 'warning', 'danger'))) {
+                        $type = 'default';
+                    }
 
                     $markup = sprintf('<span class="label label-%s">', $type);
 

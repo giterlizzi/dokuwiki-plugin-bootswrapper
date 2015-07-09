@@ -32,7 +32,12 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
 
                 case DOKU_LEXER_ENTER:
 
-                    $type   = ($attributes['type']) ? $attributes['type'] : 'info';
+                    $type   = ($attributes['type']) ? $attributes['type'] : 'muted';
+
+                    if (! in_array($type, array('muted', 'primary', 'success', 'info', 'warning', 'danger'))) {
+                        $type = 'muted';
+                    }
+
                     $markup = sprintf('<span class="text text-%s">', $type);
 
                     $renderer->doc .= $markup;

@@ -38,6 +38,10 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
                     $subtitle = ($attributes['subtitle']) ? $attributes['subtitle'] : null;
                     $icon     = ($attributes['icon'])     ? $attributes['icon']     : null;
 
+                    if (! in_array($type, array('default', 'primary', 'success', 'info', 'warning', 'danger'))) {
+                        $type = 'default';
+                    }
+
                     $markup = sprintf('<div class="panel panel-%s">', $type);
 
                     if ($title || $subtitle) {

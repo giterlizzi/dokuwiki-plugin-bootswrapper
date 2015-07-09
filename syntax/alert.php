@@ -36,6 +36,10 @@ class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootst
                     $icon     = ($attributes['icon'])    ? $attributes['icon']    : null;
                     $dismiss  = ($attributes['dismiss']) ? $attributes['dismiss'] : false;
 
+                    if (! in_array($type, array('success', 'info', 'warning', 'danger'))) {
+                        $type = 'info';
+                    }
+
                     $markup = sprintf('<div class="alert alert-%s %s" role="alert">',
                                       $type, (($dismiss) ? 'alert-dismissible' : ''));
 

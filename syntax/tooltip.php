@@ -35,6 +35,10 @@ class syntax_plugin_bootswrapper_tooltip extends syntax_plugin_bootswrapper_boot
                     $location = ($attributes['location']) ? $attributes['location'] : 'top';
                     $title    = ($attributes['title'])    ? $attributes['title']    : null;
 
+                    if (! in_array($location, array('top', 'bottom', 'left', 'right', 'auto'))) {
+                        $type = 'top';
+                    }
+
                     $markup = sprintf('<span data-toggle="tooltip" data-html="true" data-placement="%s" title="%s" style="border-bottom:1px dotted">', $location, $title);
 
                     $renderer->doc .= $markup;

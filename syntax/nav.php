@@ -1,6 +1,6 @@
 <?php
 /**
- * Bootstrap Wrapper Plugin: Button
+ * Bootstrap Wrapper Plugin: Tabs
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi>
@@ -12,12 +12,12 @@ if(!defined('DOKU_INC')) die();
 
 require_once(dirname(__FILE__).'/bootstrap.php');
 
-class syntax_plugin_bootswrapper_button extends syntax_plugin_bootswrapper_bootstrap {
+class syntax_plugin_bootswrapper_nav extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<button.*?>(?=.*?</button>)';
-    protected $pattern_end   = '</button>';
+    protected $pattern_start = '<nav.*?>(?=.*?</nav>)';
+    protected $pattern_end   = '</nav>';
 
-    function getPType() { return 'normal';}
+    function getPType() { return 'block';}
 
     function render($mode, Doku_Renderer $renderer, $data) {
 
@@ -31,28 +31,29 @@ class syntax_plugin_bootswrapper_button extends syntax_plugin_bootswrapper_boots
             $html5data = array();
 
             if (! isset($attributes['type'])) {
-              $attributes['type'] = 'default';
-            }
-
-            if (! in_array($attributes['type'], array('default', 'primary', 'success', 'info', 'warning', 'danger'))) {
-                $attributes['type'] = 'default';
+              $attributes['type'] = 'tabs';
             }
 
             foreach ($attributes as $key => $value) {
-              $html5data[] = sprintf('data-btn-%s="%s"', $key, $value);
+
+                if ($key == 'type' && ! in_array($value, array('tabs', 'pills'))) {
+                    $value = 'tabs';
+                }
+
+                $html5data[] = sprintf('data-nav-%s="%s"', $key, $value);
             }
 
             switch($state) {
 
                 case DOKU_LEXER_ENTER:
 
-                    $markup = sprintf('<span %s>', implode(' ', $html5data));
+                    $markup = sprintf('<div %s>', implode(' ', $html5data));
 
                     $renderer->doc .= $markup;
                     return true;
 
                 case DOKU_LEXER_EXIT:
-                    $renderer->doc .= "</span>";
+                    $renderer->doc .= "</div>";
                     return true;
 
             }
