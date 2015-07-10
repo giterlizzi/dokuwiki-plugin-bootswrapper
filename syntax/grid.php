@@ -14,44 +14,11 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_grid extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<(?:GRID|grid).*?>(?=.*?</(?:GRID|grid)>)';
-    protected $pattern_end   = '</(?:GRID|grid)>';
+    protected $pattern_start = '<grid>';
+    protected $pattern_end   = '</grid>';
 
-    function render($mode, Doku_Renderer $renderer, $data) {
+    protected $template_start = '<div class="row">';
+    protected $template_end   = '</div>';
 
-        if (empty($data)) return false;
-
-        if ($mode == 'xhtml') {
-
-            /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $match, $attributes) = $data;
-            $wrap = ($attributes['wrap']) ? $attributes['wrap'] : 'div';
-
-            switch($state) {
-
-                case DOKU_LEXER_ENTER:
-
-                    $markup = sprintf('<%s class="row">', $wrap);
-
-                    $renderer->doc .= $markup;
-                    return true;
-
-                case DOKU_LEXER_UNMATCHED:
-                    $renderer->doc .= $match;
-                    return true;
-
-                case DOKU_LEXER_EXIT:
-                    $renderer->doc .= "</$wrap>";
-                    return true;
-
-            }
-
-            return true;
-
-        }
-
-        return false;
-
-    }
-
+    function getPType(){ return 'block'; }
 }

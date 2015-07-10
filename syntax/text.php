@@ -26,25 +26,50 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
         if ($mode == 'xhtml') {
 
             /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $match, $attributes) = $data;
+            list($state, $match, $attributes, $is_block) = $data;
+
+            global $text_tag;
 
             switch($state) {
 
                 case DOKU_LEXER_ENTER:
 
-                    $type   = ($attributes['type']) ? $attributes['type'] : 'muted';
+                    $text_tag = (($is_block) ? 'div' : 'span');
 
-                    if (! in_array($type, array('muted', 'primary', 'success', 'info', 'warning', 'danger'))) {
-                        $type = 'muted';
+                    $color      = ($attributes['type'])       ? strtolower($attributes['type'])       : null;
+                    $background = ($attributes['background']) ? strtolower($attributes['background']) : null;
+                    $align      = ($attributes['align'])      ? strtolower($attributes['align'])      : null;
+                    $transform  = ($attributes['transform'])  ? strtolower($attributes['transform'])  : null;
+        
+                    if (! in_array($color, array('muted', 'primary', 'success', 'info', 'warning', 'danger'))) {
+                        $color = null;
                     }
 
-                    $markup = sprintf('<span class="text text-%s">', $type);
+                    if (! in_array($background, array('primary', 'success', 'info', 'warning', 'danger'))) {
+                        $background = null;
+                    }
+        
+                    if (! in_array($align, array('left', 'center', 'right', 'justify', 'nowrap'))) {
+                        $align = null;
+                    }
+        
+                    if (! in_array($transform, array('lowercase', 'uppercase', 'capitalize'))) {
+                        $transform = null;
+                    }
+        
+                    $classes = array();
+        
+                    if ($align)      { $classes[] = "text-$align"; }
+                    if ($color)      { $classes[] = "text-$color"; }
+                    if ($transform)  { $classes[] = "text-$transform"; }
+                    if ($background) { $classes[] = "bg-$background"; }
 
+                    $markup = sprintf('<%s class="text %s">', $text_tag, implode(' ', $classes));
                     $renderer->doc .= $markup;
                     return true;
 
                 case DOKU_LEXER_EXIT:
-                    $renderer->doc .= '</span>';
+                    $renderer->doc .= "</$text_tag>";
                     return true;
 
             }

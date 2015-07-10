@@ -14,8 +14,8 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_well extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<(?:WELL|well).*?>(?=.*?</(?:WELL|well)>)';
-    protected $pattern_end   = '</(?:WELL|well)>';
+    protected $pattern_start = '<well.*?>(?=.*?</well>)';
+    protected $pattern_end   = '</well>';
 
     function render($mode, Doku_Renderer $renderer, $data) {
 

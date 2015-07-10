@@ -26,20 +26,21 @@ class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootst
         if ($mode == 'xhtml') {
 
             /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $match, $attributes) = $data;
+            list($state, $match, $attributes, $is_block) = $data;
 
             switch($state) {
 
                 case DOKU_LEXER_ENTER:
 
-                    $type     = ($attributes['type']) ? $attributes['type'] : 'default';
-                    $icon     = ($attributes['icon']) ? $attributes['icon'] : null;
+                    $label_tag = (($is_block) ? 'div' : 'span');
+                    $type      = ($attributes['type']) ? $attributes['type'] : 'default';
+                    $icon      = ($attributes['icon']) ? $attributes['icon'] : null;
 
                     if (! in_array($type, array('default', 'primary', 'success', 'info', 'warning', 'danger'))) {
                         $type = 'default';
                     }
 
-                    $markup = sprintf('<span class="label label-%s">', $type);
+                    $markup = sprintf('<%s class="label label-%s">', $label_tag, $type);
 
                     if ($icon) {
                       $markup .= sprintf('<i class="%s"></i> ', $icon);
@@ -49,7 +50,7 @@ class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootst
                     return true;
 
                 case DOKU_LEXER_EXIT:
-                    $renderer->doc .= '</span>';
+                    $renderer->doc .= "</$label_tag>";
                     return true;
 
             }

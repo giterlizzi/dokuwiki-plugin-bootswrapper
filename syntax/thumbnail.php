@@ -14,41 +14,12 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_thumbnail extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<(?:THUMBNAIL|thumbnail).*?>(?=.*?</(?:THUMBNAIL|thumbnail)>)';
-    protected $pattern_end   = '</(?:THUMBNAIL|thumbnail)>';
+    protected $pattern_start = '<thumbnail>';
+    protected $pattern_end   = '</thumbnail>';
+
+    protected $template_start = '<div class="thumbnail">';
+    protected $template_end   = '</div>';
 
     function getPType(){ return 'block'; }
-
-    function render($mode, Doku_Renderer $renderer, $data) {
-
-        if (empty($data)) return false;
-
-        if ($mode == 'xhtml') {
-
-            /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $match, $attributes) = $data;
-
-            switch($state) {
-
-                case DOKU_LEXER_ENTER:
-
-                    $markup = '<div class="thumbnail">';
-
-                    $renderer->doc .= $markup;
-                    return true;
-
-                case DOKU_LEXER_EXIT:
-                    $renderer->doc .= '</div>';
-                    return true;
-
-            }
-
-            return true;
-
-        }
-
-        return false;
-
-    }
 
 }

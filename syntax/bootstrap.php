@@ -59,14 +59,25 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
             case DOKU_LEXER_ENTER:
 
+                preg_match('/<([a-zA-Z0-9-_]*)/', $match, $tag);
+
                 $attributes = array();
                 $xml        = simplexml_load_string(str_replace('>', '/>', $match));
+                $tag        = $xml->getName();
 
                 foreach ($xml->attributes() as $key => $value) {
                   $attributes[$key] = (string) $value;
                 }
 
-                return array($state, $match, $attributes);
+                if ($tag == strtolower($tag)) {
+                    $is_block = false;
+                }
+
+                if ($tag == strtoupper($tag)) {
+                    $is_block = true;
+                }
+
+                return array($state, $match, $attributes, $is_block);
 
             case DOKU_LEXER_UNMATCHED:
                 $handler->_addCall('cdata', array($match), $pos);

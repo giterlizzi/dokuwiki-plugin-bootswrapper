@@ -14,8 +14,8 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_column extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<(?:COL|col).*?>(?=.*?</(?:COL|col)>)';
-    protected $pattern_end   = '</(?:COL|col)>';
+    protected $pattern_start = '<col.*?>(?=.*?</col>)';
+    protected $pattern_end   = '</col>';
 
     function getPType(){ return 'block'; }
 
