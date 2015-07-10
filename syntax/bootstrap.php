@@ -59,8 +59,6 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
             case DOKU_LEXER_ENTER:
 
-                preg_match('/<([a-zA-Z0-9-_]*)/', $match, $tag);
-
                 $attributes = array();
                 $xml        = simplexml_load_string(str_replace('>', '/>', $match));
                 $tag        = $xml->getName();
