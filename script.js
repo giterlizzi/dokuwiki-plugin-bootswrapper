@@ -8,9 +8,9 @@
 
 jQuery(document).ready(function() {
 
-    jQuery('[data-toggle="tooltip"]').tooltip();
+    jQuery('.bs-wrap[data-toggle="tooltip"]').tooltip();
 
-    jQuery('[data-nav-type]').each(function() {
+    jQuery('.bs-wrap[data-nav-type]').each(function() {
 
         var $nav_wrap = jQuery(this),
             nav_data  = $nav_wrap.data(),
@@ -51,9 +51,26 @@ jQuery(document).ready(function() {
                 .append(' <span class="caret"/>');
         });
 
+        // Tab panels
+        if ($nav_wrap.find('.tab-pane').length) {
+
+            if (! $nav_wrap.find('.tab-content').length) {
+                $nav_wrap.find('.tab-pane').wrapAll(jQuery('<div class="tab-content"/>'));
+            }
+
+            $nav_wrap.find('a').attr('data-toggle', 'tab').attr('role', 'tab');
+
+            if (nav_data.navFade) {
+                $nav_wrap.find('.tab-content .tab-pane').addClass('fade');
+            }
+        
+            $nav_wrap.find('.nav a:first').tab('show');           
+        
+        }
+
     });
 
-    jQuery('[data-btn-type]').each(function() {
+    jQuery('.bs-wrap[data-btn-type]').each(function() {
 
         var $btn_wrap = jQuery(this),
             btn_data  = $btn_wrap.data(),

@@ -39,7 +39,7 @@ class syntax_plugin_bootswrapper_tooltip extends syntax_plugin_bootswrapper_boot
                         $type = 'top';
                     }
 
-                    $markup = sprintf('<span data-toggle="tooltip" data-html="true" data-placement="%s" title="%s" style="border-bottom:1px dotted">', $location, $title);
+                    $markup = sprintf('<span class="bs-wrap" data-toggle="tooltip" data-html="true" data-placement="%s" title="%s" style="border-bottom:1px dotted">', $location, $title);
 
                     $renderer->doc .= $markup;
                     return true;

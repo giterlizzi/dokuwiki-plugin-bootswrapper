@@ -38,7 +38,7 @@ class syntax_plugin_bootswrapper_column extends syntax_plugin_bootswrapper_boots
 
                 case DOKU_LEXER_ENTER:
 
-                    $markup = sprintf('<%s class="%s">', $wrap, trim($col));
+                    $markup = sprintf('<%s class="bs-wrap %s">', $wrap, trim($col));
 
                     $renderer->doc .= $markup;
                     return true;

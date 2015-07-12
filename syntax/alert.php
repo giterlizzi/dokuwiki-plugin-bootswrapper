@@ -40,7 +40,7 @@ class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootst
                         $type = 'info';
                     }
 
-                    $markup = sprintf('<div class="alert alert-%s %s" role="alert">',
+                    $markup = sprintf('<div class="bs-wrap alert alert-%s %s" role="alert">',
                                       $type, (($dismiss) ? 'alert-dismissible' : ''));
 
                     if ($dismiss) {

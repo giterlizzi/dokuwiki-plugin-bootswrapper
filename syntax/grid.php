@@ -17,7 +17,7 @@ class syntax_plugin_bootswrapper_grid extends syntax_plugin_bootswrapper_bootstr
     protected $pattern_start = '<grid>';
     protected $pattern_end   = '</grid>';
 
-    protected $template_start = '<div class="row">';
+    protected $template_start = '<div class="bs-wrap row">';
     protected $template_end   = '</div>';
 
     function getPType(){ return 'block'; }

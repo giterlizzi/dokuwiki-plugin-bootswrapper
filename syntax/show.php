@@ -17,7 +17,7 @@ class syntax_plugin_bootswrapper_show extends syntax_plugin_bootswrapper_bootstr
     protected $pattern_start = '<show>';
     protected $pattern_end   = '</show>';
 
-    protected $template_start = '<div class="show">';
+    protected $template_start = '<div class="bs-wrap show">';
     protected $template_end   = '</div>';
 
     function getPType(){ return 'block'; }

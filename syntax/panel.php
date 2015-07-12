@@ -42,7 +42,7 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
                         $type = 'default';
                     }
 
-                    $markup = sprintf('<div class="panel panel-%s">', $type);
+                    $markup = sprintf('<div class="bs-wrap panel panel-%s">', $type);
 
                     if ($title || $subtitle) {
 

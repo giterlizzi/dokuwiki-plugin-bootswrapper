@@ -64,7 +64,7 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
                     if ($transform)  { $classes[] = "text-$transform"; }
                     if ($background) { $classes[] = "bg-$background"; }
 
-                    $markup = sprintf('<%s class="text %s">', $text_tag, implode(' ', $classes));
+                    $markup = sprintf('<%s class="bs-wrap text %s">', $text_tag, implode(' ', $classes));
                     $renderer->doc .= $markup;
                     return true;
 

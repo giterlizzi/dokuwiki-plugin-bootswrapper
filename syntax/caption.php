@@ -17,7 +17,7 @@ class syntax_plugin_bootswrapper_caption extends syntax_plugin_bootswrapper_boot
     protected $pattern_start = '<caption>';
     protected $pattern_end   = '</caption>';
 
-    protected $template_start = '<div class="caption">';
+    protected $template_start = '<div class="bs-wrap caption">';
     protected $template_end   = '</div>';
 
 }

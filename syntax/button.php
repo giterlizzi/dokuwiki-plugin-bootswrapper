@@ -46,7 +46,7 @@ class syntax_plugin_bootswrapper_button extends syntax_plugin_bootswrapper_boots
 
                 case DOKU_LEXER_ENTER:
 
-                    $markup = sprintf('<span %s>', implode(' ', $html5data));
+                    $markup = sprintf('<span class="bs-wrap" %s>', implode(' ', $html5data));
 
                     $renderer->doc .= $markup;
                     return true;

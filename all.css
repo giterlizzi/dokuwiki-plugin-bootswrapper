@@ -1,0 +1,11 @@
+/*!
+ * DokuWiki Bootstrap Wrapper Plugin
+ *
+ * Home     http://dokuwiki.org/plugin:bootswrapper
+ * Author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ */
+
+.bs-wrap .nav-tabs {
+  margin-bottom: 15px;
+}

@@ -31,7 +31,7 @@ class syntax_plugin_bootswrapper_well extends syntax_plugin_bootswrapper_bootstr
                 case DOKU_LEXER_ENTER:
 
                     $size   = ($attributes['size']) ? 'well-'.$attributes['size'] : '';
-                    $markup = sprintf('<div class="well %s">', $size);
+                    $markup = sprintf('<div class="bs-wrap well %s">', $size);
 
                     $renderer->doc .= $markup;
                     return true;
