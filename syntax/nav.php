@@ -1,6 +1,6 @@
 <?php
 /**
- * Bootstrap Wrapper Plugin: Tabs
+ * Bootstrap Wrapper Plugin: Nav (Pills & Tabs)
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi>
@@ -17,6 +17,8 @@ class syntax_plugin_bootswrapper_nav extends syntax_plugin_bootswrapper_bootstra
     protected $pattern_start = '<nav.*?>(?=.*?</nav>)';
     protected $pattern_end   = '</nav>';
 
+    protected $type = null;
+
     function getPType() { return 'block';}
 
     function render($mode, Doku_Renderer $renderer, $data) {
@@ -32,6 +34,10 @@ class syntax_plugin_bootswrapper_nav extends syntax_plugin_bootswrapper_bootstra
 
             if (! isset($attributes['type'])) {
               $attributes['type'] = 'tabs';
+            }
+
+            if ($this->type) {
+                $attributes['type'] = $this->type;
             }
 
             foreach ($attributes as $key => $value) {
