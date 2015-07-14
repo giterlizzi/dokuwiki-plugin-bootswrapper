@@ -10,12 +10,12 @@ jQuery(document).ready(function() {
 
     jQuery('.bs-wrap[data-toggle="tooltip"]').tooltip();
 
-    jQuery('.bs-wrap[data-img-type]').each(function() {
+    jQuery('.bs-wrap[data-img-shape]').each(function() {
 
       var $img_wrap = jQuery(this),
           img_data  = $img_wrap.data();
 
-      $img_wrap.find('img').addClass(['img-', img_data.imgType].join(''));
+      $img_wrap.find('img').addClass(['img-', img_data.imgShape].join(''));
 
     });
 

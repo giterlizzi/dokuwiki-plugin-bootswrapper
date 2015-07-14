@@ -32,16 +32,16 @@ class syntax_plugin_bootswrapper_image extends syntax_plugin_bootswrapper_bootst
 
                 case DOKU_LEXER_ENTER:
 
-                    $type = ($attributes['type']) ? $attributes['type'] : '';
+                    $shape = ($attributes['shape']) ? $attributes['shape'] : '';
 
-                    if (! in_array($type, array('rounded', 'circle', 'thumbnail', 'responsive'))) {
-                        $type = null;
+                    if (! in_array($shape, array('rounded', 'circle', 'thumbnail', 'responsive'))) {
+                        $shape = null;
                     }
 
                     $html5_data = array();
 
-                    if ($type) {
-                        $html5_data[] = sprintf('data-img-type="%s"', $type);
+                    if ($shape) {
+                        $html5_data[] = sprintf('data-img-shape="%s"', $shape);
                     }
 
                     $markup = sprintf('<span class="bs-wrap" %s>', implode(' ', $html5_data));
