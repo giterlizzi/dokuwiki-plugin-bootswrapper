@@ -34,9 +34,9 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
 
                 case DOKU_LEXER_ENTER:
 
-                    $text_tag = (($is_block) ? 'div' : 'span');
-
+                    $text_tag   = (($is_block) ? 'div' : 'span');
                     $color      = ($attributes['type'])       ? strtolower($attributes['type'])       : null;
+                    $size       = ($attributes['size'])       ? strtolower($attributes['size'])       : null;
                     $background = ($attributes['background']) ? strtolower($attributes['background']) : null;
                     $align      = ($attributes['align'])      ? strtolower($attributes['align'])      : null;
                     $transform  = ($attributes['transform'])  ? strtolower($attributes['transform'])  : null;
@@ -58,13 +58,24 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
                     }
         
                     $classes = array();
+                    $styles  = array();
         
                     if ($align)      { $classes[] = "text-$align"; }
                     if ($color)      { $classes[] = "text-$color"; }
                     if ($transform)  { $classes[] = "text-$transform"; }
                     if ($background) { $classes[] = "bg-$background"; }
 
-                    $markup = sprintf('<%s class="bs-wrap text %s">', $text_tag, implode(' ', $classes));
+                    if (strtolower($size) == 'small') {
+                        $classes[] = 'small';
+                    } else {
+                        $styles[] = sprintf('font-size:%s', $size);
+                    }
+
+                    $markup = sprintf('<%s class="bs-wrap text %s" style="%s">',
+                                      $text_tag,
+                                      implode(' ', $classes),
+                                      implode(';', $styles));
+
                     $renderer->doc .= $markup;
                     return true;
 
