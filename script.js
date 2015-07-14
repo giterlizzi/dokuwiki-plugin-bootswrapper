@@ -10,6 +10,15 @@ jQuery(document).ready(function() {
 
     jQuery('.bs-wrap[data-toggle="tooltip"]').tooltip();
 
+    jQuery('.bs-wrap[data-img-type]').each(function() {
+
+      var $img_wrap = jQuery(this),
+          img_data  = $img_wrap.data();
+
+      $img_wrap.find('img').addClass(['img-', img_data.imgType].join(''));
+
+    });
+
     jQuery('.bs-wrap[data-nav-type]').each(function() {
 
         var $nav_wrap = jQuery(this),
