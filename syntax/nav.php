@@ -32,6 +32,10 @@ class syntax_plugin_bootswrapper_nav extends syntax_plugin_bootswrapper_bootstra
 
             $html5data = array();
 
+            if (! isset($attributes['type'])) {
+                $attributes['type'] = 'tabs';
+            }
+
             if ($this->type) {
                 $attributes['type'] = $this->type;
             }
