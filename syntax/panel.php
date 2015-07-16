@@ -26,7 +26,7 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
             /** @var Doku_Renderer_xhtml $renderer */
             list($state, $match, $attributes) = $data;
 
-            global $footer;
+            global $footer, $nobody;
 
             switch($state) {
 
@@ -37,6 +37,7 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
                     $footer   = ($attributes['footer'])   ? $attributes['footer']   : null;
                     $subtitle = ($attributes['subtitle']) ? $attributes['subtitle'] : null;
                     $icon     = ($attributes['icon'])     ? $attributes['icon']     : null;
+                    $nobody   = ($attributes['no-body'])  ? $attributes['no-body']  : false;
 
                     if (! in_array($type, array('default', 'primary', 'success', 'info', 'warning', 'danger'))) {
                         $type = 'default';
@@ -54,7 +55,9 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
 
                     }
 
-                    $markup .= '<div class="panel-body">';
+                    if (! $nobody) {
+                      $markup .= '<div class="panel-body">';
+                    }
 
                     $renderer->doc .= $markup;
 
@@ -62,7 +65,9 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
 
                 case DOKU_LEXER_EXIT:
 
-                    $markup = '</div>';
+                    if (! $nobody) {
+                      $markup = '</div>';
+                    }
 
                     if ($footer) {
                         $markup .= sprintf('<div class="panel-footer">%s</div>', $footer);
