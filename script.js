@@ -19,7 +19,7 @@ jQuery(document).ready(function() {
 
     });
 
-    jQuery('.bs-wrap[data-nav-type]').each(function() {
+    jQuery('.bs-wrap.bs-wrap-nav').each(function() {
 
         var $nav_wrap = jQuery(this),
             nav_data  = $nav_wrap.data(),
@@ -72,9 +72,9 @@ jQuery(document).ready(function() {
             if (nav_data.navFade) {
                 $nav_wrap.find('.tab-content .tab-pane').addClass('fade');
             }
-        
-            $nav_wrap.find('.nav a:first').tab('show');           
-        
+
+            $nav_wrap.find('.nav a:first').tab('show');
+
         }
 
     });

@@ -32,10 +32,6 @@ class syntax_plugin_bootswrapper_nav extends syntax_plugin_bootswrapper_bootstra
 
             $html5data = array();
 
-            if (! isset($attributes['type'])) {
-              $attributes['type'] = 'tabs';
-            }
-
             if ($this->type) {
                 $attributes['type'] = $this->type;
             }
@@ -53,7 +49,7 @@ class syntax_plugin_bootswrapper_nav extends syntax_plugin_bootswrapper_bootstra
 
                 case DOKU_LEXER_ENTER:
 
-                    $markup = sprintf('<div class="bs-wrap" %s>', implode(' ', $html5data));
+                    $markup = sprintf('<div class="bs-wrap bs-wrap-nav" %s>', implode(' ', $html5data));
 
                     $renderer->doc .= $markup;
                     return true;
