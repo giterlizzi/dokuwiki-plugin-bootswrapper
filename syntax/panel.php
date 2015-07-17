@@ -14,8 +14,42 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<(?:PANEL|panel).*?>(?=.*?</(?:PANEL|panel)>)';
-    protected $pattern_end   = '</(?:PANEL|panel)>';
+    protected $pattern_start  = '<panel.*?>(?=.*?</panel>)';
+    protected $pattern_end    = '</panel>';
+    protected $tag_attributes = array(
+
+      'type'      => array('type'     => 'string',
+                           'values'   => array('default', 'primary', 'success', 'info', 'warning', 'danger'),
+                           'required' => true,
+                           'default'  => 'default'),
+
+      'title'     => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+
+      'footer'    => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+
+      'subtitle'  => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+
+      'icon'      => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+
+      'no-body'   => array('type'     => 'boolean',
+                           'values'   => array(0, 1),
+                           'required' => false,
+                           'default'  => false),
+
+    );
+
 
     function render($mode, Doku_Renderer $renderer, $data) {
 
@@ -26,22 +60,16 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
             /** @var Doku_Renderer_xhtml $renderer */
             list($state, $match, $attributes) = $data;
 
-            global $footer, $nobody;
-
             switch($state) {
 
                 case DOKU_LEXER_ENTER:
 
-                    $type     = ($attributes['type'])     ? $attributes['type']     : 'default';
-                    $title    = ($attributes['title'])    ? $attributes['title']    : null;
-                    $footer   = ($attributes['footer'])   ? $attributes['footer']   : null;
-                    $subtitle = ($attributes['subtitle']) ? $attributes['subtitle'] : null;
-                    $icon     = ($attributes['icon'])     ? $attributes['icon']     : null;
-                    $nobody   = ($attributes['no-body'])  ? $attributes['no-body']  : false;
-
-                    if (! in_array($type, array('default', 'primary', 'success', 'info', 'warning', 'danger'))) {
-                        $type = 'default';
-                    }
+                    $type     = $attributes['type'];
+                    $title    = $attributes['title'];
+                    $footer   = $attributes['footer'];
+                    $subtitle = $attributes['subtitle'];
+                    $icon     = $attributes['icon'];
+                    $nobody   = $attributes['no-body'];
 
                     $markup = sprintf('<div class="bs-wrap panel panel-%s">', $type);
 

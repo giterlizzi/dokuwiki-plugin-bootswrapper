@@ -16,6 +16,14 @@ class syntax_plugin_bootswrapper_pane extends syntax_plugin_bootswrapper_bootstr
 
     protected $pattern_start  = '<pane.*?>(?=.*?</pane>)';
     protected $pattern_end    = '</pane>';
+    protected $tag_attributes = array(
+
+      'id' => array('type'     => 'string',
+                    'values'   => null,
+                    'required' => true,
+                    'default'  => null),
+
+    );
 
     function getPType(){ return 'block'; }
 
@@ -32,7 +40,7 @@ class syntax_plugin_bootswrapper_pane extends syntax_plugin_bootswrapper_bootstr
 
                 case DOKU_LEXER_ENTER:
 
-                    $id   = ($attributes['id']) ? $attributes['id'] : '';
+                    $id     = $attributes['id'];
                     $markup = sprintf('<div role="tabpanel" class="bs-wrap tab-pane" id="%s">', $id);
 
                     $renderer->doc .= $markup;

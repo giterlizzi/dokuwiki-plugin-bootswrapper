@@ -14,8 +14,31 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_column extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<col.*?>(?=.*?</col>)';
-    protected $pattern_end   = '</col>';
+    protected $pattern_start  = '<col.*?>(?=.*?</col>)';
+    protected $pattern_end    = '</col>';
+    protected $tag_attributes = array(
+
+      'lg' => array('type'     => 'integer',
+                    'values'   => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
+                    'required' => false,
+                    'default'  => null),
+
+      'md' => array('type'     => 'integer',
+                    'values'   => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
+                    'required' => false,
+                    'default'  => null),
+
+      'sm' => array('type'     => 'integer',
+                    'values'   => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
+                    'required' => false,
+                    'default'  => null),
+
+      'xs' => array('type'     => 'integer',
+                    'values'   => array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12),
+                    'required' => false,
+                    'default'  => null),
+
+    );
 
     function getPType(){ return 'block'; }
 
@@ -27,18 +50,18 @@ class syntax_plugin_bootswrapper_column extends syntax_plugin_bootswrapper_boots
 
             /** @var Doku_Renderer_xhtml $renderer */
             list($state, $match, $attributes) = $data;
-            $wrap = isset($attributes['wrap']) ? $attributes['wrap'] : 'div';
-            $col  = '';
-
-            foreach (array('lg', 'md', 'sm', 'xs') as $device) {
-                $col .= isset($attributes[$device]) ? 'col-' . $device . '-' . $attributes[$device] . ' ' : '';
-            }
 
             switch($state) {
 
                 case DOKU_LEXER_ENTER:
 
-                    $markup = sprintf('<%s class="bs-wrap %s">', $wrap, trim($col));
+                    $col = '';
+
+                    foreach (array('lg', 'md', 'sm', 'xs') as $device) {
+                        $col .= isset($attributes[$device]) ? sprintf('col-%s-%s ', $device, $attributes[$device]) : '';
+                    }
+
+                    $markup = sprintf('<div class="bs-wrap %s">', trim($col));
 
                     $renderer->doc .= $markup;
                     return true;
@@ -48,7 +71,7 @@ class syntax_plugin_bootswrapper_column extends syntax_plugin_bootswrapper_boots
                     return true;
 
                 case DOKU_LEXER_EXIT:
-                    $renderer->doc .= "</$wrap>";
+                    $renderer->doc .= "</div>";
                     return true;
 
             }

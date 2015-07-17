@@ -14,8 +14,26 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_tooltip extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<(?:TOOLTIP|tooltip).*?>(?=.*?</(?:TOOLTIP|tooltip)>)';
-    protected $pattern_end   = '</(?:TOOLTIP|tooltip)>';
+    protected $pattern_start  = '<tooltip.*?>(?=.*?</tooltip>)';
+    protected $pattern_end    = '</tooltip>';
+    protected $tag_attributes = array(
+
+      'placement' => array('type'     => 'string',
+                           'values'   => array('top', 'bottom', 'left', 'right', 'auto'),
+                           'required' => true,
+                           'default'  => 'top'),
+
+      'title'     => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => true,
+                           'default'  => null),
+
+      'html'      => array('type'     => 'boolean',
+                           'values'   => array(0, 1),
+                           'required' => false,
+                           'default'  => false),
+
+    );
 
     function getPType() { return 'normal';}
 
@@ -32,14 +50,15 @@ class syntax_plugin_bootswrapper_tooltip extends syntax_plugin_bootswrapper_boot
 
                 case DOKU_LEXER_ENTER:
 
-                    $location = ($attributes['location']) ? $attributes['location'] : 'top';
-                    $title    = ($attributes['title'])    ? $attributes['title']    : null;
+                    $placement = $attributes['placement'];
+                    $title     = $attributes['title'];
+                    $html      = $attributes['html'];
 
-                    if (! in_array($location, array('top', 'bottom', 'left', 'right', 'auto'))) {
-                        $type = 'top';
+                    if ($html) {
+                      $title = hsc(p_render('xhtml',p_get_instructions($title), $info));
                     }
 
-                    $markup = sprintf('<span class="bs-wrap" data-toggle="tooltip" data-html="true" data-placement="%s" title="%s" style="border-bottom:1px dotted">', $location, $title);
+                    $markup = sprintf('<span class="bs-wrap bs-wrap-tooltip" data-toggle="tooltip" data-html="%s" data-placement="%s" title="%s" style="border-bottom:1px dotted">', $html, $placement, $title);
 
                     $renderer->doc .= $markup;
                     return true;

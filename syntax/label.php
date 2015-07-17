@@ -16,6 +16,19 @@ class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootst
 
     protected $pattern_start = '<(?:LABEL|label).*?>(?=.*?</(?:LABEL|label)>)';
     protected $pattern_end   = '</(?:LABEL|label)>';
+    protected $tag_attributes = array(
+
+      'type'      => array('type'     => 'string',
+                           'values'   => array('default', 'primary', 'success', 'info', 'warning', 'danger'),
+                           'required' => true,
+                           'default'  => 'default'),
+
+      'icon'      => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+
+    );
 
     function getPType() { return 'normal';}
 
@@ -33,12 +46,8 @@ class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootst
                 case DOKU_LEXER_ENTER:
 
                     $label_tag = (($is_block) ? 'div' : 'span');
-                    $type      = ($attributes['type']) ? $attributes['type'] : 'default';
-                    $icon      = ($attributes['icon']) ? $attributes['icon'] : null;
-
-                    if (! in_array($type, array('default', 'primary', 'success', 'info', 'warning', 'danger'))) {
-                        $type = 'default';
-                    }
+                    $type      = $attributes['type'];
+                    $icon      = $attributes['icon'];
 
                     $markup = sprintf('<%s class="bs-wrap label label-%s">', $label_tag, $type);
 

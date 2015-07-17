@@ -16,15 +16,14 @@ if(!defined('DOKU_INC')) die();
  * Add external CSS file to DokuWiki
  */
 class action_plugin_bootswrapper extends DokuWiki_Action_Plugin {
- 
+
     /**
      * Register events
      *
      * @param  Doku_Event_Handler  $controller
      */
     public function register(Doku_Event_Handler $controller) {
-        $controller->register_hook('TPL_METAHEADER_OUTPUT', 'BEFORE', $this,
-                                   '_load');
+        $controller->register_hook('TPL_METAHEADER_OUTPUT', 'BEFORE', $this, '_load');
     }
 
 
@@ -40,18 +39,18 @@ class action_plugin_bootswrapper extends DokuWiki_Action_Plugin {
             $event->data['link'][] = array(
               'type' => 'text/css',
               'rel'  => 'stylesheet',
-              'href' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css',
+              'href' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
             );
 
             $event->data['link'][] = array(
               'type' => 'text/css',
               'rel'  => 'stylesheet',
-              'href' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css',
+              'href' => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css',
             );
 
             $event->data['script'][] = array(
               'type' => 'text/javascript',
-              'src'  => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'
+              'src'  => 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'
             );
 
         }

@@ -14,12 +14,29 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_nav extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<nav.*?>(?=.*?</nav>)';
-    protected $pattern_end   = '</nav>';
+    protected $pattern_start  = '<nav.*?>(?=.*?</nav>)';
+    protected $pattern_end    = '</nav>';
+    protected $type           = null;
+    protected $tag_attributes = array(
 
-    protected $type = null;
+      'type'      => array('type'     => 'string',
+                           'values'   => array('tabs', 'pills'),
+                           'required' => true,
+                           'default'  => 'pills'),
 
-    function getPType() { return 'block';}
+      'stacked'   => array('type'     => 'boolean',
+                           'values'   => array(0, 1),
+                           'required' => false,
+                           'default'  => false),
+
+      'justified' => array('type'     => 'boolean',
+                           'values'   => array(0, 1),
+                           'required' => false,
+                           'default'  => false),
+
+    );
+
+    function getPType() { return 'block'; }
 
     function render($mode, Doku_Renderer $renderer, $data) {
 
@@ -30,28 +47,19 @@ class syntax_plugin_bootswrapper_nav extends syntax_plugin_bootswrapper_bootstra
             /** @var Doku_Renderer_xhtml $renderer */
             list($state, $match, $attributes) = $data;
 
-            $html5data = array();
-
-            if (! isset($attributes['type'])) {
-                $attributes['type'] = 'tabs';
-            }
-
-            if ($this->type) {
-                $attributes['type'] = $this->type;
-            }
-
-            foreach ($attributes as $key => $value) {
-
-                if ($key == 'type' && ! in_array($value, array('tabs', 'pills'))) {
-                    $value = 'tabs';
-                }
-
-                $html5data[] = sprintf('data-nav-%s="%s"', $key, $value);
-            }
-
             switch($state) {
 
                 case DOKU_LEXER_ENTER:
+
+                    $html5data  = array();
+
+                    if (! empty($this->type)) {
+                        $attributes['type'] = $this->type;
+                    }
+
+                    foreach ($attributes as $key => $value) {
+                        $html5data[] = sprintf('data-nav-%s="%s"', $key, $value);
+                    }
 
                     $markup = sprintf('<div class="bs-wrap bs-wrap-nav" %s>', implode(' ', $html5data));
 

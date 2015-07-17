@@ -16,6 +16,34 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
 
     protected $pattern_start = '<(?:TEXT|text).*?>(?=.*?</(?:TEXT|text)>)';
     protected $pattern_end   = '</(?:TEXT|text)>';
+    protected $tag_attributes = array(
+
+      'type'       => array('type'     => 'string',
+                            'values'   => array('muted', 'primary', 'success', 'info', 'warning', 'danger'),
+                            'required' => false,
+                            'default'  => 'muted'),
+
+      'size'       => array('type'     => 'string',
+                            'values'   => null,
+                            'required' => false,
+                            'default'  => null),
+
+      'background' => array('type'     => 'string',
+                            'values'   => array('primary', 'success', 'info', 'warning', 'danger'),
+                            'required' => false,
+                            'default'  => null),
+
+      'align'      => array('type'     => 'string',
+                            'values'   => array('left', 'center', 'right', 'justify', 'nowrap'),
+                            'required' => false,
+                            'default'  => null),
+
+      'transform'  => array('type'     => 'string',
+                            'values'   => array('lowercase', 'uppercase', 'capitalize'),
+                            'required' => false,
+                            'default'  => null),
+
+    );
 
     function getPType() { return 'normal';}
 
@@ -35,31 +63,15 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
                 case DOKU_LEXER_ENTER:
 
                     $text_tag   = (($is_block) ? 'div' : 'span');
-                    $color      = ($attributes['type'])       ? strtolower($attributes['type'])       : null;
-                    $size       = ($attributes['size'])       ? strtolower($attributes['size'])       : null;
-                    $background = ($attributes['background']) ? strtolower($attributes['background']) : null;
-                    $align      = ($attributes['align'])      ? strtolower($attributes['align'])      : null;
-                    $transform  = ($attributes['transform'])  ? strtolower($attributes['transform'])  : null;
-        
-                    if (! in_array($color, array('muted', 'primary', 'success', 'info', 'warning', 'danger'))) {
-                        $color = null;
-                    }
+                    $color      = $attributes['type'];
+                    $size       = $attributes['size'];
+                    $background = $attributes['background'];
+                    $align      = $attributes['align'];
+                    $transform  = $attributes['transform'];
 
-                    if (! in_array($background, array('primary', 'success', 'info', 'warning', 'danger'))) {
-                        $background = null;
-                    }
-        
-                    if (! in_array($align, array('left', 'center', 'right', 'justify', 'nowrap'))) {
-                        $align = null;
-                    }
-        
-                    if (! in_array($transform, array('lowercase', 'uppercase', 'capitalize'))) {
-                        $transform = null;
-                    }
-        
                     $classes = array();
                     $styles  = array();
-        
+
                     if ($align)      { $classes[] = "text-$align"; }
                     if ($color)      { $classes[] = "text-$color"; }
                     if ($transform)  { $classes[] = "text-$transform"; }

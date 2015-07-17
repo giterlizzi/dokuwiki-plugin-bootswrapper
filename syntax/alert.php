@@ -14,8 +14,25 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<(?:ALERT|alert).*?>(?=.*?</(?:ALERT|alert)>)';
-    protected $pattern_end   = '</(?:ALERT|alert)>';
+    protected $pattern_start  = '<(?:ALERT|alert).*?>(?=.*?</(?:ALERT|alert)>)';
+    protected $pattern_end    = '</(?:ALERT|alert)>';
+    protected $tag_attributes = array(
+
+      'type'      => array('type'     => 'string',
+                           'values'   => array('success', 'info', 'warning', 'danger'),
+                           'required' => true,
+                           'default'  => 'info'),
+
+      'dismiss'   => array('type'     => 'boolean',
+                           'values'   => array(0, 1),
+                           'required' => false,
+                           'default'  => false),
+
+      'icon'      => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+    );
 
     function getPType(){ return 'block'; }
 
@@ -32,13 +49,7 @@ class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootst
 
                 case DOKU_LEXER_ENTER:
 
-                    $type     = ($attributes['type'])    ? $attributes['type']    : 'info';
-                    $icon     = ($attributes['icon'])    ? $attributes['icon']    : null;
-                    $dismiss  = ($attributes['dismiss']) ? $attributes['dismiss'] : false;
-
-                    if (! in_array($type, array('success', 'info', 'warning', 'danger'))) {
-                        $type = 'info';
-                    }
+                    extract($attributes);
 
                     $markup = sprintf('<div class="bs-wrap alert alert-%s %s" role="alert">',
                                       $type, (($dismiss) ? 'alert-dismissible' : ''));

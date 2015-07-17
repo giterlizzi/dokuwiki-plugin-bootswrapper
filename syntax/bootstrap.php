@@ -17,14 +17,58 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
     protected $template_start   = '<div class="%s">';
     protected $template_content = '%s';
     protected $template_end     = '</div>';
-
     protected $header_pattern   = '[ \t]*={2,}[^\n]+={2,}[ \t]*(?=\n)';
+    protected $tag_attributes   = array();
+
+
+    /**
+     * Check default and user attributes
+     *
+     * @param   array  $attributes
+     */
+    function checkAttributes($attributes = array()) {
+
+      $default_attributes = array();
+      $merged_attributes  = array();
+      $checked_attributes = array();
+
+      // Save the default attributes
+      foreach ($this->tag_attributes as $attribute => $item) {
+        $default_attributes[$attribute] = $item['default'];
+      }
+
+      foreach ($attributes as $attribute => $value) {
+
+        $no_check = $this->tag_attributes[$attribute]['noCheck'];
+        $required = $this->tag_attributes[$attribute]['required'];
+        $values   = $this->tag_attributes[$attribute]['values'];
+        $default  = $this->tag_attributes[$attribute]['default'];
+
+        $checked_attributes[$attribute] = $value;
+
+        if ($required && empty($value)) {
+          $checked_attributes[$attribute] = $default;
+
+        // Check if the user attribute have a valid range values
+        } elseif (is_array($values) && ! in_array($value, $values)) {
+          $checked_attributes[$attribute] = $default;
+        }
+
+      }
+
+      // Merge attributes (default + user)
+      $merged_attributes = array_merge($default_attributes, $checked_attributes);
+
+      return $merged_attributes;
+
+    }
 
 
     function getType(){ return 'formatting'; }
     function getAllowedTypes() { return array('container', 'formatting', 'substition', 'protected', 'disabled', 'paragraphs'); }
     function getPType(){ return 'stack'; }
     function getSort(){ return 195; }
+
 
 
     function connectTo($mode) {
@@ -75,7 +119,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
                     $is_block = true;
                 }
 
-                return array($state, $match, $attributes, $is_block);
+                return array($state, $match, $this->checkAttributes($attributes), $is_block);
 
             case DOKU_LEXER_UNMATCHED:
                 $handler->_addCall('cdata', array($match), $pos);

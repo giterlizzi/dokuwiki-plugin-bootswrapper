@@ -16,6 +16,12 @@ class syntax_plugin_bootswrapper_image extends syntax_plugin_bootswrapper_bootst
 
     protected $pattern_start  = '<image.*?>(?=.*?</image>)';
     protected $pattern_end    = '</image>';
+    protected $tag_attributes = array(
+      'shape' => array('type'    => 'string',
+                       'values'   => array('rounded', 'circle', 'thumbnail', 'responsive'),
+                       'required' => false,
+                       'default'  => ''),
+    );
 
     function getPType(){ return 'block'; }
 
@@ -32,11 +38,7 @@ class syntax_plugin_bootswrapper_image extends syntax_plugin_bootswrapper_bootst
 
                 case DOKU_LEXER_ENTER:
 
-                    $shape = ($attributes['shape']) ? $attributes['shape'] : '';
-
-                    if (! in_array($shape, array('rounded', 'circle', 'thumbnail', 'responsive'))) {
-                        $shape = null;
-                    }
+                    extract($attributes);
 
                     $html5_data = array();
 
