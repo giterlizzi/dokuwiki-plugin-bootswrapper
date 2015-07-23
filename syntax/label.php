@@ -41,6 +41,8 @@ class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootst
             /** @var Doku_Renderer_xhtml $renderer */
             list($state, $match, $attributes, $is_block) = $data;
 
+            global $label_tag;
+
             switch($state) {
 
                 case DOKU_LEXER_ENTER:
