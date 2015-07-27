@@ -1,5 +1,5 @@
-Bootsrap Wrapper Plugin for DokuWiki
-====================================
+Bootstrap Wrapper Plugin for DokuWiki
+=====================================
 
 Bootstrap Wrapper for DokuWiki
 

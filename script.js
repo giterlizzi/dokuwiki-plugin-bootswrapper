@@ -8,6 +8,8 @@
 
 jQuery(document).ready(function() {
 
+    setTimeout(function() {
+
     jQuery('.bs-wrap[data-toggle="tooltip"]').tooltip();
 
     jQuery('.bs-wrap[data-img-shape]').each(function() {
@@ -121,5 +123,47 @@ jQuery(document).ready(function() {
         $btn_link.attr('role', 'button');
 
     });
+
+
+    jQuery('.bs-wrap.bs-wrap-list-group').each(function() {
+
+        var $list_wrap = jQuery(this);
+
+        $list_wrap.find('div.li').contents().unwrap();
+        $list_wrap.find('ul').addClass('list-group');
+        $list_wrap.find('ul > li').addClass('list-group-item');
+
+        if ($list_wrap.find('a').length) {
+
+            $list_wrap.find('a').parent().each(function() {
+
+              var $list = jQuery(this);
+
+              if ($list.children().length > 1) {
+
+                $list.wrapInner('<p class="list-group-item-text"/>');
+
+                var $link = $list.find('a');
+
+                $link.wrapInner('<h4 class="list-group-item-heading"/>');
+                $link.prependTo($list);
+                $list.find('p').appendTo($link);
+
+              }
+
+            });
+
+            $list_wrap.find('a').parent().contents().unwrap();
+            $list_wrap.find('ul a').parent().contents().unwrap();
+            $list_wrap.addClass('list-group');
+            $list_wrap.find('a').addClass('list-group-item');
+            $list_wrap.find('a.curid').removeClass('curid').addClass('active');
+
+        }
+
+
+    });
+
+    }, 0);
 
 });
