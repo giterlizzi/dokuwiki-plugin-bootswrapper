@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     HavocKKS
- * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi>
+ * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @copyright  (C) 2015, Giuseppe Di Terlizzi
  */
  
@@ -63,6 +63,7 @@ class syntax_plugin_bootswrapper_progressbar extends syntax_plugin_bootswrapper_
                     extract($attributes);
 
                     $classCode = "";
+
                     if($striped){
                         $classCode = "progress-bar-striped";
                     }
@@ -71,15 +72,13 @@ class syntax_plugin_bootswrapper_progressbar extends syntax_plugin_bootswrapper_
                         $classCode .= " active";
                     }
 
-                    $markup = sprintf('<div class="progress-bar progress-bar-%s %s" role="progressbar" style="width: %s%%;">',
-                                      $type, $classCode, $value, $label);
+                    $markup = sprintf('<div class="progress-bar progress-bar-%s %s" role="progressbar" aria-valuenow="%s" aria-valuemin="0" aria-valuemax="100" style="width: %s%%;%s">',
+                                      $type, $classCode, $value, $value, ($showvalue ? 'min-width: 2em;' : ''));
 
-                    if($showvalue){
+                    if ($showvalue){
                         $markup .= sprintf('%s%% ', $value);
-                    }
-
-                    if ($label) {
-                        $markup .= sprintf('%s', $label);
+                    } else {
+                        $markup .= sprintf('<span class="sr-only">%s%%</span> ', $value);
                     }
 
                     $renderer->doc .= $markup;
