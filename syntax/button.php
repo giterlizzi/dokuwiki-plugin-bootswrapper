@@ -19,7 +19,7 @@ class syntax_plugin_bootswrapper_button extends syntax_plugin_bootswrapper_boots
     protected $tag_attributes = array(
 
       'type'      => array('type'     => 'string',
-                           'values'   => array('default', 'primary', 'success', 'info', 'warning', 'danger'),
+                           'values'   => array('default', 'primary', 'success', 'info', 'warning', 'danger', 'link'),
                            'required' => true,
                            'default'  => 'default'),
 
