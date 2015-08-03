@@ -17,7 +17,7 @@ class syntax_plugin_bootswrapper_panelbody extends syntax_plugin_bootswrapper_bo
     protected $pattern_start = '<panel-body>';
     protected $pattern_end   = '</panel-body>';
 
-    protected $template_start = '<div class="bs-wrap panel-body">';
+    protected $template_start = '<div class="bs-wrap bs-wrap-panel-body panel-body">';
     protected $template_end   = '</div>';
 
     function getPType(){ return 'block'; }

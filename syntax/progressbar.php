@@ -72,7 +72,7 @@ class syntax_plugin_bootswrapper_progressbar extends syntax_plugin_bootswrapper_
                         $classCode .= " active";
                     }
 
-                    $markup = sprintf('<div class="progress-bar progress-bar-%s %s" role="progressbar" aria-valuenow="%s" aria-valuemin="0" aria-valuemax="100" style="width: %s%%;%s">',
+                    $markup = sprintf('<div class="bs-wrap bs-wrap-progress-bar progress-bar progress-bar-%s %s" role="progressbar" aria-valuenow="%s" aria-valuemin="0" aria-valuemax="100" style="width: %s%%;%s">',
                                       $type, $classCode, $value, $value, ($showvalue ? 'min-width: 2em;' : ''));
 
                     if ($showvalue){

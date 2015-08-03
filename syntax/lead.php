@@ -17,7 +17,7 @@ class syntax_plugin_bootswrapper_lead extends syntax_plugin_bootswrapper_bootstr
     protected $pattern_start = '<lead>';
     protected $pattern_end   = '</lead>';
 
-    protected $template_start = '<div class="bs-wrap lead">';
+    protected $template_start = '<div class="bs-wrap bs-wrap-lead lead">';
     protected $template_end   = '</div>';
 
     function getPType(){ return 'block'; }

@@ -18,7 +18,7 @@ class syntax_plugin_bootswrapper_progress extends syntax_plugin_bootswrapper_boo
     protected $pattern_start  = '<progress>';
     protected $pattern_end    = '</progress>';
 
-    protected $template_start = '<div class="progress">';
+    protected $template_start = '<div class="bs-wrap bs-wrap-progress progress">';
     protected $template_end   = '</div>';
 
 }

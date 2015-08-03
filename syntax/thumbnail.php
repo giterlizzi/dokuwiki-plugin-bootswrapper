@@ -17,7 +17,7 @@ class syntax_plugin_bootswrapper_thumbnail extends syntax_plugin_bootswrapper_bo
     protected $pattern_start = '<thumbnail>';
     protected $pattern_end   = '</thumbnail>';
 
-    protected $template_start = '<div class="bs-wrap thumbnail">';
+    protected $template_start = '<div class="bs-wrap bs-wrap-thumbnail thumbnail">';
     protected $template_end   = '</div>';
 
     function getPType(){ return 'block'; }

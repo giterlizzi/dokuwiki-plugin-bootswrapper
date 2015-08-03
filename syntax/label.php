@@ -51,7 +51,7 @@ class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootst
                     $type      = $attributes['type'];
                     $icon      = $attributes['icon'];
 
-                    $markup = sprintf('<%s class="bs-wrap label label-%s">', $label_tag, $type);
+                    $markup = sprintf('<%s class="bs-wrap bs-wrap-label label label-%s">', $label_tag, $type);
 
                     if ($icon) {
                       $markup .= sprintf('<i class="%s"></i> ', $icon);

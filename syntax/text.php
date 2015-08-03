@@ -83,7 +83,7 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
                         $styles[] = sprintf('font-size:%s', $size);
                     }
 
-                    $markup = sprintf('<%s class="bs-wrap text %s" style="%s">',
+                    $markup = sprintf('<%s class="bs-wrap bs-wrap-text text %s" style="%s">',
                                       $text_tag,
                                       implode(' ', $classes),
                                       implode(';', $styles));

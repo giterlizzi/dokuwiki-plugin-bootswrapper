@@ -17,7 +17,7 @@ class syntax_plugin_bootswrapper_invisible extends syntax_plugin_bootswrapper_bo
     protected $pattern_start = '<invisible>';
     protected $pattern_end   = '</invisible>';
 
-    protected $template_start = '<div class="bs-wrap invisible">';
+    protected $template_start = '<div class="bs-wrap bs-wrap-invisible invisible">';
     protected $template_end   = '</div>';
 
     function getPType(){ return 'block'; }

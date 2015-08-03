@@ -73,7 +73,7 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
                     $icon     = $attributes['icon'];
                     $nobody   = $attributes['no-body'];
 
-                    $markup = sprintf('<div class="bs-wrap panel panel-%s">', $type);
+                    $markup = sprintf('<div class="bs-wrap bs-wrap-panel panel panel-%s">', $type);
 
                     if ($title || $subtitle) {
 
@@ -81,7 +81,7 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
                           $title = sprintf('<i class="%s"></i> %s', $icon, $title);
                         }
 
-                        $markup .= sprintf('<div class="panel-heading"><div class="panel-title">%s</div>%s</div>', $title, $subtitle);
+                        $markup .= sprintf('<div class="panel-heading"><h4 class="panel-title">%s</h4>%s</div>', $title, $subtitle);
 
                     }
 

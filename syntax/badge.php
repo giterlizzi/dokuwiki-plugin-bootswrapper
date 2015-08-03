@@ -17,7 +17,7 @@ class syntax_plugin_bootswrapper_badge extends syntax_plugin_bootswrapper_bootst
     protected $pattern_start = '<badge>';
     protected $pattern_end   = '</badge>';
 
-    protected $template_start = '<span class="bs-wrap badge">';
+    protected $template_start = '<span class="bs-wrap bs-wrap-badge badge">';
     protected $template_end   = '</span>';
 
     function getPType() { return 'normal';}

@@ -17,7 +17,7 @@ class syntax_plugin_bootswrapper_pageheader extends syntax_plugin_bootswrapper_b
     protected $pattern_start = '<page-header>';
     protected $pattern_end   = '</page-header>';
 
-    protected $template_start = '<div class="bs-wrap page-header">';
+    protected $template_start = '<div class="bs-wrap bs-wrap-page-header page-header">';
     protected $template_end   = '</div>';
 
 }

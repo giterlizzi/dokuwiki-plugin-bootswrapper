@@ -46,7 +46,7 @@ class syntax_plugin_bootswrapper_image extends syntax_plugin_bootswrapper_bootst
                         $html5_data[] = sprintf('data-img-shape="%s"', $shape);
                     }
 
-                    $markup = sprintf('<span class="bs-wrap" %s>', implode(' ', $html5_data));
+                    $markup = sprintf('<span class="bs-wrap bs-wrap-image" %s>', implode(' ', $html5_data));
 
                     $renderer->doc .= $markup;
                     return true;

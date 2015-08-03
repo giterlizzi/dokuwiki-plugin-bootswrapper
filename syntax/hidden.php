@@ -17,7 +17,7 @@ class syntax_plugin_bootswrapper_hidden extends syntax_plugin_bootswrapper_boots
     protected $pattern_start = '<hidden>';
     protected $pattern_end   = '</hidden>';
 
-    protected $template_start = '<div class="bs-wrap hidden">';
+    protected $template_start = '<div class="bs-wrap bs-wrap-hidden hidden">';
     protected $template_end   = '</div>';
 
     function getPType(){ return 'block'; }

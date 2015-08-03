@@ -61,7 +61,7 @@ class syntax_plugin_bootswrapper_column extends syntax_plugin_bootswrapper_boots
                         $col .= isset($attributes[$device]) ? sprintf('col-%s-%s ', $device, $attributes[$device]) : '';
                     }
 
-                    $markup = sprintf('<div class="bs-wrap %s">', trim($col));
+                    $markup = sprintf('<div class="bs-wrap bs-wrap-col %s">', trim($col));
 
                     $renderer->doc .= $markup;
                     return true;
