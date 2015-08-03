@@ -33,6 +33,11 @@ class syntax_plugin_bootswrapper_button extends syntax_plugin_bootswrapper_boots
                            'required' => false,
                            'default'  => null),
 
+      'collapse'  => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+
     );
 
     function getPType() { return 'normal';}
@@ -56,7 +61,7 @@ class syntax_plugin_bootswrapper_button extends syntax_plugin_bootswrapper_boots
                       $html5data[] = sprintf('data-btn-%s="%s"', $key, $value);
                     }
 
-                    $markup = sprintf('<span class="bs-wrap" %s>', implode(' ', $html5data));
+                    $markup = sprintf('<span class="bs-wrap bs-wrap-button" %s>', implode(' ', $html5data));
 
                     $renderer->doc .= $markup;
                     return true;

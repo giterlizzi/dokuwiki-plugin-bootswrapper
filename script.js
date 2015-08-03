@@ -10,9 +10,13 @@ jQuery(document).ready(function() {
 
     setTimeout(function() {
 
-    jQuery('.bs-wrap[data-toggle="tooltip"]').tooltip();
 
-    jQuery('.bs-wrap[data-img-shape]').each(function() {
+    // Tooltips
+    jQuery('.bs-wrap-tooltip').tooltip();
+
+
+    // Images
+    jQuery('.bs-wrap-image').each(function() {
 
       var $img_wrap = jQuery(this),
           img_data  = $img_wrap.data();
@@ -21,7 +25,9 @@ jQuery(document).ready(function() {
 
     });
 
-    jQuery('.bs-wrap.bs-wrap-nav').each(function() {
+
+    // Nav (Pills and Tabs)
+    jQuery('.bs-wrap-nav').each(function() {
 
         var $nav_wrap = jQuery(this),
             nav_data  = $nav_wrap.data(),
@@ -81,7 +87,9 @@ jQuery(document).ready(function() {
 
     });
 
-    jQuery('.bs-wrap[data-btn-type]').each(function() {
+
+    // Buttons
+    jQuery('.bs-wrap-button').each(function() {
 
         var $btn_wrap = jQuery(this),
             btn_data  = $btn_wrap.data(),
@@ -111,6 +119,11 @@ jQuery(document).ready(function() {
                 case 'btnBlock':
                     btn_class.push('btn-block');
                     break;
+                case 'btnCollapse':
+                    $btn_link.attr('data-toggle', 'collapse');
+                    $btn_link.attr('data-target', '#' + value);
+                    $btn_link.on('click', function(e){ e.preventDefault(); });
+                    break;
                 case 'btnIcon':
                     var icon = ['<i class="', value, '"/> '].join('');
                     $btn_link.prepend(icon);
@@ -125,7 +138,8 @@ jQuery(document).ready(function() {
     });
 
 
-    jQuery('.bs-wrap.bs-wrap-list-group').each(function() {
+    // List Group
+    jQuery('.bs-wrap-list-group').each(function() {
 
         var $list_wrap = jQuery(this);
 
@@ -163,6 +177,32 @@ jQuery(document).ready(function() {
 
 
     });
+
+
+    // Accordion
+    jQuery('.bs-wrap-accordion').each(function() {
+
+        var $accordion   = jQuery(this),
+            accordion_id = Math.random().toString(36).substr(2, 9);
+
+        $accordion.find('.panel').each(function() {
+
+            var $panel   = jQuery(this),
+                panel_id = accordion_id + '_' + Math.random().toString(36).substr(2, 9);
+
+            $panel.find('h4.panel-title').wrapInner('<a role="button" data-toggle="collapse" data-parent="#'+ accordion_id +'" href="#'+ panel_id +'">');
+            $panel.find('.panel-body').wrap('<div id="'+ panel_id +'" class="panel-collapse collapse" role="tabpanel">');
+
+        });
+
+        $accordion.attr('id', accordion_id);
+
+        if ($accordion.find('.panel-collapse').length > 1) {
+            $accordion.find('.panel-collapse').first().addClass('in');
+        }
+
+    });
+
 
     }, 0);
 
