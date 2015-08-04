@@ -32,7 +32,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
       $merged_attributes  = array();
       $checked_attributes = array();
 
-      // Save the default attributes
+      // Save the default values of attributes
       foreach ($this->tag_attributes as $attribute => $item) {
         $default_attributes[$attribute] = $item['default'];
       }
@@ -46,6 +46,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
         $checked_attributes[$attribute] = $value;
 
+        // Set the default value when the user-value is empty
         if ($required && empty($value)) {
           $checked_attributes[$attribute] = $default;
 
@@ -58,6 +59,16 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
       // Merge attributes (default + user)
       $merged_attributes = array_merge($default_attributes, $checked_attributes);
+
+      // Remove empty attributes
+      foreach ($merged_attributes as $attribute => $value) {
+        if (empty($value)) {
+          unset($merged_attributes[$attribute]);
+        }
+      }
+
+      // Uncomment for debug
+      //msg(get_class($this) . ': ' . print_r($merged_attributes, 1));
 
       return $merged_attributes;
 
