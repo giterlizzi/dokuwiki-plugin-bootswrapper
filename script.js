@@ -204,6 +204,43 @@ jQuery(document).ready(function() {
     });
 
 
+    // Carousel
+    jQuery('.bs-wrap-carousel').each(function() {
+
+        var $carousel   = jQuery(this),
+            carousel_id = Math.random().toString(36).substr(2, 9),
+            $images     = $carousel.find('img'),
+            $slides     = $carousel.find('.bs-wrap-slide'),
+            $caption    = $carousel.find('.bs-wrap-caption'),
+            $indicators = $carousel.find('ol');
+
+        $carousel.attr('id', carousel_id);
+
+        $images.removeClass('media')
+               .removeClass('medialeft')
+               .removeClass('mediaright')
+               .removeClass('mediacenter');
+
+        if (! $slides.length) {
+          $images.wrap('<div class="item"/>');
+        }
+
+        if ($caption.length) {
+          $caption.removeClass('caption').addClass('carousel-caption');
+        }
+
+        $carousel.find('.carousel-control').attr('href', '#' + carousel_id);
+
+        for (var i = 0; i < $images.length; i++) {
+            $indicators.append('<li data-target="#'+ carousel_id +'" data-slide-to="'+i+'"></li>');
+        }
+
+        $carousel.find('.item').first().addClass('active');
+        $indicators.find('li').first().addClass('active');
+
+    });
+
+
     }, 0);
 
 });
