@@ -52,17 +52,20 @@ jQuery(document).ready(function() {
         }
 
         $nav_wrap.find('ul:first').addClass(nav_class.join(' '));
-        $nav_wrap.find('div.li *').unwrap();
-        $nav_wrap.find('li').attr('role', 'presentation');
-        $nav_wrap.find('.curid').parent('li').addClass('active');
+
+        var $nav = $nav_wrap.find('.nav');
+
+        $nav.find('div.li *').unwrap();
+        $nav.find('li').attr('role', 'presentation');
+        $nav.find('.curid').parent('li').addClass('active');
 
         // Drop-down menu
-        $nav_wrap.find('ul li ul')
+        $nav.find('li ul')
             .addClass('dropdown-menu')
             .parent('li')
             .addClass('dropdown');
 
-        $nav_wrap.find('.dropdown div.li').replaceWith(function() {
+        $nav.find('.dropdown div.li').replaceWith(function() {
             return jQuery('<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" />')
                 .html(jQuery(this).contents())
                 .append(' <span class="caret"/>');
@@ -75,13 +78,13 @@ jQuery(document).ready(function() {
                 $nav_wrap.find('.tab-pane').wrapAll(jQuery('<div class="tab-content"/>'));
             }
 
-            $nav_wrap.find('a').attr('data-toggle', 'tab').attr('role', 'tab');
+            $nav.find('a').attr('data-toggle', 'tab').attr('role', 'tab');
 
             if (nav_data.navFade) {
                 $nav_wrap.find('.tab-content .tab-pane').addClass('fade');
             }
 
-            $nav_wrap.find('.nav a:first').tab('show');
+            $nav.find('a:first').tab('show');
 
         }
 
