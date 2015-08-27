@@ -146,6 +146,13 @@ jQuery(document).ready(function() {
 
         var $list_wrap = jQuery(this);
 
+        var $icon_link = $list_wrap.find('li i + a');
+
+        if ($icon_link.length) {
+          $icon_link.prev().prependTo($icon_link);
+          $list_wrap.find('li a i').after(' ');
+        }
+
         $list_wrap.find('div.li').contents().unwrap();
         $list_wrap.find('ul').addClass('list-group');
         $list_wrap.find('ul > li').addClass('list-group-item');
