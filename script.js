@@ -146,11 +146,15 @@ jQuery(document).ready(function() {
 
         var $list_wrap = jQuery(this);
 
-        var $icon_link = $list_wrap.find('li i + a');
+        var $icon_links = $list_wrap.find('li i + a');
 
-        if ($icon_link.length) {
-          $icon_link.prev().prependTo($icon_link);
-          $list_wrap.find('li a i').after(' ');
+        if ($icon_links.length) {
+          jQuery.each($icon_links, function() {
+            var $link = jQuery(this),
+                $icon = $link.prev();
+            $icon.prependTo($link);
+            $icon.after(' ');
+          });
         }
 
         $list_wrap.find('div.li').contents().unwrap();
