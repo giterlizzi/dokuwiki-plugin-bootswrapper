@@ -37,22 +37,25 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
         $default_attributes[$attribute] = $item['default'];
       }
 
-      foreach ($attributes as $attribute => $value) {
+      foreach ($attributes as $name => $value) {
 
-        $no_check = $this->tag_attributes[$attribute]['noCheck'];
-        $required = $this->tag_attributes[$attribute]['required'];
-        $values   = $this->tag_attributes[$attribute]['values'];
-        $default  = $this->tag_attributes[$attribute]['default'];
+        if (! isset($this->tag_attributes[$name])) continue;
 
-        $checked_attributes[$attribute] = $value;
+        $item = $this->tag_attributes[$name];
+
+        $required = isset($item['required']) ? $item['required'] : false;
+        $values   = isset($item['values'])   ? $item['values']   : null;
+        $default  = isset($item['default'])  ? $item['default']  : null;
+
+        $checked_attributes[$name] = $value;
 
         // Set the default value when the user-value is empty
         if ($required && empty($value)) {
-          $checked_attributes[$attribute] = $default;
+          $checked_attributes[$name] = $default;
 
         // Check if the user attribute have a valid range values
         } elseif (is_array($values) && ! in_array($value, $values)) {
-          $checked_attributes[$attribute] = $default;
+          $checked_attributes[$name] = $default;
         }
 
       }
@@ -61,11 +64,11 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
       $merged_attributes = array_merge($default_attributes, $checked_attributes);
 
       // Remove empty attributes
-      foreach ($merged_attributes as $attribute => $value) {
-        if (empty($value)) {
-          unset($merged_attributes[$attribute]);
-        }
-      }
+      //foreach ($merged_attributes as $attribute => $value) {
+      //  if (empty($value)) {
+      //    unset($merged_attributes[$attribute]);
+      //  }
+      //}
 
       // Uncomment for debug
       //msg(get_class($this) . ': ' . print_r($merged_attributes, 1));
@@ -103,12 +106,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
               $title = trim($title,'=');
               $title = trim($title);
 
-              //if( $handler->status['section'] ) $handler->_addCall('section_close',array(), $pos);
-
               $handler->_addCall('header',array($title,$level,$pos), $pos);
-
-              //$handler->_addCall('section_open',array($level),$pos);
-              //$this->status['section'] = true;
 
               break;
 
@@ -130,15 +128,16 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
                     $is_block = true;
                 }
 
-                return array($state, $match, $this->checkAttributes($attributes), $is_block);
+                $checked_attributes = $this->checkAttributes($attributes);
+
+                return array($state, $match, $checked_attributes, $is_block);
 
             case DOKU_LEXER_UNMATCHED:
-                $handler->_addCall('cdata', array($match), $pos);
-                //return array($state, $match);
+                $handler->_addCall('cdata', array($match), $pos, null);
                 break;
 
             case DOKU_LEXER_EXIT:
-                return array($state, '');
+                return array($state, '', $pos, null);
 
         }
 
