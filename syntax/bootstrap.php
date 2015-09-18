@@ -64,11 +64,11 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
       $merged_attributes = array_merge($default_attributes, $checked_attributes);
 
       // Remove empty attributes
-      //foreach ($merged_attributes as $attribute => $value) {
-      //  if (empty($value)) {
-      //    unset($merged_attributes[$attribute]);
-      //  }
-      //}
+      foreach ($merged_attributes as $attribute => $value) {
+        if (empty($value)) {
+          unset($merged_attributes[$attribute]);
+        }
+      }
 
       // Uncomment for debug
       //msg(get_class($this) . ': ' . print_r($merged_attributes, 1));
