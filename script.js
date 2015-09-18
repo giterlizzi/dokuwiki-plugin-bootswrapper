@@ -138,6 +138,10 @@ jQuery(document).ready(function() {
         $btn_link.addClass(btn_class.join(' '));
         $btn_link.attr('role', 'button');
 
+        if ($btn_link.hasClass('urlextern')) {
+          $btn_link.removeClass('urlextern').addClass('wikilink1');
+        }
+
     });
 
 
