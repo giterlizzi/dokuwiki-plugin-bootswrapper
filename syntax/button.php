@@ -14,8 +14,8 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_button extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start  = '<button.*?>(?=.*?</button>)';
-    protected $pattern_end    = '</button>';
+    protected $pattern_start  = '<(?:btn|button).*?>(?=.*?</(?:btn|button)>)';
+    protected $pattern_end    = '</(?:btn|button)>';
     protected $tag_attributes = array(
 
       'type'      => array('type'     => 'string',
