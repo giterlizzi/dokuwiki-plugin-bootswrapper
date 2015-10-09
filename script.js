@@ -10,6 +10,7 @@ jQuery(document).ready(function() {
 
     setTimeout(function() {
 
+    jQuery('.bs-wrap .fix-media-list-overlap').removeClass('fix-media-list-overlap');
 
     // Tooltips
     jQuery('.bs-wrap-tooltip').tooltip();
