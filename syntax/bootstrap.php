@@ -1,7 +1,7 @@
 <?php
 /**
  * Bootstrap Wrapper Plugin
- * 
+ *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  */
@@ -28,6 +28,8 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
      */
     function checkAttributes($attributes = array()) {
 
+      global $ACT;
+
       $default_attributes = array();
       $merged_attributes  = array();
       $checked_attributes = array();
@@ -39,7 +41,19 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
       foreach ($attributes as $name => $value) {
 
-        if (! isset($this->tag_attributes[$name])) continue;
+        $msg_title = sprintf('<strong>Bootstrap Wrapper - %s</strong>',
+                             ucfirst(str_replace('syntax_plugin_bootswrapper_',
+                                                 '', get_class($this))));
+
+        if (! isset($this->tag_attributes[$name])) {
+
+          if ($ACT == 'preview') {
+            msg(sprintf('%s Unknown attribute "%s"', $msg_title, $name), -1);
+          }
+
+          continue;
+
+        }
 
         $item = $this->tag_attributes[$name];
 
@@ -55,6 +69,12 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
         // Check if the user attribute have a valid range values
         } elseif (is_array($values) && ! in_array($value, $values)) {
+
+          if ($ACT == 'preview') {
+            msg(sprintf('%s Invalid value (%s) for "%s" attribute. It will apply the default value "%s"',
+                        $msg_title, $value, $name, $default), 2);
+          }
+
           $checked_attributes[$name] = $default;
         }
 
@@ -71,7 +91,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
       }
 
       // Uncomment for debug
-      //msg(get_class($this) . ': ' . print_r($merged_attributes, 1));
+      //msg(sprintf('%s %s', $msg_title, print_r($merged_attributes, 1)));
 
       return $merged_attributes;
 
