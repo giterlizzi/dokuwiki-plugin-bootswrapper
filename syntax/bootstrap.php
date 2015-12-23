@@ -134,7 +134,20 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
                 $attributes = array();
                 $xml        = simplexml_load_string(str_replace('>', '/>', $match));
-                $tag        = $xml->getName();
+
+                if (! is_object($xml)) {
+
+                  $xml = simplexml_load_string('<foo />');
+
+                  global $ACT;
+
+                  if ($ACT == 'preview') {
+                    msg(sprintf('<strong>Bootstrap Wrapper</strong> - Malformed tag (%s). Please check your code!', hsc($match)), -1);
+                  }
+
+                }
+
+                $tag = $xml->getName();
 
                 foreach ($xml->attributes() as $key => $value) {
                   $attributes[$key] = (string) $value;
