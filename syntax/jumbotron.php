@@ -16,10 +16,6 @@ class syntax_plugin_bootswrapper_jumbotron extends syntax_plugin_bootswrapper_bo
 
     protected $pattern_start  = '<(?:JUMBOTRON|jumbotron).*?>(?=.*?</(?:JUMBOTRON|jumbotron)>)';
     protected $pattern_end    = '</(?:JUMBOTRON|jumbotron)>';
-
-    protected $template_start = '<div class="bs-wrap bs-wrap-jumbotron jumbotron">';
-    protected $template_end   = '</div>';
-
     protected $tag_attributes = array(
 
       'background' => array('type'     => 'string',
