@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -22,17 +22,17 @@ class syntax_plugin_bootswrapper_carousel extends syntax_plugin_bootswrapper_boo
                             'values'   => null,
                             'required' => false,
                             'default'  => 5000),
-  
+
         'pause'    => array('type'     => 'string',
                             'values'   => null,
                             'required' => false,
                             'default'  => 'hover'),
-  
+
         'wrap'     => array('type'     => 'boolean',
                             'values'   => null,
                             'required' => false,
                             'default'  => true),
-  
+
         'keyboard' => array('type'     => 'boolean',
                             'values'   => null,
                             'required' => false,
