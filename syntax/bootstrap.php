@@ -35,16 +35,18 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
     $merged_attributes  = array();
     $checked_attributes = array();
 
+    if ($ACT == 'preview') {
+      $msg_title = sprintf('<strong>Bootstrap Wrapper - %s</strong>',
+                            ucfirst(str_replace('syntax_plugin_bootswrapper_',
+                                                '', get_class($this))));
+    }
+
     // Save the default values of attributes
     foreach ($this->tag_attributes as $attribute => $item) {
       $default_attributes[$attribute] = $item['default'];
     }
 
     foreach ($attributes as $name => $value) {
-
-      $msg_title = sprintf('<strong>Bootstrap Wrapper - %s</strong>',
-                            ucfirst(str_replace('syntax_plugin_bootswrapper_',
-                                                '', get_class($this))));
 
       if (! isset($this->tag_attributes[$name])) {
 
