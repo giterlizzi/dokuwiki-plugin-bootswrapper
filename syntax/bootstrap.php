@@ -51,7 +51,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
       if (! isset($this->tag_attributes[$name])) {
 
         if ($ACT == 'preview') {
-          msg(sprintf('%s Unknown attribute "%s"', $msg_title, $name), -1);
+          msg(sprintf('%s Unknown attribute <code>%s</code>', $msg_title, $name), -1);
         }
 
         continue;
@@ -74,7 +74,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
       } elseif (is_array($values) && ! in_array($value, $values)) {
 
         if ($ACT == 'preview') {
-          msg(sprintf('%s Invalid value (%s) for "%s" attribute. It will apply the default value "%s"',
+          msg(sprintf('%s Invalid value (<code>%s</code>) for <code>%s</code> attribute. It will apply the default value <code>%s</code>',
                       $msg_title, $value, $name, $default), 2);
         }
 
@@ -146,7 +146,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
           global $ACT;
 
           if ($ACT == 'preview') {
-            msg(sprintf('<strong>Bootstrap Wrapper</strong> - Malformed tag (%s). Please check your code!', hsc($match)), -1);
+            msg(sprintf('<strong>Bootstrap Wrapper</strong> - Malformed tag (<code>%s</code>). Please check your code!', hsc($match)), -1);
           }
 
         }
@@ -186,30 +186,25 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
   function render($mode, Doku_Renderer $renderer, $data) {
 
     if (empty($data)) return false;
+    if ($mode !== 'xhtml') return false;
 
-    if ($mode == 'xhtml') {
+    /** @var Doku_Renderer_xhtml $renderer */
+    list($state, $match) = $data;
 
-      /** @var Doku_Renderer_xhtml $renderer */
-      list($state, $match) = $data;
+    switch($state) {
 
-      switch($state) {
+      case DOKU_LEXER_ENTER:
+        $markup = $this->template_start;
+        $renderer->doc .= $markup;
+        return true;
 
-        case DOKU_LEXER_ENTER:
-          $markup = $this->template_start;
-          $renderer->doc .= $markup;
-          return true;
-
-        case DOKU_LEXER_EXIT:
-          $renderer->doc .= $this->template_end;
-          return true;
-
-      }
-
-      return true;
+      case DOKU_LEXER_EXIT:
+        $renderer->doc .= $this->template_end;
+        return true;
 
     }
 
-    return false;
+    return true;
 
   }
 
