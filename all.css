@@ -10,6 +10,11 @@
   margin-bottom: 15px;
 }
 
+.bs-wrap-accordion .panel-heading a {
+  color: inherit;
+  text-decoration: none;
+}
+
 
 /*
  * Callouts (from Twitter Bootstrap Documentation)
