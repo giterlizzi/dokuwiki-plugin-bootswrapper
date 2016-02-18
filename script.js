@@ -209,7 +209,7 @@ jQuery(document).ready(function() {
       var $panel   = jQuery(this),
           panel_id = accordion_id + '_' + Math.random().toString(36).substr(2, 9);
 
-      $panel.find('.panel-heading').wrapInner('<a role="button" data-toggle="collapse" data-parent="#'+ accordion_id +'" href="#'+ panel_id +'">');
+      $panel.find('.panel-heading').wrap('<a role="button" data-toggle="collapse" data-parent="#'+ accordion_id +'" href="#'+ panel_id +'">');
       $panel.find('.panel-body').wrap('<div id="'+ panel_id +'" class="panel-collapse collapse" role="tabpanel">');
 
     });
