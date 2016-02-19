@@ -15,6 +15,8 @@ jQuery(document).ready(function() {
   // Tooltips
   jQuery('.bs-wrap-tooltip').tooltip();
 
+  // Popovers
+  jQuery('.bs-wrap-popover').popover();
 
   // Images
   jQuery('.bs-wrap-image').each(function() {
