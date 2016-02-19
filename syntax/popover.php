@@ -4,7 +4,8 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Jos Roossien <mail@jroossien.com>
- * @copyright  (C) 2015, Giuseppe Di Terlizzi
+ * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -19,9 +20,9 @@ class syntax_plugin_bootswrapper_popover extends syntax_plugin_bootswrapper_boot
     protected $tag_attributes = array(
 
       'placement' => array('type'     => 'string',
-                           'values'   => array('top', 'bottom', 'left', 'right', 'auto'),
+                           'values'   => array('top', 'bottom', 'left', 'right', 'auto', 'auto top', 'auto bottom', 'auto left', 'auto right'),
                            'required' => true,
-                           'default'  => 'top'),
+                           'default'  => 'right'),
 
       'title'     => array('type'     => 'string',
                            'values'   => null,
@@ -43,6 +44,26 @@ class syntax_plugin_bootswrapper_popover extends syntax_plugin_bootswrapper_boot
                            'required' => false,
                            'default'  => false),
 
+      'animation' => array('type'     => 'boolean',
+                           'values'   => array(0, 1),
+                           'required' => false,
+                           'default'  => true),
+
+      'delay'     => array('type'     => 'integer',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => 0),
+
+      'delay-show' => array('type'     => 'integer',
+                            'values'   => null,
+                            'required' => false,
+                            'default'  => 0),
+
+      'delay-hide' => array('type'     => 'integer',
+                            'values'   => null,
+                            'required' => false,
+                            'default'  => 0),
+
     );
 
     function getPType() { return 'normal';}
@@ -60,19 +81,37 @@ class syntax_plugin_bootswrapper_popover extends syntax_plugin_bootswrapper_boot
 
                 case DOKU_LEXER_ENTER:
 
-                    $placement = $attributes['placement'];
-                    $title     = $attributes['title'];
-                    $content   = $attributes['content'];
-                    $trigger   = $attributes['trigger'];
-                    $html      = $attributes['html'];
+                    $html5_data = array();
+
+                    extract($attributes);
 
                     if ($html) {
-                      $title = hsc(p_render('xhtml',p_get_instructions($title), $info));
+                      $title   = hsc(p_render('xhtml',p_get_instructions($title), $info));
                       $content = hsc(p_render('xhtml',p_get_instructions($content), $info));
                     }
 
-                    $markup = sprintf('<span class="bs-wrap bs-wrap-popover" data-toggle="popover" data-trigger="%s" data-html="%s" data-placement="%s" title="%s" data-content="%s">',
-                        $trigger, $html, $placement, $title, $content);
+                    if ($trigger)   $html5_data[] = sprintf('data-trigger="%s"',   $trigger);
+                    if ($animation) $html5_data[] = sprintf('data-animation="%s"', $animation);
+                    if ($html)      $html5_data[] = sprintf('data-html="%s"',      $html);
+                    if ($placement) $html5_data[] = sprintf('data-placement="%s"', $placement);
+                    if ($content)   $html5_data[] = sprintf('data-content="%s"',   $content);
+                    if ($delay)     $html5_data[] = sprintf('data-delay="%s"',     $delay);
+
+                    if (! $delay && ($attributes['delay-hide'] || $attributes['delay-show'])) {
+
+                      $delays = array();
+                      $show   = $attributes['delay-show'];
+                      $hide   = $attributes['delay-hide'];
+
+                      if ($hide) $delays['hide'] = $hide;
+                      if ($show) $delays['show'] = $show;
+
+                      $html5_data[] = sprintf('data-delay=\'%s\'', json_encode($delays));
+
+                    }
+
+                    $markup = sprintf('<span class="bs-wrap bs-wrap-popover" data-toggle="popover" title="%s" %s>',
+                        $title, implode(' ', $html5_data));
 
                     $renderer->doc .= $markup;
                     return true;
