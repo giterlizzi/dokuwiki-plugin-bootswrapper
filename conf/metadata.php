@@ -6,3 +6,4 @@
  */
 
 $meta['loadBootstrap'] = array('onoff', '_caution' => 'danger');
+$meta['allowStylingAttributes'] = array('onoff');

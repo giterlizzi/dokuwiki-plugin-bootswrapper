@@ -6,3 +6,4 @@
  */
 
 $conf['loadBootstrap'] = 0;
+$conf['allowStylingAttributes'] = 0;
