@@ -64,6 +64,19 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
       $values   = isset($item['values'])   ? $item['values']   : null;
       $default  = isset($item['default'])  ? $item['default']  : null;
 
+      if ($item['type'] == 'boolean') {
+        switch ($value) {
+          case 'false':
+          case 'FALSE':
+            $value = false;
+            break;
+          case 'true':
+          case 'TRUE':
+            $value = true;
+            break;
+        }
+      }
+
       $checked_attributes[$name] = $value;
 
       // Set the default value when the user-value is empty
