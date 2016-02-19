@@ -123,45 +123,27 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
   }
 
   /**
-   * This function replaces placeholders in the specified markup with styling attribute values from the user.
-   * It will only do this if the user has allowed styling attributes in the config.
-   * The markup string should contain three %s placeholders.
-   * If the markup already has styling or a class you can put the placeholder within the brackets.
-   * For example: <div class="bs-wrap %s" %s %s></div> or if it doesn't have a class you'd use <div %s %s %s></div>
-   * @param $markup Html markup element containting placeholders for the styling attributes.
-   * @param array $attributes Attribute values from user.
-   * @return The markup passed in with styling parsed.
-   */
-  function parseMarkupSyntax($markup, $attributes = array()) {
-    $styling = $this->getStylingAttributes($attributes);
-
-    if (strpos($markup, 'class=') === false) {
-      $styling['class'] = 'class="' . $styling['class'] . '"';
-    }
-    if (strpos($markup, 'id=') === false) {
-      $styling['id'] = ''; //There can only be one ID
-    }
-    if (strpos($markup, 'style=') === false) {
-      $styling['style'] = 'style="' . $styling['style'] . '"';
-    }
-
-    $markup = sprintf($markup, $styling['class'], $styling['id'], $styling['style']);
-    return $markup;
-  }
-
-  /**
    * Get array with styling attributes from the attributes array passed in.
    * If the user has styling disabled this array will contain empty strings.
    * @param array $attributes The attribute array with user values.
    * @return array The array with styling attribute values or empty string.
    */
-  function getStylingAttributes($attributes = array()) {
-    $styling = array('class' => '', 'id' => '', 'style' => '');
+  function getStylingAttributes($attributes) {
+    $styling = array(
+      'class' => '',
+      'id' => '',
+      'style' => ''
+    );
+
     if ($this->getConf('allowStylingAttributes')) {
-      $styling['class'] = $attributes['class'];
-      $styling['id'] = $attributes['id'];
-      $styling['style'] = $attributes['style'];
+      if (isset($attributes['class']) && $attributes['class'])
+        $styling['class'] = $attributes['class'];
+      if (isset($attributes['id']) && $attributes['id'])
+        $styling['id'] = $attributes['id'];
+      if (isset($attributes['style']) && $attributes['style'])
+        $styling['style'] = $attributes['style'];
     }
+
     return $styling;
   }
 
@@ -259,7 +241,9 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
     switch($state) {
 
       case DOKU_LEXER_ENTER:
-        $markup = $this->parseMarkupSyntax($this->template_start, $attributes);
+        $style = $this->getStylingAttributes($attributes);
+
+        $markup = sprintf($this->template_start, $style['class'], $style['id'], $style['style']);
         $renderer->doc .= $markup;
         return true;
 
