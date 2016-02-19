@@ -19,7 +19,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
   protected $template_end     = '</div>';
   protected $header_pattern   = '[ \t]*={2,}[^\n]+={2,}[ \t]*(?=\n)';
   protected $tag_attributes   = array();
-  protected $core_tag_attributes = array(
+  protected $styling_attributes = array(
 
     'style' => array('type'  => 'string',
                   'values'   => null,
@@ -48,7 +48,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
     global $ACT;
 
     if ($this->getConf('allowStylingAttributes')) {
-      $all_attributes  = array_merge($this->tag_attributes, $this->core_tag_attributes);
+      $all_attributes  = array_merge($this->tag_attributes, $this->styling_attributes);
     } else {
       $all_attributes  = $this->tag_attributes;
     }
@@ -133,26 +133,36 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
    * @return The markup passed in with styling parsed.
    */
   function parseMarkupSyntax($markup, $attributes = array()) {
-    if ($this->getConf('allowStylingAttributes')) {
-      $class    = $attributes['class'];
-      $id       = $attributes['id'];
-      $style    = $attributes['style'];
+    $styling = $this->getStylingAttributes($attributes);
 
-      if (strpos($markup, 'class=') === false) {
-        $class = 'class="' . $class . '"';
-      }
-      if (strpos($markup, 'id=') === false) {
-        $id = ''; //There can only be one ID
-      }
-      if (strpos($markup, 'style=') === false) {
-        $style = 'style="' . $style . '"';
-      }
-
-      $markup = sprintf($markup, $class, $id, $style);
-    } else {
-      $markup = sprintf($markup, '', '', '');
+    if (strpos($markup, 'class=') === false) {
+      $styling['class'] = 'class="' . $styling['class'] . '"';
     }
+    if (strpos($markup, 'id=') === false) {
+      $styling['id'] = ''; //There can only be one ID
+    }
+    if (strpos($markup, 'style=') === false) {
+      $styling['style'] = 'style="' . $styling['style'] . '"';
+    }
+
+    $markup = sprintf($markup, $styling['class'], $styling['id'], $styling['style']);
     return $markup;
+  }
+
+  /**
+   * Get array with styling attributes from the attributes array passed in.
+   * If the user has styling disabled this array will contain empty strings.
+   * @param array $attributes The attribute array with user values.
+   * @return array The array with styling attribute values or empty string.
+   */
+  function getStylingAttributes($attributes = array()) {
+    $styling = array('class' => '', 'id' => '', 'style' => '');
+    if ($this->getConf('allowStylingAttributes')) {
+      $styling['class'] = $attributes['class'];
+      $styling['class'] = $attributes['id'];
+      $styling['class'] = $attributes['style'];
+    }
+    return $styling;
   }
 
 
