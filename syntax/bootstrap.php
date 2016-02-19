@@ -15,12 +15,28 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
   protected $pattern_start    = '<BOOTSTRAP.+?>';
   protected $pattern_end      = '</BOOTSTRAP>';
-  protected $template_start   = '<div class="%s">';
   protected $template_content = '%s';
   protected $template_end     = '</div>';
   protected $header_pattern   = '[ \t]*={2,}[^\n]+={2,}[ \t]*(?=\n)';
   protected $tag_attributes   = array();
+  protected $core_tag_attributes = array(
 
+    'style' => array('type'  => 'string',
+                  'values'   => null,
+                  'required' => false,
+                  'default'  => ''),
+
+    'class' => array('type'  => 'string',
+                  'values'   => null,
+                  'required' => false,
+                  'default'  => ''),
+
+    'id' => array('type'     => 'integer',
+                  'values'   => null,
+                  'required' => false,
+                  'default'  => '')
+
+  );
 
   /**
     * Check default and user attributes
@@ -30,6 +46,12 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
   function checkAttributes($attributes = array()) {
 
     global $ACT;
+
+    if ($this->getConf('allowStylingAttributes')) {
+      $all_attributes  = array_merge($this->tag_attributes, $this->core_tag_attributes);
+    } else {
+      $all_attributes  = $this->tag_attributes;
+    }
 
     $default_attributes = array();
     $merged_attributes  = array();
@@ -42,13 +64,13 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
     }
 
     // Save the default values of attributes
-    foreach ($this->tag_attributes as $attribute => $item) {
+    foreach ($all_attributes as $attribute => $item) {
       $default_attributes[$attribute] = $item['default'];
     }
 
     foreach ($attributes as $name => $value) {
 
-      if (! isset($this->tag_attributes[$name])) {
+      if (! isset($all_attributes[$name])) {
 
         if ($ACT == 'preview') {
           msg(sprintf('%s Unknown attribute <code>%s</code>', $msg_title, $name), -1);
@@ -58,7 +80,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
       }
 
-      $item = $this->tag_attributes[$name];
+      $item = $all_attributes[$name];
 
       $required = isset($item['required']) ? $item['required'] : false;
       $values   = isset($item['values'])   ? $item['values']   : null;
@@ -98,6 +120,39 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
     return $merged_attributes;
 
+  }
+
+  /**
+   * This function replaces placeholders in the specified markup with styling attribute values from the user.
+   * It will only do this if the user has allowed styling attributes in the config.
+   * The markup string should contain three %s placeholders.
+   * If the markup already has styling or a class you can put the placeholder within the brackets.
+   * For example: <div class="bs-wrap %s" %s %s></div> or if it doesn't have a class you'd use <div %s %s %s></div>
+   * @param $markup Html markup element containting placeholders for the styling attributes.
+   * @param array $attributes Attribute values from user.
+   * @return The markup passed in with styling parsed.
+   */
+  function parseMarkupSyntax($markup, $attributes = array()) {
+    if ($this->getConf('allowStylingAttributes')) {
+      $class    = $attributes['class'];
+      $id       = $attributes['id'];
+      $style    = $attributes['style'];
+
+      if (strpos($markup, 'class=') === false) {
+        $class = 'class="' . $class . '"';
+      }
+      if (strpos($markup, 'id=') === false) {
+        $id = ''; //There can only be one ID
+      }
+      if (strpos($markup, 'style=') === false) {
+        $style = 'style="' . $style . '"';
+      }
+
+      $markup = sprintf($markup, $class, $id, $style);
+    } else {
+      $markup = sprintf($markup, '', '', '');
+    }
+    return $markup;
   }
 
 
@@ -189,12 +244,12 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
     if ($mode !== 'xhtml') return false;
 
     /** @var Doku_Renderer_xhtml $renderer */
-    list($state, $match) = $data;
+    list($state, $match, $attributes) = $data;
 
     switch($state) {
 
       case DOKU_LEXER_ENTER:
-        $markup = $this->template_start;
+        $markup = $this->parseMarkupSyntax($this->template_start, $attributes);
         $renderer->doc .= $markup;
         return true;
 
