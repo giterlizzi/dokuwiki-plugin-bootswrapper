@@ -14,10 +14,10 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_list extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<list-group>';
+    protected $pattern_start = '<list-group.*?>(?=.*?</list-group>)';
     protected $pattern_end   = '</list-group>';
 
-    protected $template_start = '<div class="bs-wrap bs-wrap-list-group">';
+    protected $template_start = '<div class="bs-wrap bs-wrap-list-group %s" id="%s" style="%s">';
     protected $template_end   = '</div>';
 
     function getPType() { return 'block';}

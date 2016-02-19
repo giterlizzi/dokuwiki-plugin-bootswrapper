@@ -55,6 +55,7 @@ class syntax_plugin_bootswrapper_affix extends syntax_plugin_bootswrapper_bootst
                     $top    = $attributes['offset-top'];
                     $bottom = $attributes['offset-bottom'];
                     $target = $attributes['target'];
+                    $style = $this->getStylingAttributes($attributes);
                     $data   = array();
 
                     if ($top) {
@@ -67,7 +68,8 @@ class syntax_plugin_bootswrapper_affix extends syntax_plugin_bootswrapper_bootst
                         $data[] = sprintf('data-target="%s"', $target);
                     }
 
-                    $markup = sprintf('<div style="z-index:1024" class="bs-wrap bs-wrap-affix" data-spy="affix" %s>', implode(' ', $data));
+                    $markup = sprintf('<div class="bs-wrap bs-wrap-affix %s" id="%s" style="z-index:1024; %s" data-spy="affix" %s>',
+                      $style['class'], $style['id'], $style['style'], implode(' ', data));
 
                     $renderer->doc .= $markup;
                     return true;

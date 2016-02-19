@@ -45,8 +45,10 @@ class syntax_plugin_bootswrapper_callout extends syntax_plugin_bootswrapper_boot
                 case DOKU_LEXER_ENTER:
 
                     $type = $attributes['type'];
+                    $style = $this->getStylingAttributes($attributes);
 
-                    $markup = sprintf('<div class="bs-wrap bs-callout bs-callout-%s">', $type);
+                    $markup = sprintf('<div class="bs-wrap bs-callout bs-callout-%s %s" id="%s" style="%s">',
+                      $type, $style['class'], $style['id'], $style['style']);
 
                     if ($title = $attributes['title']) {
                       $markup .= "<h4>$title</h4>";

@@ -48,7 +48,10 @@ class syntax_plugin_bootswrapper_collapse extends syntax_plugin_bootswrapper_boo
 
                     $id        = $attributes['id'];
                     $collapsed = $attributes['collapsed'];
-                    $markup    = sprintf('<div class="bs-wrap bs-wrap-collapse collapse %s" id="%s">', ($collapsed ? '' : 'in'), $id);
+                    $style = $this->getStylingAttributes($attributes);
+
+                    $markup    = sprintf('<div class="bs-wrap bs-wrap-collapse collapse %s %s" id="%s" style="%s">',
+                      ($collapsed ? '' : 'in'), $style['class'], $id, $style['style']);
 
                     $renderer->doc .= $markup;
                     return true;

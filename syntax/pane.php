@@ -41,7 +41,10 @@ class syntax_plugin_bootswrapper_pane extends syntax_plugin_bootswrapper_bootstr
                 case DOKU_LEXER_ENTER:
 
                     $id     = $attributes['id'];
-                    $markup = sprintf('<div role="tabpanel" class="bs-wrap bs-wrap-tab-pane tab-pane" id="%s">', $id);
+                    $style = $this->getStylingAttributes($attributes);
+
+                    $markup = sprintf('<div role="tabpanel" class="bs-wrap bs-wrap-tab-pane tab-pane %s" id="%s" style="%s">',
+                      $style['class'], $id, $style['style']);
 
                     $renderer->doc .= $markup;
                     return true;

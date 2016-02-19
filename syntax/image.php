@@ -40,13 +40,15 @@ class syntax_plugin_bootswrapper_image extends syntax_plugin_bootswrapper_bootst
 
                     extract($attributes);
 
+                    $style = $this->getStylingAttributes($attributes);
                     $html5_data = array();
 
                     if ($shape) {
                         $html5_data[] = sprintf('data-img-shape="%s"', $shape);
                     }
 
-                    $markup = sprintf('<span class="bs-wrap bs-wrap-image" %s>', implode(' ', $html5_data));
+                    $markup = sprintf('<span class="bs-wrap bs-wrap-image %s" id="%s" style="%s" %s>',
+                      $style['class'], $style['id'], $style['style'], implode(' ', $html5_data));
 
                     $renderer->doc .= $markup;
                     return true;

@@ -14,7 +14,7 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_accordion extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start  = '<accordion>';
+    protected $pattern_start  = '<accordion.*?>(?=.*?</accordion>)';
     protected $pattern_end    = '</accordion>';
 
     protected $tag_attributes = array(
@@ -42,7 +42,10 @@ class syntax_plugin_bootswrapper_accordion extends syntax_plugin_bootswrapper_bo
                 case DOKU_LEXER_ENTER:
 
                     $id     = $attributes['id'];
-                    $markup = sprintf('<div class="bs-wrap bs-wrap-accordion panel-group" id="%s">', $id);
+                    $style = $this->getStylingAttributes($attributes);
+
+                    $markup = sprintf('<div class="bs-wrap bs-wrap-accordion panel-group %s" id="%s" style="%s">',
+                      $style['class'], $id, $style['style']);
 
                     $renderer->doc .= $markup;
                     return true;

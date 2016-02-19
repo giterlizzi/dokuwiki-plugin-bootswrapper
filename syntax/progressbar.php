@@ -61,6 +61,7 @@ class syntax_plugin_bootswrapper_progressbar extends syntax_plugin_bootswrapper_
                 case DOKU_LEXER_ENTER:
 
                     extract($attributes);
+                    $style = $this->getStylingAttributes($attributes);
 
                     $classCode = "";
 
@@ -72,8 +73,8 @@ class syntax_plugin_bootswrapper_progressbar extends syntax_plugin_bootswrapper_
                         $classCode .= " active";
                     }
 
-                    $markup = sprintf('<div class="bs-wrap bs-wrap-progress-bar progress-bar progress-bar-%s %s" role="progressbar" aria-valuenow="%s" aria-valuemin="0" aria-valuemax="100" style="width: %s%%;%s">',
-                                      $type, $classCode, $value, $value, ($showvalue ? 'min-width: 2em;' : ''));
+                    $markup = sprintf('<div class="bs-wrap bs-wrap-progress-bar progress-bar progress-bar-%s %s %s" id="%s" role="progressbar" aria-valuenow="%s" aria-valuemin="0" aria-valuemax="100" style="width: %s%%;%s %s">',
+                                      $type, $classCode, $style['class'], $style['id'], $value, $value, ($showvalue ? 'min-width: 2em;' : ''), $style['style']);
 
                     if ($showvalue){
                         $markup .= sprintf('%s%% ', $value);

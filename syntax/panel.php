@@ -72,8 +72,10 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
                     $subtitle = $attributes['subtitle'];
                     $icon     = $attributes['icon'];
                     $nobody   = $attributes['no-body'];
+                    $style = $this->getStylingAttributes($attributes);
 
-                    $markup = sprintf('<div class="bs-wrap bs-wrap-panel panel panel-%s">', $type);
+                    $markup = sprintf('<div class="bs-wrap bs-wrap-panel panel panel-%s %s" id="%s" style="%s">',
+                      $type, $style['class'], $style['id'], $style['style']);
 
                     if ($title || $subtitle) {
 

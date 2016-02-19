@@ -50,8 +50,10 @@ class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootst
                     $label_tag = (($is_block) ? 'div' : 'span');
                     $type      = $attributes['type'];
                     $icon      = $attributes['icon'];
+                    $style = $this->getStylingAttributes($attributes);
 
-                    $markup = sprintf('<%s class="bs-wrap bs-wrap-label label label-%s">', $label_tag, $type);
+                    $markup = sprintf('<%s class="bs-wrap bs-wrap-label label label-%s %s" id="%s" style="%s">',
+                      $label_tag, $type, $style['class'], $style['id'], $style['style']);
 
                     if ($icon) {
                       $markup .= sprintf('<i class="%s"></i> ', $icon);

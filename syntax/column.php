@@ -55,13 +55,15 @@ class syntax_plugin_bootswrapper_column extends syntax_plugin_bootswrapper_boots
 
                 case DOKU_LEXER_ENTER:
 
+                    $style = $this->getStylingAttributes($attributes);
                     $col = '';
 
                     foreach (array('lg', 'md', 'sm', 'xs') as $device) {
                         $col .= isset($attributes[$device]) ? sprintf('col-%s-%s ', $device, $attributes[$device]) : '';
                     }
 
-                    $markup = sprintf('<div class="bs-wrap bs-wrap-col %s">', trim($col));
+                    $markup = sprintf('<div class="bs-wrap bs-wrap-col %s %s" id="%s" style="%s">',
+                      trim($col), $style['class'], $style['id'], $style['style']);
 
                     $renderer->doc .= $markup;
                     return true;

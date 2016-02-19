@@ -65,14 +65,15 @@ class syntax_plugin_bootswrapper_popover extends syntax_plugin_bootswrapper_boot
                     $content   = $attributes['content'];
                     $trigger   = $attributes['trigger'];
                     $html      = $attributes['html'];
+                    $style = $this->getStylingAttributes($attributes);
 
                     if ($html) {
                       $title = hsc(p_render('xhtml',p_get_instructions($title), $info));
                       $content = hsc(p_render('xhtml',p_get_instructions($content), $info));
                     }
 
-                    $markup = sprintf('<span class="bs-wrap bs-wrap-popover" data-toggle="popover" data-trigger="%s" data-html="%s" data-placement="%s" title="%s" data-content="%s">',
-                        $trigger, $html, $placement, $title, $content);
+                    $markup = sprintf('<span class="bs-wrap bs-wrap-popover %s" id="%s" style="%s" data-toggle="popover" data-trigger="%s" data-html="%s" data-placement="%s" title="%s" data-content="%s">',
+                      $style['class'], $style['id'], $style['style'], $trigger, $html, $placement, $title, $content);
 
                     $renderer->doc .= $markup;
                     return true;

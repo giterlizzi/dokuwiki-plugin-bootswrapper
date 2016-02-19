@@ -53,12 +53,14 @@ class syntax_plugin_bootswrapper_tooltip extends syntax_plugin_bootswrapper_boot
                     $placement = $attributes['placement'];
                     $title     = $attributes['title'];
                     $html      = $attributes['html'];
+                    $style = $this->getStylingAttributes($attributes);
 
                     if ($html) {
                       $title = hsc(p_render('xhtml',p_get_instructions($title), $info));
                     }
 
-                    $markup = sprintf('<span class="bs-wrap bs-wrap-tooltip" data-toggle="tooltip" data-html="%s" data-placement="%s" title="%s" style="border-bottom:1px dotted">', $html, $placement, $title);
+                    $markup = sprintf('<span class="bs-wrap bs-wrap-tooltip %s" id="%s" data-toggle="tooltip" data-html="%s" data-placement="%s" title="%s" style="border-bottom:1px dotted; %s">',
+                      $style['class'], $style['id'], $html, $placement, $title, $style['style']);
 
                     $renderer->doc .= $markup;
                     return true;

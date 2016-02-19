@@ -56,6 +56,7 @@ class syntax_plugin_bootswrapper_nav extends syntax_plugin_bootswrapper_bootstra
 
                 case DOKU_LEXER_ENTER:
 
+                    $style = $this->getStylingAttributes($attributes);
                     $html5data  = array();
 
                     if (! empty($this->type)) {
@@ -66,7 +67,8 @@ class syntax_plugin_bootswrapper_nav extends syntax_plugin_bootswrapper_bootstra
                         $html5data[] = sprintf('data-nav-%s="%s"', $key, $value);
                     }
 
-                    $markup = sprintf('<div class="bs-wrap bs-wrap-nav" %s>', implode(' ', $html5data));
+                    $markup = sprintf('<div class="bs-wrap bs-wrap-nav %s" id="%s" style="%s" %s>',
+                      $style['class'], $style['id'], $style['style'], implode(' ', $html5data));
 
                     $renderer->doc .= $markup;
                     return true;
