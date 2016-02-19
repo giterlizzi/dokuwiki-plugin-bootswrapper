@@ -51,7 +51,6 @@ class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootst
 
                     extract($attributes);
                     $style = $this->getStylingAttributes($attributes);
-                    print_r($style);
 
                     $markup = sprintf('<div class="bs-wrap alert alert-%s %s %s" id="%s" style="%s" role="alert">',
                       $type, (($dismiss) ? 'alert-dismissible' : ''), $style['class'], $style['id'], $style['style']);
