@@ -290,7 +290,7 @@ jQuery(document).ready(function() {
 
   //Modal
   jQuery('.bs-wrap-modal').each(function(){
-    if (jQuery(this).attr('data-show') === "true") {
+    if (jQuery(this).attr('data-show') == true) {
       jQuery(this).modal('show');
     } else {
       jQuery(this).modal('hide');
