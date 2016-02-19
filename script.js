@@ -108,7 +108,7 @@ jQuery(document).ready(function() {
       btn_label = $btn_wrap.html();
       $btn_wrap.html('');
 
-      $btn_link  = jQuery('<a href="#"/>').html(btn_label);
+      $btn_link  = jQuery('<a href="javascript:void(0)"/>').html(btn_label);
       jQuery(this).append($btn_link);
 
     }
