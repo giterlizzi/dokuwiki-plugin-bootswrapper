@@ -130,6 +130,11 @@ jQuery(document).ready(function() {
           $btn_link.attr('data-target', '#' + value);
           $btn_link.on('click', function(e){ e.preventDefault(); });
           break;
+        case 'btnModal':
+          $btn_link.attr('data-toggle', 'modal');
+          $btn_link.attr('data-target', '#' + value);
+          $btn_link.on('click', function(e){ e.preventDefault(); });
+          break;
         case 'btnIcon':
           var icon = ['<i class="', value, '"/> '].join('');
           $btn_link.prepend(icon);
@@ -280,6 +285,16 @@ jQuery(document).ready(function() {
 
     }
 
+  });
+
+
+  //Modal
+  jQuery('.bs-wrap-modal').each(function(){
+    if (jQuery(this).attr('data-show') === "true") {
+      jQuery(this).modal('show');
+    } else {
+      jQuery(this).modal('hide');
+    }
   });
 
 

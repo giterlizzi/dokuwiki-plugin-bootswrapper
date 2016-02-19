@@ -38,6 +38,11 @@ class syntax_plugin_bootswrapper_button extends syntax_plugin_bootswrapper_boots
                            'required' => false,
                            'default'  => null),
 
+      'modal'  => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+
       'block'     => array('type'     => 'boolean',
                            'values'   => array(0, 1),
                            'required' => false,
