@@ -108,7 +108,7 @@ jQuery(document).ready(function() {
       btn_label = $btn_wrap.html();
       $btn_wrap.html('');
 
-      $btn_link  = jQuery('<a href="#"/>').html(btn_label);
+      $btn_link  = jQuery('<a href="javascript:void(0)"/>').html(btn_label);
       jQuery(this).append($btn_link);
 
     }
@@ -135,6 +135,11 @@ jQuery(document).ready(function() {
           break;
         case 'btnCollapse':
           $btn_link.attr('data-toggle', 'collapse');
+          $btn_link.attr('data-target', '#' + value);
+          $btn_link.on('click', function(e){ e.preventDefault(); });
+          break;
+        case 'btnModal':
+          $btn_link.attr('data-toggle', 'modal');
           $btn_link.attr('data-target', '#' + value);
           $btn_link.on('click', function(e){ e.preventDefault(); });
           break;
@@ -288,6 +293,16 @@ jQuery(document).ready(function() {
 
     }
 
+  });
+
+
+  //Modal
+  jQuery('.bs-wrap-modal').each(function(){
+    if (jQuery(this).attr('data-show') == true) {
+      jQuery(this).modal('show');
+    } else {
+      jQuery(this).modal('hide');
+    }
   });
 
 
