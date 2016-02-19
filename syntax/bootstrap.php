@@ -159,8 +159,8 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
     $styling = array('class' => '', 'id' => '', 'style' => '');
     if ($this->getConf('allowStylingAttributes')) {
       $styling['class'] = $attributes['class'];
-      $styling['class'] = $attributes['id'];
-      $styling['class'] = $attributes['style'];
+      $styling['id'] = $attributes['id'];
+      $styling['style'] = $attributes['style'];
     }
     return $styling;
   }
