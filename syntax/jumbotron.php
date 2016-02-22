@@ -45,6 +45,7 @@ class syntax_plugin_bootswrapper_jumbotron extends syntax_plugin_bootswrapper_bo
 
                     $background = $attributes['background'];
                     $color      = $attributes['color'];
+                    $style = $this->getStylingAttributes($attributes);
 
                     $styles = array();
 
@@ -56,7 +57,8 @@ class syntax_plugin_bootswrapper_jumbotron extends syntax_plugin_bootswrapper_bo
                       $styles[] = sprintf('color:%s', hsc($color));
                     }
 
-                    $markup = sprintf('<div class="bs-wrap bs-wrap-jumbotron jumbotron" style="%s">', implode(';', $styles), $type);
+                    $markup = sprintf('<div class="bs-wrap bs-wrap-jumbotron jumbotron %s" id="%s" style="%s %s">',
+                      $style['class'], $style['id'], (implode(';', $styles) . ';'), $style['style']);
 
                     $renderer->doc .= $markup;
                     return true;

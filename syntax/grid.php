@@ -14,10 +14,10 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_grid extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<grid>';
+    protected $pattern_start = '<grid.*?>(?=.*?</grid>)';
     protected $pattern_end   = '</grid>';
 
-    protected $template_start = '<div class="bs-wrap bs-wrap-row row">';
+    protected $template_start = '<div class="bs-wrap bs-wrap-row row %s" id="%s" style="%s">';
     protected $template_end   = '</div>';
 
     function getPType(){ return 'block'; }

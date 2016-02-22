@@ -122,6 +122,14 @@ jQuery(document).ready(function() {
         case 'btnSize':
           btn_class.push(['btn-', value].join(''));
           break;
+        case 'btnClass':
+          btn_class.push(value);
+        case 'btnId':
+          $btn_link.attr('id', value);
+          break;
+        case 'btnStyle':
+          $btn_link.attr('style', value);
+          break;
         case 'btnBlock':
           btn_class.push('btn-block');
           break;

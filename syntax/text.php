@@ -68,6 +68,7 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
           $background = $attributes['background'];
           $align      = $attributes['align'];
           $transform  = $attributes['transform'];
+          $style = $this->getStylingAttributes($attributes);
 
           $classes = array();
           $styles  = array();
@@ -87,10 +88,8 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
 
           }
 
-          $markup = sprintf('<%s class="bs-wrap bs-wrap-text text %s" style="%s">',
-                            $text_tag,
-                            implode(' ', $classes),
-                            implode(';', $styles));
+          $markup = sprintf('<%s class="bs-wrap bs-wrap-text text %s %s" id="%s" style="%s %s">',
+                            $text_tag, implode(' ', $classes), $style['class'], $style['id'], implode(';', $styles) . ';', $style['style']);
 
           $renderer->doc .= $markup;
           return true;

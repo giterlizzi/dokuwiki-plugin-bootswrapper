@@ -54,13 +54,15 @@ class syntax_plugin_bootswrapper_carousel extends syntax_plugin_bootswrapper_boo
 
                 case DOKU_LEXER_ENTER:
 
+                    $style = $this->getStylingAttributes($attributes);
                     $html5_attributes = array();
 
                     foreach ($attributes as $attribute => $value) {
                       $html5_attributes[] = sprintf('data-%s="%s"', $attribute, $value);
                     }
 
-                    $markup = sprintf('<div class="bs-wrap bs-wrap-carousel carousel slide" data-ride="carousel" %s><ol class="carousel-indicators"></ol><div class="carousel-inner" role="listbox">', implode(' ', $html5_attributes));
+                    $markup = sprintf('<div class="bs-wrap bs-wrap-carousel carousel slide %s" data-ride="carousel" id="%s" style="%s" %s><ol class="carousel-indicators"></ol><div class="carousel-inner" role="listbox">',
+                      $style['class'], $style['id'], $style['style'], implode(' ', $html5_attributes));
 
                     $renderer->doc .= $markup;
                     return true;

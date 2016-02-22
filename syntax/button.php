@@ -70,6 +70,7 @@ class syntax_plugin_bootswrapper_button extends syntax_plugin_bootswrapper_boots
 
                 case DOKU_LEXER_ENTER:
 
+                    $style = $this->getStylingAttributes($attributes);
                     $html5data = array();
 
                     foreach ($attributes as $key => $value) {

@@ -50,9 +50,10 @@ class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootst
                 case DOKU_LEXER_ENTER:
 
                     extract($attributes);
+                    $style = $this->getStylingAttributes($attributes);
 
-                    $markup = sprintf('<div class="bs-wrap alert alert-%s %s" role="alert">',
-                                      $type, (($dismiss) ? 'alert-dismissible' : ''));
+                    $markup = sprintf('<div class="bs-wrap alert alert-%s %s %s" id="%s" style="%s" role="alert">',
+                      $type, (($dismiss) ? 'alert-dismissible' : ''), $style['class'], $style['id'], $style['style']);
 
                     if ($dismiss) {
                         $markup .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';

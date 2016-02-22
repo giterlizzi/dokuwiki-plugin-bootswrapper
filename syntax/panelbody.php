@@ -14,10 +14,10 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_panelbody extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<panel-body>';
+    protected $pattern_start = '<panel-body.*?>(?=.*?</panel-body>)';
     protected $pattern_end   = '</panel-body>';
 
-    protected $template_start = '<div class="bs-wrap bs-wrap-panel-body panel-body">';
+    protected $template_start = '<div class="bs-wrap bs-wrap-panel-body panel-body %s" id="%s" style="%s">';
     protected $template_end   = '</div>';
 
     function getPType(){ return 'block'; }
