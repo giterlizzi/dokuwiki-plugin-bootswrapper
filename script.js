@@ -125,6 +125,9 @@ jQuery(document).ready(function() {
         case 'btnBlock':
           btn_class.push('btn-block');
           break;
+        case 'btnDisabled':
+          btn_class.push('disabled');
+          break;
         case 'btnCollapse':
           $btn_link.attr('data-toggle', 'collapse');
           $btn_link.attr('data-target', '#' + value);
