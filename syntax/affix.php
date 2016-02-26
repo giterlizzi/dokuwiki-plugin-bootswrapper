@@ -89,8 +89,28 @@ class syntax_plugin_bootswrapper_affix extends syntax_plugin_bootswrapper_bootst
 
           if ($position === 'fixed') $position = null;
 
-          if (! strstr($position_top, 'px') || ! strstr($position_top, 'em') || ! strstr($position_top, '%')) {
+          if ($position_top && (   ! strstr($position_top, 'px')
+                                && ! strstr($position_top, 'em')
+                                && ! strstr($position_top, '%'))) {
             $position_top = "{$position_top}px";
+          }
+
+          if ($position_bottom && (   ! strstr($position_bottom, 'px')
+                                   && ! strstr($position_bottom, 'em')
+                                   && ! strstr($position_bottom, '%'))) {
+            $position_bottom = "{$position_bottom}px";
+          }
+
+          if ($position_right && (   ! strstr($position_right, 'px')
+                                  && ! strstr($position_right, 'em')
+                                  && ! strstr($position_right, '%'))) {
+            $position_right = "{$position_right}px";
+          }
+
+          if ($position_left && (   ! strstr($position_left, 'px')
+                                 && ! strstr($position_left, 'em')
+                                 && ! strstr($position_left, '%'))) {
+            $position_left = "{$position_left}px";
           }
 
           if ($top)    $html5_data[] = "data-offset-top=$top ";
