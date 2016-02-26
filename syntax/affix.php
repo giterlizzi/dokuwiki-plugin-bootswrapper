@@ -1,12 +1,12 @@
 <?php
 /**
  * Bootstrap Wrapper Plugin: Affix
- * 
+ *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
  */
- 
+
 // must be run within Dokuwiki
 if(!defined('DOKU_INC')) die();
 
@@ -14,76 +14,113 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_affix extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start  = '<affix.*?>(?=.*?</affix>)';
-    protected $pattern_end    = '</affix>';
-    protected $tag_attributes = array(
+  protected $pattern_start  = '<affix.*?>(?=.*?</affix>)';
+  protected $pattern_end    = '</affix>';
+  protected $tag_attributes = array(
 
-        'offset-top'      => array( 'type'     => 'integer',
-                                    'values'   => null,
-                                    'required' => false,
-                                    'default'  => null),
-  
-        'offset-bottom'   => array( 'type'     => 'integer',
-                                    'values'   => null,
-                                    'required' => false,
-                                    'default'  => null),
+      'offset-top'      => array( 'type'     => 'integer',
+                                  'values'   => null,
+                                  'required' => false,
+                                  'default'  => null),
 
-        'target'          => array( 'type'     => 'string',
-                                    'values'   => null,
-                                    'required' => false,
-                                    'default'  => null),
+      'offset-bottom'   => array( 'type'     => 'integer',
+                                  'values'   => null,
+                                  'required' => false,
+                                  'default'  => null),
+
+      'target'          => array( 'type'     => 'string',
+                                  'values'   => null,
+                                  'required' => false,
+                                  'default'  => null),
+
+      'position'        => array( 'type'     => 'string',
+                                  'values'   => array('fixed', 'absolute'),
+                                  'required' => false,
+                                  'default'  => 'fixed'),
+
+      'position-top'    => array( 'type'     => 'string',
+                                  'values'   => null,
+                                  'required' => false,
+                                  'default'  => null),
+
+      'position-bottom' => array( 'type'     => 'string',
+                                  'values'   => null,
+                                  'required' => false,
+                                  'default'  => null),
+
+      'position-left'   => array( 'type'     => 'string',
+                                  'values'   => null,
+                                  'required' => false,
+                                  'default'  => null),
+
+      'position-right'  => array( 'type'     => 'string',
+                                  'values'   => null,
+                                  'required' => false,
+                                  'default'  => null),
+  );
+
+  function getPType() { return 'block';}
 
 
-    );
+  function render($mode, Doku_Renderer $renderer, $data) {
 
-    function getPType() { return 'block';}
+    if (empty($data)) return false;
 
+    if ($mode == 'xhtml') {
 
-    function render($mode, Doku_Renderer $renderer, $data) {
+      /** @var Doku_Renderer_xhtml $renderer */
+      list($state, $match, $attributes) = $data;
 
-        if (empty($data)) return false;
+      switch($state) {
 
-        if ($mode == 'xhtml') {
+        case DOKU_LEXER_ENTER:
 
-            /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $match, $attributes) = $data;
+          $top             = $attributes['offset-top'];
+          $bottom          = $attributes['offset-bottom'];
+          $target          = $attributes['target'];
+          $position        = $attributes['position'];
+          $position_top    = $attributes['position-top'];
+          $position_bottom = $attributes['position-bottom'];
+          $position_right  = $attributes['position-right'];
+          $position_left   = $attributes['position-left'];
 
-            switch($state) {
+          $html5_data = array();
+          $styles     = array();
 
-                case DOKU_LEXER_ENTER:
+          if ($position === 'fixed') $position = null;
 
-                    $top    = $attributes['offset-top'];
-                    $bottom = $attributes['offset-bottom'];
-                    $target = $attributes['target'];
-                    $data   = array();
+          if (! strstr($position_top, 'px') || ! strstr($position_top, 'em') || ! strstr($position_top, '%')) {
+            $position_top = "{$position_top}px";
+          }
 
-                    if ($top) {
-                        $data[] = "data-offset-top=$top ";
-                    }
-                    if ($bottom) {
-                        $data[] = "data-offset-bottom=$bottom ";
-                    }
-                    if ($target) {
-                        $data[] = sprintf('data-target="%s"', $target);
-                    }
+          if ($top)    $html5_data[] = "data-offset-top=$top ";
+          if ($bottom) $html5_data[] = "data-offset-bottom=$bottom ";
+          if ($target) $html5_data[] = sprintf('data-target="%s"', $target);
 
-                    $markup = sprintf('<div style="z-index:1024" class="bs-wrap bs-wrap-affix" data-spy="affix" %s>', implode(' ', $data));
+          if ($position)        $styles[] = "position:$position";
+          if ($position_top)    $styles[] = "top:$position_top";
+          if ($position_bottom) $styles[] = "bottom:$position_bottom";
+          if ($position_left)   $styles[] = "left:$position_left";
+          if ($position_right)  $styles[] = "right:$position_right";
 
-                    $renderer->doc .= $markup;
-                    return true;
+          $markup = sprintf('<div style="z-index:1024;%s" class="bs-wrap bs-wrap-affix" data-spy="affix" %s>',
+            implode(';', $styles), implode(' ', $html5_data));
 
-                case DOKU_LEXER_EXIT:
-                    $renderer->doc .= '</div>';
-                    return true;
+          $renderer->doc .= $markup;
+          return true;
 
-            }
+        case DOKU_LEXER_EXIT:
+          $renderer->doc .= '</div>';
+          return true;
 
-            return true;
+      }
 
-        }
-
-        return false;
+      return true;
 
     }
+
+    return false;
+
+  }
 
 }
