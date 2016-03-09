@@ -125,6 +125,9 @@ jQuery(document).ready(function() {
         case 'btnBlock':
           btn_class.push('btn-block');
           break;
+        case 'btnDisabled':
+          btn_class.push('disabled');
+          break;
         case 'btnCollapse':
           $btn_link.attr('data-toggle', 'collapse');
           $btn_link.attr('data-target', '#' + value);
@@ -145,6 +148,10 @@ jQuery(document).ready(function() {
 
     $btn_link.addClass(btn_class.join(' '));
     $btn_link.attr('role', 'button');
+
+    if ($btn_link.hasClass('curid')) {
+        $btn_link.addClass('active');
+    }
 
     if ($btn_link.hasClass('urlextern')) {
       $btn_link.removeClass('urlextern').addClass('wikilink1');
