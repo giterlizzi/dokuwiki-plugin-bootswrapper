@@ -19,7 +19,7 @@ class syntax_plugin_bootswrapper_callout extends syntax_plugin_bootswrapper_boot
     protected $tag_attributes = array(
 
       'type' =>  array('type'     => 'string',
-                       'values'   => array('default', 'primary', 'success', 'info', 'warning', 'danger'),
+                       'values'   => array('default', 'primary', 'success', 'info', 'warning', 'danger', 'question', 'tip'),
                        'required' => true,
                        'default'  => 'default'),
 
@@ -27,45 +27,123 @@ class syntax_plugin_bootswrapper_callout extends syntax_plugin_bootswrapper_boot
                        'values'   => null,
                        'required' => false,
                        'default'  => null),
+
+      'color' => array('type'     => 'string',
+                       'values'   => null,
+                       'required' => false,
+                       'default'  => null),
+
+      'icon'  => array('type'     => 'string',
+                       'values'   => null,
+                       'required' => false,
+                       'default'  => null),
+
     );
 
     function getPType(){ return 'block'; }
 
     function render($mode, Doku_Renderer $renderer, $data) {
 
-        if (empty($data)) return false;
+      if (empty($data)) return false;
+      if ($mode !== 'xhtml') return false;
 
-        if ($mode == 'xhtml') {
+      /** @var Doku_Renderer_xhtml $renderer */
+      list($state, $match, $attributes) = $data;
 
-            /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $match, $attributes) = $data;
+      global $icon;
 
-            switch($state) {
+      switch($state) {
 
-                case DOKU_LEXER_ENTER:
+        case DOKU_LEXER_ENTER:
 
-                    $type = $attributes['type'];
+          $type  = $attributes['type'];
+          $icon  = $attributes['icon'];
+          $color = $attributes['color'];
 
-                    $markup = sprintf('<div class="bs-wrap bs-callout bs-callout-%s">', $type);
+          $icon_class    = '';
+          $text_color    = '';
+          $callout_color = '';
 
-                    if ($title = $attributes['title']) {
-                      $markup .= "<h4>$title</h4>";
-                    }
+          # Automatic detection of icon
+          if (strtolower($icon) == 'true') {
 
-                    $renderer->doc .= $markup;
-                    return true;
+            switch ($type) {
 
-                case DOKU_LEXER_EXIT:
-                    $renderer->doc .= '</div>';
-                    return true;
+              case 'success':
+                $icon_class = 'check-circle';
+                break;
+
+              case 'info':
+                $icon_class = 'info-circle';
+                break;
+
+              case 'danger':
+                $icon_class = 'minus-circle';
+                break;
+
+              case 'primary':
+                $icon_class = 'exclamation-circle';
+                break;
+
+              case 'warning':
+                $icon_class = 'exclamation-triangle';
+                break;
+
+              // Extra
+              case 'question':
+                $type      = 'primary';
+                $icon_class = 'question-circle';
+                break;
+
+              case 'tip':
+                $type      = 'warning';
+                $icon_class = 'lightbulb-o';
+                break;
+
+              default:
+                $icon_class = $type;
 
             }
 
-            return true;
+            $icon_class = "fa fa-$icon_class";
 
-        }
+          } else {
+            $icon_class = $icon;
+          }
 
-        return false;
+          if ($color) {
+            $callout_color = sprintf(' style="border-left-color:%s"', $color);
+            $text_color    = sprintf(' style="color:%s"', $color);
+          }
+
+          $markup = sprintf('<div class="bs-wrap bs-callout bs-callout-%s"%s>', $type, $callout_color);
+
+          if ($icon && $icon_class) {
+            $markup .= sprintf('<div class="row"><div class="col-xs-1"><i class="bs-callout-icon %s"%s></i></div><div class="col-xs-11">', $icon_class, $text_color);
+          }
+
+          if ($title = $attributes['title']) {
+            $markup .= sprintf('<h4%s>%s</h4>', $text_color, $title);
+          }
+
+          $renderer->doc .= $markup;
+
+          return true;
+
+        case DOKU_LEXER_EXIT:
+
+          $markup = '</div>';
+
+          if ($icon) {
+            $markup .= '</div></div>';
+          }
+
+          $renderer->doc .= $markup;
+          return true;
+
+      }
+
+      return true;
 
     }
 
