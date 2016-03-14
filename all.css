@@ -80,3 +80,9 @@
 .bs-callout-info h4 {
   color: #5bc0de;
 }
+
+@media print {
+  .bs-page-break {
+    page-break-after: always;
+  }
+}

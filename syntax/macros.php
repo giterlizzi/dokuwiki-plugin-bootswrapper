@@ -6,7 +6,7 @@
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @copyright  (C) 2016, Giuseppe Di Terlizzi
  */
- 
+
 // must be run within Dokuwiki
 if(!defined('DOKU_INC')) die();
 
@@ -15,7 +15,8 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 class syntax_plugin_bootswrapper_macros extends DokuWiki_Syntax_Plugin {
 
   private $macros = array(
-    '~~CLEARFIX~~'
+    '~~CLEARFIX~~',
+    '~~PAGEBREAK~~'
   );
 
   function getType() { return 'substition'; }
@@ -44,6 +45,10 @@ class syntax_plugin_bootswrapper_macros extends DokuWiki_Syntax_Plugin {
     switch ($match) {
       case '~~CLEARFIX~~':
         $renderer->doc .= '<span class="clearfix"></span>';
+        break;
+      case '~~PAGEBREAK~~':
+        $renderer->doc .= '<span class="bs-page-break"></span>';
+        break;
     }
 
   }
