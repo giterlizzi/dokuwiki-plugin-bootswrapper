@@ -16,6 +16,13 @@
 }
 
 
+/* Bootstrap 3 Template */
+aside ul.dropdown-menu {
+  font-size: 1em;
+  padding-left: 0 !important;
+}
+
+
 /*
  * Callouts (from Twitter Bootstrap Documentation)
  *

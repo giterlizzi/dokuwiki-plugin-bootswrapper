@@ -29,7 +29,6 @@ jQuery(document).ready(function() {
   });
 
 
-  // Nav (Pills and Tabs)
   jQuery('.bs-wrap-nav').each(function() {
 
     var $nav_wrap = jQuery(this),
@@ -71,8 +70,14 @@ jQuery(document).ready(function() {
     $nav.find('.dropdown div.li').replaceWith(function() {
       return jQuery('<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" />')
         .html(jQuery(this).contents())
-        .append(' <span class="caret"/>');
     });
+
+    // Sidebar (Bootstrap3 template)
+    $nav.find('li.dropdown').contents().filter(function() {
+      return this.nodeType === 3  && this.data.trim().length > 0
+    }).wrap('<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" />');
+
+    $nav.find('.dropdown-toggle').append(' <span class="caret"/>');
 
     // Tab panels
     if ($nav_wrap.find('.tab-pane').length) {
