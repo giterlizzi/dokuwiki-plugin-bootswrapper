@@ -1,7 +1,7 @@
 base bootswrapper
 author Giuseppe Di Terlizzi
 email giuseppe.diterlizzi@gmail.com
-date 2016-03-15
+date 2016-04-14
 name Bootstrap Wrapper Plugin
 desc Bootstrap Wrapper for DokuWiki
 url http://www.dokuwiki.org/plugin:bootswrapper
