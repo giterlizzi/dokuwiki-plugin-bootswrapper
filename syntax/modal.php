@@ -58,6 +58,12 @@ class syntax_plugin_bootswrapper_modal extends syntax_plugin_bootswrapper_bootst
                           'required' => false,
                           'default'  => true),
 
+    'remote'     => array('type'     => 'string',
+                          'values'   => null,
+                          'required' => false,
+                          'default'  => null),
+    
+
   );
 
   function getPType() { return 'normal';}
@@ -83,10 +89,15 @@ class syntax_plugin_bootswrapper_modal extends syntax_plugin_bootswrapper_bootst
           $show     = $attributes['show'];
           $fade     = $attributes['fade'] === true ? 'fade' : '';
           $backdrop = $attributes['backdrop'];
+          $remote   = $attributes['remote'];
+
+          if ($remote) {
+            $remote = sprintf(' data-remote="%s"', wl($remote, array('do' => 'export_xhtmlbody'), true));
+          }
 
           //Modal
-          $markup = sprintf('<div class="bs-wrap bs-wrap-modal modal %s" id="%s" role="dialog" tabindex="-1" aria-labelledby="%s" data-show="%s" data-backdrop="%s" data-keyboard="%s">',
-            $fade, $id, $title, $show, $backdrop, $keyboard);
+          $markup = sprintf('<div class="bs-wrap bs-wrap-modal modal %s" id="%s" role="dialog" tabindex="-1" aria-labelledby="%s" data-show="%s" data-backdrop="%s" data-keyboard="%s"%s>',
+            $fade, $id, $title, $show, $backdrop, $keyboard, $remote);
           $markup .= sprintf('<div class="bs-wrap modal-dialog modal-%s" role="document"><div class="bs-wrap modal-content">', $size);
 
           //Header/Title

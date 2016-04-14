@@ -10,6 +10,10 @@
   margin-bottom: 15px;
 }
 
+.bs-wrap-modal[data-remote] .modal-content {
+  padding: 0 15px;
+}
+
 .bs-wrap-accordion .panel-heading a {
   color: inherit;
   text-decoration: none;
