@@ -1,12 +1,12 @@
 <?php
 /**
  * Bootstrap Wrapper Plugin: Text
- * 
+ *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
  */
- 
+
 // must be run within Dokuwiki
 if(!defined('DOKU_INC')) die();
 
@@ -86,6 +86,9 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
             }
 
           }
+
+          $styles  = array_merge($styles,  $attributes['style']);
+          $classes = array_merge($classes, $attributes['class']);
 
           $markup = sprintf('<%s class="bs-wrap bs-wrap-text text %s" style="%s">',
                             $text_tag,

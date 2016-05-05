@@ -20,7 +20,28 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
   protected $template_end     = '</div>';
   protected $header_pattern   = '[ \t]*={2,}[^\n]+={2,}[ \t]*(?=\n)';
   protected $tag_attributes   = array();
-
+  protected $core_attributes  = array(
+      'id'        => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+      'class'     => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+      'style'     => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+      'width'     => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+      'height'    => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+  );
 
   /**
     * Check default and user attributes
@@ -41,14 +62,16 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
                                                 '', get_class($this))));
     }
 
+    $tag_attributes = array_merge($this->core_attributes, $this->tag_attributes);
+
     // Save the default values of attributes
-    foreach ($this->tag_attributes as $attribute => $item) {
+    foreach ($tag_attributes as $attribute => $item) {
       $default_attributes[$attribute] = $item['default'];
     }
 
     foreach ($attributes as $name => $value) {
 
-      if (! isset($this->tag_attributes[$name])) {
+      if (! isset($tag_attributes[$name])) {
 
         if ($ACT == 'preview') {
           msg(sprintf('%s Unknown attribute <code>%s</code>', $msg_title, $name), -1);
@@ -58,12 +81,13 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
       }
 
-      $item = $this->tag_attributes[$name];
+      $item = $tag_attributes[$name];
 
       $required = isset($item['required']) ? $item['required'] : false;
       $values   = isset($item['values'])   ? $item['values']   : null;
       $default  = isset($item['default'])  ? $item['default']  : null;
 
+      // Normalize boolean value
       if ($item['type'] == 'boolean') {
         switch ($value) {
           case 'false':
@@ -75,6 +99,19 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
             $value = true;
             break;
         }
+      }
+
+      switch ($name) {
+        case 'style':
+          $value = explode(';', $value);
+          break;
+        case 'class':
+          $value = explode(' ', $value);
+          break;
+        case 'width':
+        case 'height':
+          $checked_attributes['style'][] = "$name:$value";
+          break;
       }
 
       $checked_attributes[$name] = $value;
@@ -92,6 +129,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
         }
 
         $checked_attributes[$name] = $default;
+
       }
 
     }
@@ -107,7 +145,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
     }
 
     // Uncomment for debug
-    //msg(sprintf('%s %s', $msg_title, print_r($merged_attributes, 1)));
+    // msg(sprintf('%s %s', $msg_title, print_r($merged_attributes, 1)));
 
     return $merged_attributes;
 
