@@ -12,6 +12,9 @@ jQuery(document).ready(function() {
 
   jQuery('.bs-wrap .fix-media-list-overlap').removeClass('fix-media-list-overlap');
 
+  // Jumbotron
+  jQuery('.bs-wrap-jumbotron .page-header').removeClass('page-header');
+
   // Tooltips
   jQuery('.bs-wrap-tooltip').tooltip();
 
@@ -28,7 +31,7 @@ jQuery(document).ready(function() {
 
   });
 
-
+  // Nav
   jQuery('.bs-wrap-nav').each(function() {
 
     var $nav_wrap = jQuery(this),
