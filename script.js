@@ -213,7 +213,8 @@ jQuery(document).ready(function() {
 
       }
 
-
+      // Now that the list is processed, show it
+      $list_wrap.removeClass('hide');
   });
 
 
