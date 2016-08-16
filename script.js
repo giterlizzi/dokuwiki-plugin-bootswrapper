@@ -197,7 +197,7 @@ jQuery(document).ready(function() {
 
               var $link = $list.find('a');
 
-              $link.wrapInner('<h4 class="list-group-item-heading"/>');
+              $link.wrapInner('<h4 class="list-group-item-heading" style="padding-left:0"/>');
               $link.prependTo($list);
               $list.find('p').appendTo($link);
 
