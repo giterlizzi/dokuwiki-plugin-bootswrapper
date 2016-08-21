@@ -216,6 +216,8 @@ jQuery(document).ready(function() {
 
       }
 
+      $list_wrap.removeClass('hide');
+
 
   });
 

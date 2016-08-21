@@ -17,7 +17,7 @@ class syntax_plugin_bootswrapper_list extends syntax_plugin_bootswrapper_bootstr
     protected $pattern_start = '<list-group>';
     protected $pattern_end   = '</list-group>';
 
-    protected $template_start = '<div class="bs-wrap bs-wrap-list-group">';
+    protected $template_start = '<div class="bs-wrap bs-wrap-list-group hide">';
     protected $template_end   = '</div>';
 
     function getPType() { return 'block';}
