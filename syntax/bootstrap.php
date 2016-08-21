@@ -287,7 +287,9 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
           $value = trim(implode(' ', $value));
           break;
         case 'style':
-          $value = trim(implode(';', $value));
+          foreach ($value as $property => $val) {
+            $value = "$property:$val";
+          }
           break;
       }
 
