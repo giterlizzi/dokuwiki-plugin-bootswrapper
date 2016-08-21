@@ -64,6 +64,9 @@ class syntax_plugin_bootswrapper_callout extends syntax_plugin_bootswrapper_boot
           $text_color    = '';
           $callout_color = '';
 
+          $html_attributes = $this->mergeCoreAttributes($attributes);
+          $html_attributes['class'][] = 'bs-wrap bs-callout';
+
           # Automatic detection of icon
           if (strtolower($icon) == 'true') {
 
@@ -112,11 +115,13 @@ class syntax_plugin_bootswrapper_callout extends syntax_plugin_bootswrapper_boot
           }
 
           if ($color) {
-            $callout_color = sprintf(' style="border-left-color:%s"', $color);
-            $text_color    = sprintf(' style="color:%s"', $color);
+            $html_attributes['style']['border-left-color'] = $color;
+            $text_color = sprintf(' style="color:%s"', $color);
           }
 
-          $markup = sprintf('<div class="bs-wrap bs-callout bs-callout-%s"%s>', $type, $callout_color);
+          $html_attributes['class'][] = "bs-callout-$type";
+
+          $markup = sprintf('<div %s>', $this->buildAttributes($html_attributes));
 
           if ($icon && $icon_class) {
             $markup .= sprintf('<div class="row"><div class="col-xs-1"><i class="bs-callout-icon %s"%s></i></div><div class="col-xs-11">', $icon_class, $text_color);

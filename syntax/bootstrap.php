@@ -20,6 +20,8 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
   protected $template_end     = '</div>';
   protected $header_pattern   = '[ \t]*={2,}[^\n]+={2,}[ \t]*(?=\n)';
   protected $tag_attributes   = array();
+
+  // HTML core/global attribute
   protected $core_attributes  = array(
       'id'        => array('type'     => 'string',
                            'values'   => null,
@@ -33,12 +35,16 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
                            'values'   => null,
                            'required' => false,
                            'default'  => null),
-      'width'     => array('type'     => 'string',
+      'title'     => array('type'     => 'string',
                            'values'   => null,
                            'required' => false,
                            'default'  => null),
-      'height'    => array('type'     => 'string',
+      'lang'      => array('type'     => 'string',
                            'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+      'dir'       => array('type'     => 'string',
+                           'values'   => array('ltr', 'rtl'),
                            'required' => false,
                            'default'  => null),
   );
@@ -107,10 +113,6 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
           break;
         case 'class':
           $value = explode(' ', $value);
-          break;
-        case 'width':
-        case 'height':
-          $checked_attributes['style'][] = "$name:$value";
           break;
       }
 
@@ -256,6 +258,46 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
     }
 
     return true;
+
+  }
+
+
+  function mergeCoreAttributes($attributes) {
+
+    $core_attributes = array();
+
+    foreach (array_keys($this->core_attributes) as $attribute) {
+      if (isset($attributes[$attribute])) $core_attributes[$attribute] = $attributes[$attribute];
+    }
+
+    return $core_attributes;
+
+  }
+
+
+  function buildAttributes($attributes, $override_attributes = array()) {
+
+    $attributes      = array_merge_recursive($attributes, $override_attributes);
+    $html_attributes = array();
+
+    foreach ($attributes as $attribute => $value) {
+
+      switch($attribute) {
+        case 'class':
+          $value = trim(implode(' ', $value));
+          break;
+        case 'style':
+          $value = trim(implode(';', $value));
+          break;
+      }
+
+      if ($value) {
+        $html_attributes[] = sprintf('%s="%s"', $attribute, $value);
+      }
+
+    }
+
+    return implode(' ', $html_attributes);
 
   }
 

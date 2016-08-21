@@ -32,13 +32,15 @@ class syntax_plugin_bootswrapper_wrapper extends syntax_plugin_bootswrapper_boot
 
       case DOKU_LEXER_ENTER:
 
-        $wrapper_tag = ($is_block) ? 'div' : 'span';
-        $id          = '';
-        $classes     = implode(' ', $attributes['class']);
-        $style       = implode(';', $attributes['style']);
-        $markup      = sprintf('<%s id="%s" class="%s" style="%s">', $tag, $id, $classes, $styles);
+        $wrapper_tag  = ($is_block) ? 'div' : 'span';
+        $wrap_classes = $attributes['class'];
+
+        $wrap_classes[]  = 'bs-wrapper';
+
+        $markup = sprintf('<%s %s>', $wrapper_tag, $this->buildAttributes($attributes, array('class' => $wrap_classes)));
 
         $renderer->doc .= $markup;
+
         return true;
 
       case DOKU_LEXER_EXIT:

@@ -63,14 +63,19 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
         case DOKU_LEXER_ENTER:
 
           $text_tag   = (($is_block) ? 'div' : 'span');
-          $color      = $attributes['type'];
-          $size       = $attributes['size'];
-          $background = $attributes['background'];
-          $align      = $attributes['align'];
-          $transform  = $attributes['transform'];
+
+          $color      = (isset($attributes['type'])       ? $attributes['type']       : null);
+          $size       = (isset($attributes['size'])       ? $attributes['size']       : null);
+          $background = (isset($attributes['background']) ? $attributes['background'] : null);
+          $align      = (isset($attributes['align'])      ? $attributes['align']      : null);
+          $transform  = (isset($attributes['transform'])  ? $attributes['transform']  : null);
 
           $classes = array();
           $styles  = array();
+
+          $classes[] = 'bs-wrap';
+          $classes[] = 'bs-wrap-text';
+          $classes[] = 'text';
 
           if ($align && $is_block) { $classes[] = "text-$align"; }
           if ($color)              { $classes[] = "text-$color"; }
@@ -87,13 +92,10 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
 
           }
 
-          $styles  = array_merge($styles,  $attributes['style']);
-          $classes = array_merge($classes, $attributes['class']);
+          $text_attributes = $this->buildAttributes($attributes, array('class'  => $classes,
+                                                                       'styles' => $styles));
 
-          $markup = sprintf('<%s class="bs-wrap bs-wrap-text text %s" style="%s">',
-                            $text_tag,
-                            implode(' ', $classes),
-                            implode(';', $styles));
+          $markup = sprintf('<%s %s>', $text_tag, $text_attributes);
 
           $renderer->doc .= $markup;
           return true;
