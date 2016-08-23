@@ -17,7 +17,12 @@ class syntax_plugin_bootswrapper_list extends syntax_plugin_bootswrapper_bootstr
     protected $pattern_start = '<list-group>';
     protected $pattern_end   = '</list-group>';
 
-    protected $template_start = '<div class="bs-wrap bs-wrap-list-group">';
+    /*
+     * By default, hide list-group as they are processed by the JavaScript.
+     * It avoids page changing on user's view.
+     * See also: script.js --> jQuery('.bs-wrap-list-group').each(function() {
+     */
+    protected $template_start = '<div class="bs-wrap bs-wrap-list-group hide">';
     protected $template_end   = '</div>';
 
     function getPType() { return 'block';}
