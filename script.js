@@ -170,7 +170,7 @@ jQuery(document).ready(function() {
 
       var $list_wrap = jQuery(this);
 
-      var $icon_links = $list_wrap.find('li i + a');
+      var $icon_links = $list_wrap.find('li i + a, li img + a');
 
       if ($icon_links.length) {
         jQuery.each($icon_links, function() {
