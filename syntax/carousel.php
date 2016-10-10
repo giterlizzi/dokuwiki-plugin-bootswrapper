@@ -14,7 +14,7 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_carousel extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start  = '<carousel>';
+    protected $pattern_start  = '<carousel.*?>(?=.*?</carousel>)';
     protected $pattern_end    = '</carousel>';
     protected $tag_attributes = array(
 
