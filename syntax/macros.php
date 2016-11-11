@@ -21,7 +21,7 @@ class syntax_plugin_bootswrapper_macros extends DokuWiki_Syntax_Plugin {
 
   function getType() { return 'substition'; }
   function getSort() { return 99; }
-  function getPType(){ return 'normal'; }
+  function getPType(){ return 'block'; }
 
   function connectTo($mode) {
 
