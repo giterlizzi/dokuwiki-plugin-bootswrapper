@@ -19,10 +19,15 @@ class syntax_plugin_bootswrapper_accordion extends syntax_plugin_bootswrapper_bo
 
   protected $tag_attributes = array(
 
-    'id' => array('type'     => 'string',
-                  'values'   => null,
-                  'required' => true,
-                  'default'  => null),
+    'id'        =>  array('type'     => 'string',
+                          'values'   => null,
+                          'required' => true,
+                          'default'  => null),
+
+    'collapsed' =>  array('type'     => 'boolean',
+                          'values'   => array(0,1),
+                          'required' => false,
+                          'default'  => null),
 
   );
 
@@ -43,6 +48,11 @@ class syntax_plugin_bootswrapper_accordion extends syntax_plugin_bootswrapper_bo
         $html_attributes = $this->mergeCoreAttributes($attributes);
 
         $html_attributes['class'][] = 'bs-wrap bs-wrap-accordion panel-group';
+
+        if ($attributes['collapsed']) {
+          $html_attributes['class'][] = 'bs-wrap-accordion-collapsed';
+        }
+
         $markup = sprintf('<div %s>', $this->buildAttributes($html_attributes));
 
         $renderer->doc .= $markup;

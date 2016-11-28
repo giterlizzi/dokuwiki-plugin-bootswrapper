@@ -230,7 +230,8 @@ jQuery(document).ready(function() {
   jQuery('.bs-wrap-accordion').each(function() {
 
     var $accordion   = jQuery(this),
-        accordion_id = Math.random().toString(36).substr(2, 9);
+        accordion_id = Math.random().toString(36).substr(2, 9),
+        is_collapsed = $accordion.hasClass('bs-wrap-accordion-collapsed');
 
     $accordion.find('.panel').each(function() {
 
@@ -244,8 +245,8 @@ jQuery(document).ready(function() {
 
     $accordion.attr('id', accordion_id);
 
-    if ($accordion.find('.panel-collapse').length > 1) {
-        $accordion.find('.panel-collapse').first().addClass('in');
+    if ($accordion.find('.panel-collapse').length > 1 && ! is_collapsed) {
+      $accordion.find('.panel-collapse').first().addClass('in');
     }
 
   });
