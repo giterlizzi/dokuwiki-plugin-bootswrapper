@@ -99,6 +99,10 @@ jQuery(document).ready(function() {
 
     }
 
+    jQuery(window).on('hashchange',function() { 
+      jQuery('.bs-wrap-nav .nav a[href="'+location.hash+'"]').tab('show');
+    });
+
   });
 
 
