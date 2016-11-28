@@ -34,7 +34,7 @@ class syntax_plugin_bootswrapper_popover extends syntax_plugin_bootswrapper_boot
                            'required' => true,
                            'default'  => null),
 
-      'trigger'   => array('type'     => 'string',
+      'trigger'   => array('type'     => 'multiple',
                            'values'   => array('click', 'hover', 'focus'),
                            'required' => true,
                            'default'  => 'click'),

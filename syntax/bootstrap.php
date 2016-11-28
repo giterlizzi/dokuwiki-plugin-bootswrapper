@@ -122,8 +122,8 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
       if ($required && empty($value)) {
         $checked_attributes[$name] = $default;
 
-      // Check if the user attribute have a valid range values
-      } elseif (is_array($values) && ! in_array($value, $values)) {
+      // Check if the user attribute have a valid range values (single value)
+      } elseif ($item['type'] !== 'multiple' && is_array($values) && ! in_array($value, $values)) {
 
         if ($ACT == 'preview') {
           msg(sprintf('%s Invalid value (<code>%s</code>) for <code>%s</code> attribute. It will apply the default value <code>%s</code>',
@@ -131,6 +131,26 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
         }
 
         $checked_attributes[$name] = $default;
+
+      // Check if the user attribute have a valid range values (multiple values)
+      } elseif ($item['type'] == 'multiple') {
+
+        $multitple_values = explode(' ', $value);
+        $check = 0;
+
+        foreach ($multitple_values as $single_value) {
+          if (! in_array($single_value, $values)) {
+            $check = 1;
+          }
+        }
+
+        if ($check) {
+          if ($ACT == 'preview') {
+            msg(sprintf('%s Invalid value (<code>%s</code>) for <code>%s</code> attribute. It will apply the default value <code>%s</code>',
+                        $msg_title, $value, $name, $default), 2);
+          }
+          $checked_attributes[$name] = $default;
+        }
 
       }
 
