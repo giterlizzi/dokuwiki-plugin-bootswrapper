@@ -14,7 +14,7 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_pane extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start  = '<pane.*?>(?=.*?</pane>)';
+    protected $pattern_start  = '<pane .*?>(?=.*?</pane>)';
     protected $pattern_end    = '</pane>';
     protected $tag_attributes = array(
 
