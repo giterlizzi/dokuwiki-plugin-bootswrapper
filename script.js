@@ -170,7 +170,7 @@ jQuery(document).ready(function() {
 
       var $list_wrap = jQuery(this);
 
-      var $icon_links = $list_wrap.find('li i + a');
+      var $icon_links = $list_wrap.find('li i + a, li img + a');
 
       if ($icon_links.length) {
         jQuery.each($icon_links, function() {
@@ -197,7 +197,7 @@ jQuery(document).ready(function() {
 
               var $link = $list.find('a');
 
-              $link.wrapInner('<h4 class="list-group-item-heading"/>');
+              $link.wrapInner('<h4 class="list-group-item-heading" style="padding-left:0"/>');
               $link.prependTo($list);
               $list.find('p').appendTo($link);
 
@@ -213,7 +213,8 @@ jQuery(document).ready(function() {
 
       }
 
-
+      // Now that the list is processed, show it
+      $list_wrap.removeClass('hide');
   });
 
 

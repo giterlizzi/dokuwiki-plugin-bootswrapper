@@ -45,7 +45,7 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
 
   );
 
-  function getPType() { return 'normal'; }
+  function getPType() { return 'block'; }
 
   function render($mode, Doku_Renderer $renderer, $data) {
 

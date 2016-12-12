@@ -40,7 +40,7 @@ class syntax_plugin_bootswrapper_column extends syntax_plugin_bootswrapper_boots
 
     );
 
-    function getPType(){ return 'block'; }
+    function getPType(){ return 'block';}
 
     function render($mode, Doku_Renderer $renderer, $data) {
 

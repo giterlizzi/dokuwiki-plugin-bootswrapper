@@ -3,7 +3,7 @@
  * Bootstrap Wrapper Plugin: Useful Macros
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
- * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>, Eric Maeker <eric@maeker.fr>
  * @copyright  (C) 2016, Giuseppe Di Terlizzi
  */
 
@@ -15,13 +15,13 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 class syntax_plugin_bootswrapper_macros extends DokuWiki_Syntax_Plugin {
 
   private $macros = array(
-    '~~CLEARFIX~~',
-    '~~PAGEBREAK~~'
+    '~~PAGEBREAK~~',
+    '~~CLEARFIX.*?~~'
   );
 
   function getType() { return 'substition'; }
   function getSort() { return 99; }
-  function getPType(){ return 'normal'; }
+  function getPType(){ return 'block'; }
 
   function connectTo($mode) {
 
@@ -42,15 +42,18 @@ class syntax_plugin_bootswrapper_macros extends DokuWiki_Syntax_Plugin {
 
     list($match, $state, $pos) = $data;
 
-    switch ($match) {
-      case '~~CLEARFIX~~':
-        $renderer->doc .= '<span class="clearfix"></span>';
-        break;
-      case '~~PAGEBREAK~~':
-        $renderer->doc .= '<span class="bs-page-break"></span>';
-        break;
+    if (substr($match,0, 11) == '~~CLEARFIX:') {
+      $renderer->doc .= '<span class="clearfix '.substr($match,11,-2).'"></span>';
+    } else {
+      switch ($match) {
+        case '~~CLEARFIX~~':
+          $renderer->doc .= '<span class="clearfix"></span>';
+          break;
+        case '~~PAGEBREAK~~':
+          $renderer->doc .= '<span class="bs-page-break"></span>';
+          break;
+      }
     }
-
   }
 
 }
