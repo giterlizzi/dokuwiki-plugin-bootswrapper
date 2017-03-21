@@ -24,6 +24,7 @@ class action_plugin_bootswrapper extends DokuWiki_Action_Plugin {
     */
   public function register(Doku_Event_Handler $controller) {
     $controller->register_hook('TPL_METAHEADER_OUTPUT', 'BEFORE', $this, '_load');
+    $controller->register_hook('TOOLBAR_DEFINE', 'AFTER', $this, '_insert_button', array ());
   }
 
 
@@ -32,7 +33,7 @@ class action_plugin_bootswrapper extends DokuWiki_Action_Plugin {
     *
     * @param  Doku_Event  &$event
     */
-  public function _load(Doku_Event &$event, $param) {
+  public function _load(Doku_Event $event, $param) {
 
     global $conf;
 
@@ -56,6 +57,20 @@ class action_plugin_bootswrapper extends DokuWiki_Action_Plugin {
       );
 
     }
+
+  }
+
+  public function _insert_button(Doku_Event $event, $param) {
+
+    $event->data[] = array(
+      'type'   => 'mediapopup',
+      'title'  => 'Bootstrap Wrapper',
+      'icon'   => '../../plugins/bootswrapper/images/bootstrap.png',
+      'url'    => 'lib/plugins/bootswrapper/exe/popup.php?ns=',
+      'name'   => 'bootstrap-wrapper',
+      'options'=> 'width=800,height=600,left=20,top=20,toolbar=no,menubar=no,scrollbars=yes,resizable=yes',
+      'block'  => false
+    );
 
   }
 

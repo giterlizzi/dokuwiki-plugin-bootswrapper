@@ -14,10 +14,10 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_pageheader extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<page-header>';
-    protected $pattern_end   = '</page-header>';
-
-    protected $template_start = '<div class="bs-wrap bs-wrap-page-header page-header">';
-    protected $template_end   = '</div>';
+  public $pattern_start  = '<page-header>';
+  public $pattern_end    = '</page-header>';
+  public $template_start = '<div class="bs-wrap bs-wrap-page-header page-header">';
+  public $template_end   = '</div>';
+  public $tag_name       = 'page-header';
 
 }

@@ -14,9 +14,10 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_button extends syntax_plugin_bootswrapper_bootstrap {
 
-  protected $pattern_start  = '<(?:btn|button).*?>(?=.*?</(?:btn|button)>)';
-  protected $pattern_end    = '</(?:btn|button)>';
-  protected $tag_attributes = array(
+  public $pattern_start  = '<(?:btn|button).*?>(?=.*?</(?:btn|button)>)';
+  public $pattern_end    = '</(?:btn|button)>';
+  public $tag_name       = 'button';
+  public $tag_attributes = array(
 
     'type'      => array('type'     => 'string',
                           'values'   => array('default', 'primary', 'success', 'info', 'warning', 'danger', 'link'),
@@ -55,7 +56,7 @@ class syntax_plugin_bootswrapper_button extends syntax_plugin_bootswrapper_boots
 
   );
 
-  function getPType() { return 'normal';}
+  function getPType() { return 'normal'; }
 
   function render($mode, Doku_Renderer $renderer, $data) {
 

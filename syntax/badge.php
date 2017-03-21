@@ -14,12 +14,12 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_badge extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<badge>';
-    protected $pattern_end   = '</badge>';
+  public $pattern_start = '<badge>';
+  public $pattern_end   = '</badge>';
+  public $template_start = '<span class="bs-wrap bs-wrap-badge badge">';
+  public $template_end   = '</span>';
+  public $tag_name       = 'badge';
 
-    protected $template_start = '<span class="bs-wrap bs-wrap-badge badge">';
-    protected $template_end   = '</span>';
-
-    function getPType() { return 'normal';}
+  function getPType() { return 'normal'; }
 
 }

@@ -14,8 +14,9 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_wrapper extends syntax_plugin_bootswrapper_bootstrap {
 
-  protected $pattern_start = '<(?:WRAPPER|wrapper).*?>(?=.*?</(?:WRAPPER|wrapper)>)';
-  protected $pattern_end   = '</(?:WRAPPER|wrapper)>';
+  public $pattern_start = '<(?:WRAPPER|wrapper).*?>(?=.*?</(?:WRAPPER|wrapper)>)';
+  public $pattern_end   = '</(?:WRAPPER|wrapper)>';
+  public $tag_name      = 'wrapper';
 
   function render($mode, Doku_Renderer $renderer, $data) {
 

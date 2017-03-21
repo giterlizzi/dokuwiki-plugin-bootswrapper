@@ -14,9 +14,10 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootstrap {
 
-  protected $pattern_start  = '<(?:ALERT|alert).*?>(?=.*?</(?:ALERT|alert)>)';
-  protected $pattern_end    = '</(?:ALERT|alert)>';
-  protected $tag_attributes = array(
+  public $pattern_start  = '<(?:ALERT|alert).*?>(?=.*?</(?:ALERT|alert)>)';
+  public $pattern_end    = '</(?:ALERT|alert)>';
+  public $tag_name       = 'alert';
+  public $tag_attributes = array(
 
     'type'      => array('type'     => 'string',
                          'values'   => array('success', 'info', 'warning', 'danger'),

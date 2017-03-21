@@ -14,9 +14,9 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_tabs extends syntax_plugin_bootswrapper_nav {
 
-    protected $pattern_start = '<tabs.*?>(?=.*?</tabs>)';
-    protected $pattern_end   = '</tabs>';
-
-    protected $type = 'tabs';
+  public $pattern_start = '<tabs.*?>(?=.*?</tabs>)';
+  public $pattern_end   = '</tabs>';
+  public $nav_type      = 'tabs';
+  public $tag_name      = 'tabs';
 
 }

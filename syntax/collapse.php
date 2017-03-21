@@ -14,9 +14,10 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_collapse extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start  = '<collapse.*?>(?=.*?</collapse>)';
-    protected $pattern_end    = '</collapse>';
-    protected $tag_attributes = array(
+    public $pattern_start  = '<collapse.*?>(?=.*?</collapse>)';
+    public $pattern_end    = '</collapse>';
+    public $tag_name       = 'collapse';
+    public $tag_attributes = array(
 
       'id'        => array('type'     => 'string',
                            'values'   => null,
@@ -36,34 +37,29 @@ class syntax_plugin_bootswrapper_collapse extends syntax_plugin_bootswrapper_boo
     function render($mode, Doku_Renderer $renderer, $data) {
 
         if (empty($data)) return false;
+        if ($mode !== 'xhtml') return false;
 
-        if ($mode == 'xhtml') {
+        /** @var Doku_Renderer_xhtml $renderer */
+        list($state, $match, $attributes) = $data;
 
-            /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $match, $attributes) = $data;
+        switch($state) {
 
-            switch($state) {
+          case DOKU_LEXER_ENTER:
 
-                case DOKU_LEXER_ENTER:
+            $id        = $attributes['id'];
+            $collapsed = $attributes['collapsed'];
+            $markup    = sprintf('<div class="bs-wrap bs-wrap-collapse collapse %s" id="%s">', ($collapsed ? '' : 'in'), $id);
 
-                    $id        = $attributes['id'];
-                    $collapsed = $attributes['collapsed'];
-                    $markup    = sprintf('<div class="bs-wrap bs-wrap-collapse collapse %s" id="%s">', ($collapsed ? '' : 'in'), $id);
+            $renderer->doc .= $markup;
+            return true;
 
-                    $renderer->doc .= $markup;
-                    return true;
-
-                case DOKU_LEXER_EXIT:
-                    $renderer->doc .= '</div>';
-                    return true;
-
-            }
-
+          case DOKU_LEXER_EXIT:
+            $renderer->doc .= '</div>';
             return true;
 
         }
 
-        return false;
+        return true;
 
     }
 

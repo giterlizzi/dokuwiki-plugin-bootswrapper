@@ -14,75 +14,71 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_nav extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start  = '<nav.*?>(?=.*?</nav>)';
-    protected $pattern_end    = '</nav>';
-    protected $type           = null;
-    protected $tag_attributes = array(
+  public $pattern_start  = '<nav.*?>(?=.*?</nav>)';
+  public $pattern_end    = '</nav>';
+  public $nav_type       = null;
+  public $tag_name       = 'nav';
+  public $tag_attributes = array(
 
-      'type'      => array('type'     => 'string',
-                           'values'   => array('tabs', 'pills'),
-                           'required' => true,
-                           'default'  => 'pills'),
+    'type'      => array('type'     => 'string',
+                          'values'   => array('tabs', 'pills'),
+                          'required' => true,
+                          'default'  => 'pills'),
 
-      'stacked'   => array('type'     => 'boolean',
-                           'values'   => array(0, 1),
-                           'required' => false,
-                           'default'  => false),
+    'stacked'   => array('type'     => 'boolean',
+                          'values'   => array(0, 1),
+                          'required' => false,
+                          'default'  => false),
 
-      'justified' => array('type'     => 'boolean',
-                           'values'   => array(0, 1),
-                           'required' => false,
-                           'default'  => false),
+    'justified' => array('type'     => 'boolean',
+                          'values'   => array(0, 1),
+                          'required' => false,
+                          'default'  => false),
 
-      'fade' => array('type'     => 'boolean',
-                           'values'   => array(0, 1),
-                           'required' => false,
-                           'default'  => false),
+    'fade' => array('type'     => 'boolean',
+                          'values'   => array(0, 1),
+                          'required' => false,
+                          'default'  => false),
 
-    );
+  );
 
-    function getPType() { return 'block'; }
+  function getPType() { return 'block'; }
 
-    function render($mode, Doku_Renderer $renderer, $data) {
+  function render($mode, Doku_Renderer $renderer, $data) {
 
-        if (empty($data)) return false;
+    if (empty($data)) return false;
+    if ($mode !== 'xhtml') return false;
 
-        if ($mode == 'xhtml') {
+    /** @var Doku_Renderer_xhtml $renderer */
+    list($state, $match, $attributes) = $data;
 
-            /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $match, $attributes) = $data;
+    switch($state) {
 
-            switch($state) {
+      case DOKU_LEXER_ENTER:
 
-                case DOKU_LEXER_ENTER:
+        $html5data  = array();
 
-                    $html5data  = array();
-
-                    if (! empty($this->type)) {
-                        $attributes['type'] = $this->type;
-                    }
-
-                    foreach ($attributes as $key => $value) {
-                        $html5data[] = sprintf('data-nav-%s="%s"', $key, $value);
-                    }
-
-                    $markup = sprintf('<div class="bs-wrap bs-wrap-nav" %s>', implode(' ', $html5data));
-
-                    $renderer->doc .= $markup;
-                    return true;
-
-                case DOKU_LEXER_EXIT:
-                    $renderer->doc .= "</div>";
-                    return true;
-
-            }
-
-            return true;
-
+        if (! empty($this->nav_type)) {
+            $attributes['type'] = $this->nav_type;
         }
 
-        return false;
+        foreach ($attributes as $key => $value) {
+            $html5data[] = sprintf('data-nav-%s="%s"', $key, $value);
+        }
+
+        $markup = sprintf('<div class="bs-wrap bs-wrap-nav" %s>', implode(' ', $html5data));
+
+        $renderer->doc .= $markup;
+        return true;
+
+      case DOKU_LEXER_EXIT:
+        $renderer->doc .= "</div>";
+        return true;
 
     }
+
+    return true;
+
+  }
 
 }

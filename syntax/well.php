@@ -14,51 +14,47 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_well extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start  = '<well.*?>(?=.*?</well>)';
-    protected $pattern_end    = '</well>';
-    protected $tag_attributes = array(
+  public $pattern_start  = '<well.*?>(?=.*?</well>)';
+  public $pattern_end    = '</well>';
+  public $tag_name       = 'well';
+  public $tag_attributes = array(
 
-      'size' => array('type'     => 'string',
-                      'values'   => array('lg', 'sm'),
-                      'required' => false,
-                      'default'  => null),
+    'size' => array('type'     => 'string',
+                    'values'   => array('lg', 'sm'),
+                    'required' => false,
+                    'default'  => null),
 
-    );
+  );
 
-    function getPType() { return 'normal';}
+  function getPType() { return 'normal'; }
 
 
-    function render($mode, Doku_Renderer $renderer, $data) {
+  function render($mode, Doku_Renderer $renderer, $data) {
 
-        if (empty($data)) return false;
+    if (empty($data)) return false;
+    if ($mode !== 'xhtml') return false;
 
-        if ($mode == 'xhtml') {
+    /** @var Doku_Renderer_xhtml $renderer */
+    list($state, $match, $attributes) = $data;
 
-            /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $match, $attributes) = $data;
+    switch($state) {
 
-            switch($state) {
+      case DOKU_LEXER_ENTER:
 
-                case DOKU_LEXER_ENTER:
+        $size   = ($attributes['size']) ? 'well-'.$attributes['size'] : '';
+        $markup = sprintf('<div class="bs-wrap bs-wrap-well well %s">', $size);
 
-                    $size   = ($attributes['size']) ? 'well-'.$attributes['size'] : '';
-                    $markup = sprintf('<div class="bs-wrap bs-wrap-well well %s">', $size);
+        $renderer->doc .= $markup;
+        return true;
 
-                    $renderer->doc .= $markup;
-                    return true;
-
-                case DOKU_LEXER_EXIT:
-                    $renderer->doc .= '</div>';
-                    return true;
-
-            }
-
-            return true;
-
-        }
-
-        return false;
+      case DOKU_LEXER_EXIT:
+        $renderer->doc .= '</div>';
+        return true;
 
     }
+
+    return true;
+
+  }
 
 }

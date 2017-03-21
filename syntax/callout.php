@@ -14,9 +14,10 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_callout extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start  = '<callout.*?>(?=.*?</callout>)';
-    protected $pattern_end    = '</callout>';
-    protected $tag_attributes = array(
+    public $pattern_start  = '<callout.*?>(?=.*?</callout>)';
+    public $pattern_end    = '</callout>';
+    public $tag_name       = 'callout';
+    public $tag_attributes = array(
 
       'type' =>  array('type'     => 'string',
                        'values'   => array('default', 'primary', 'success', 'info', 'warning', 'danger', 'question', 'tip'),

@@ -14,7 +14,8 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_row extends syntax_plugin_bootswrapper_grid {
 
-    protected $pattern_start = '<row>';
-    protected $pattern_end   = '</row>';
+  public $pattern_start = '<row>';
+  public $pattern_end   = '</row>';
+  public $tag_name      = 'row';
 
 }

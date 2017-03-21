@@ -14,59 +14,60 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_carousel extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start  = '<carousel>';
-    protected $pattern_end    = '</carousel>';
-    protected $tag_attributes = array(
+    public $pattern_start  = '<carousel>';
+    public $pattern_end    = '</carousel>';
+    public $tag_name       = 'carousel';
+    public $tag_attributes = array(
 
-        'interval' => array('type'     => 'integer',
-                            'values'   => null,
-                            'required' => false,
-                            'default'  => 5000),
+      'interval' => array('type'     => 'integer',
+                          'values'   => null,
+                          'required' => false,
+                          'default'  => 5000),
 
-        'pause'    => array('type'     => 'string',
-                            'values'   => null,
-                            'required' => false,
-                            'default'  => 'hover'),
+      'pause'    => array('type'     => 'string',
+                          'values'   => null,
+                          'required' => false,
+                          'default'  => 'hover'),
 
-        'wrap'     => array('type'     => 'boolean',
-                            'values'   => null,
-                            'required' => false,
-                            'default'  => true),
+      'wrap'     => array('type'     => 'boolean',
+                          'values'   => null,
+                          'required' => false,
+                          'default'  => true),
 
-        'keyboard' => array('type'     => 'boolean',
-                            'values'   => null,
-                            'required' => false,
-                            'default'  => true),
+      'keyboard' => array('type'     => 'boolean',
+                          'values'   => null,
+                          'required' => false,
+                          'default'  => true),
     );
 
-    function getPType() { return 'block';}
+    function getPType() { return 'block'; }
 
     function render($mode, Doku_Renderer $renderer, $data) {
 
         if (empty($data)) return false;
+        if ($mode !== 'xhtml') return false;
 
-        if ($mode == 'xhtml') {
+        /** @var Doku_Renderer_xhtml $renderer */
+        list($state, $match, $attributes) = $data;
 
-            /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $match, $attributes) = $data;
+        switch($state) {
 
-            switch($state) {
+          case DOKU_LEXER_ENTER:
 
-                case DOKU_LEXER_ENTER:
+            $html5_attributes = array();
 
-                    $html5_attributes = array();
+            foreach ($attributes as $attribute => $value) {
+              $html5_attributes[] = sprintf('data-%s="%s"', $attribute, $value);
+            }
 
-                    foreach ($attributes as $attribute => $value) {
-                      $html5_attributes[] = sprintf('data-%s="%s"', $attribute, $value);
-                    }
+            $markup = sprintf('<div class="bs-wrap bs-wrap-carousel carousel slide" data-ride="carousel" %s><ol class="carousel-indicators"></ol><div class="carousel-inner" role="listbox">', implode(' ', $html5_attributes));
 
-                    $markup = sprintf('<div class="bs-wrap bs-wrap-carousel carousel slide" data-ride="carousel" %s><ol class="carousel-indicators"></ol><div class="carousel-inner" role="listbox">', implode(' ', $html5_attributes));
+            $renderer->doc .= $markup;
+            return true;
 
-                    $renderer->doc .= $markup;
-                    return true;
+            case DOKU_LEXER_EXIT:
 
-                case DOKU_LEXER_EXIT:
-                    $renderer->doc .= '</div>
+              $renderer->doc .= '</div>
   <a class="left carousel-control" href="#" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
@@ -75,15 +76,11 @@ class syntax_plugin_bootswrapper_carousel extends syntax_plugin_bootswrapper_boo
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a></div>';
-                    return true;
-
-            }
-
-            return true;
+              return true;
 
         }
 
-        return false;
+        return true;
 
     }
 

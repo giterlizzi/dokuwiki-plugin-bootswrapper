@@ -14,65 +14,61 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_jumbotron extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start  = '<(?:JUMBOTRON|jumbotron).*?>(?=.*?</(?:JUMBOTRON|jumbotron)>)';
-    protected $pattern_end    = '</(?:JUMBOTRON|jumbotron)>';
-    protected $tag_attributes = array(
+  public $pattern_start  = '<(?:JUMBOTRON|jumbotron).*?>(?=.*?</(?:JUMBOTRON|jumbotron)>)';
+  public $pattern_end    = '</(?:JUMBOTRON|jumbotron)>';
+  public $tag_name       = 'jumbotron';
+  public $tag_attributes = array(
 
-      'background' => array('type'     => 'string',
-                            'values'   => null,
-                            'required' => false,
-                            'default'  => null),
+    'background' => array('type'     => 'string',
+                          'values'   => null,
+                          'required' => false,
+                          'default'  => null),
 
-      'color'      => array('type'     => 'string',
-                            'values'   => null,
-                            'required' => false,
-                            'default'  => null),
+    'color'      => array('type'     => 'string',
+                          'values'   => null,
+                          'required' => false,
+                          'default'  => null),
 
-    );
+  );
 
-    function render($mode, Doku_Renderer $renderer, $data) {
+  function render($mode, Doku_Renderer $renderer, $data) {
 
-        if (empty($data)) return false;
+    if (empty($data)) return false;
+    if ($mode !== 'xhtml') return false;
 
-        if ($mode == 'xhtml') {
+    /** @var Doku_Renderer_xhtml $renderer */
+    list($state, $match, $attributes, $is_block) = $data;
 
-            /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $match, $attributes, $is_block) = $data;
+    switch($state) {
 
-            switch($state) {
+      case DOKU_LEXER_ENTER:
 
-                case DOKU_LEXER_ENTER:
+        $background = $attributes['background'];
+        $color      = $attributes['color'];
 
-                    $background = $attributes['background'];
-                    $color      = $attributes['color'];
+        $styles = array();
 
-                    $styles = array();
-
-                    if ($background) {
-                      $styles[] = sprintf('background-image:url(%s)', ml($background));
-                    }
-
-                    if ($color) {
-                      $styles[] = sprintf('color:%s', hsc($color));
-                    }
-
-                    $markup = sprintf('<div class="bs-wrap bs-wrap-jumbotron jumbotron" style="%s">', implode(';', $styles), $type);
-
-                    $renderer->doc .= $markup;
-                    return true;
-
-                case DOKU_LEXER_EXIT:
-                    $renderer->doc .= '</div>';
-                    return true;
-
-            }
-
-            return true;
-
+        if ($background) {
+          $styles[] = sprintf('background-image:url(%s)', ml($background));
         }
 
-        return false;
+        if ($color) {
+          $styles[] = sprintf('color:%s', hsc($color));
+        }
+
+        $markup = sprintf('<div class="bs-wrap bs-wrap-jumbotron jumbotron" style="%s">', implode(';', $styles), $type);
+
+        $renderer->doc .= $markup;
+        return true;
+
+      case DOKU_LEXER_EXIT:
+        $renderer->doc .= '</div>';
+        return true;
 
     }
+
+    return true;
+
+  }
 
 }

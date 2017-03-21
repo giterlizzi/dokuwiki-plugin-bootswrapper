@@ -13,16 +13,17 @@ if (!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 
 class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
-  protected $pattern_start    = '<BOOTSTRAP.+?>';
-  protected $pattern_end      = '</BOOTSTRAP>';
-  protected $template_start   = '<div class="%s">';
-  protected $template_content = '%s';
-  protected $template_end     = '</div>';
-  protected $header_pattern   = '[ \t]*={2,}[^\n]+={2,}[ \t]*(?=\n)';
-  protected $tag_attributes   = array();
+  public $pattern_start    = '<BOOTSTRAP.+?>';
+  public $pattern_end      = '</BOOTSTRAP>';
+  public $template_start   = '<div class="%s">';
+  public $template_content = '%s';
+  public $template_end     = '</div>';
+  public $header_pattern   = '[ \t]*={2,}[^\n]+={2,}[ \t]*(?=\n)';
+  public $tag_attributes   = array();
+  public $tag_name         = null;
 
   // HTML core/global attribute
-  protected $core_attributes  = array(
+  public $core_attributes  = array(
       'id'        => array('type'     => 'string',
                            'values'   => null,
                            'required' => false,
@@ -48,6 +49,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
                            'required' => false,
                            'default'  => null),
   );
+
 
   /**
     * Check default and user attributes

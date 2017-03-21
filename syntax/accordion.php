@@ -14,10 +14,10 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_accordion extends syntax_plugin_bootswrapper_bootstrap {
 
-  protected $pattern_start  = '<accordion.*?>(?=.*?</accordion>)';
-  protected $pattern_end    = '</accordion>';
-
-  protected $tag_attributes = array(
+  public $pattern_start  = '<accordion.*?>(?=.*?</accordion>)';
+  public $pattern_end    = '</accordion>';
+  public $tag_name       = 'accordion';
+  public $tag_attributes = array(
 
     'id'        =>  array('type'     => 'string',
                           'values'   => null,
