@@ -14,12 +14,12 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_caption extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<caption>';
-    protected $pattern_end   = '</caption>';
+    public $pattern_start  = '<caption>';
+    public $pattern_end    = '</caption>';
+    public $template_start = '<div class="bs-wrap bs-wrap-caption caption">';
+    public $template_end   = '</div>';
+    public $tag_name       = 'caption';
 
-    protected $template_start = '<div class="bs-wrap bs-wrap-caption caption">';
-    protected $template_end   = '</div>';
-
-    function getPType() { return 'block';}
+    function getPType() { return 'block'; }
 
 }

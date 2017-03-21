@@ -14,12 +14,12 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_invisible extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<invisible>';
-    protected $pattern_end   = '</invisible>';
+  public $pattern_start  = '<invisible>';
+  public $pattern_end    = '</invisible>';
+  public $template_start = '<div class="bs-wrap bs-wrap-invisible invisible">';
+  public $template_end   = '</div>';
+  public $tag_name       = 'invisible';
 
-    protected $template_start = '<div class="bs-wrap bs-wrap-invisible invisible">';
-    protected $template_end   = '</div>';
-
-    function getPType(){ return 'block'; }
+  function getPType(){ return 'block'; }
 
 }

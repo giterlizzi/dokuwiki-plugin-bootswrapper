@@ -14,12 +14,12 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_show extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<show>';
-    protected $pattern_end   = '</show>';
+  public $pattern_start  = '<show>';
+  public $pattern_end    = '</show>';
+  public $template_start = '<div class="bs-wrap bs-wrap-show show">';
+  public $template_end   = '</div>';
+  public $tag_name       = 'show';
 
-    protected $template_start = '<div class="bs-wrap bs-wrap-show show">';
-    protected $template_end   = '</div>';
-
-    function getPType(){ return 'block'; }
+  function getPType(){ return 'block'; }
 
 }

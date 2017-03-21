@@ -13,13 +13,42 @@ if (!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 
 class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
-  protected $pattern_start    = '<BOOTSTRAP.+?>';
-  protected $pattern_end      = '</BOOTSTRAP>';
-  protected $template_start   = '<div class="%s">';
-  protected $template_content = '%s';
-  protected $template_end     = '</div>';
-  protected $header_pattern   = '[ \t]*={2,}[^\n]+={2,}[ \t]*(?=\n)';
-  protected $tag_attributes   = array();
+  public $pattern_start    = '<BOOTSTRAP.+?>';
+  public $pattern_end      = '</BOOTSTRAP>';
+  public $template_start   = '<div class="%s">';
+  public $template_content = '%s';
+  public $template_end     = '</div>';
+  public $header_pattern   = '[ \t]*={2,}[^\n]+={2,}[ \t]*(?=\n)';
+  public $tag_attributes   = array();
+  public $tag_name         = null;
+
+  // HTML core/global attribute
+  public $core_attributes  = array(
+      'id'        => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+      'class'     => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+      'style'     => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+      'title'     => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+      'lang'      => array('type'     => 'string',
+                           'values'   => null,
+                           'required' => false,
+                           'default'  => null),
+      'dir'       => array('type'     => 'string',
+                           'values'   => array('ltr', 'rtl'),
+                           'required' => false,
+                           'default'  => null),
+  );
 
 
   /**
@@ -41,14 +70,16 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
                                                 '', get_class($this))));
     }
 
+    $tag_attributes = array_merge($this->core_attributes, $this->tag_attributes);
+
     // Save the default values of attributes
-    foreach ($this->tag_attributes as $attribute => $item) {
+    foreach ($tag_attributes as $attribute => $item) {
       $default_attributes[$attribute] = $item['default'];
     }
 
     foreach ($attributes as $name => $value) {
 
-      if (! isset($this->tag_attributes[$name])) {
+      if (! isset($tag_attributes[$name])) {
 
         if ($ACT == 'preview') {
           msg(sprintf('%s Unknown attribute <code>%s</code>', $msg_title, $name), -1);
@@ -58,12 +89,13 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
       }
 
-      $item = $this->tag_attributes[$name];
+      $item = $tag_attributes[$name];
 
       $required = isset($item['required']) ? $item['required'] : false;
       $values   = isset($item['values'])   ? $item['values']   : null;
       $default  = isset($item['default'])  ? $item['default']  : null;
 
+      // Normalize boolean value
       if ($item['type'] == 'boolean') {
         switch ($value) {
           case 'false':
@@ -77,14 +109,23 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
         }
       }
 
+      switch ($name) {
+        case 'style':
+          $value = explode(';', $value);
+          break;
+        case 'class':
+          $value = explode(' ', $value);
+          break;
+      }
+
       $checked_attributes[$name] = $value;
 
       // Set the default value when the user-value is empty
       if ($required && empty($value)) {
         $checked_attributes[$name] = $default;
 
-      // Check if the user attribute have a valid range values
-      } elseif (is_array($values) && ! in_array($value, $values)) {
+      // Check if the user attribute have a valid range values (single value)
+      } elseif ($item['type'] !== 'multiple' && is_array($values) && ! in_array($value, $values)) {
 
         if ($ACT == 'preview') {
           msg(sprintf('%s Invalid value (<code>%s</code>) for <code>%s</code> attribute. It will apply the default value <code>%s</code>',
@@ -92,6 +133,27 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
         }
 
         $checked_attributes[$name] = $default;
+
+      // Check if the user attribute have a valid range values (multiple values)
+      } elseif ($item['type'] == 'multiple') {
+
+        $multitple_values = explode(' ', $value);
+        $check = 0;
+
+        foreach ($multitple_values as $single_value) {
+          if (! in_array($single_value, $values)) {
+            $check = 1;
+          }
+        }
+
+        if ($check) {
+          if ($ACT == 'preview') {
+            msg(sprintf('%s Invalid value (<code>%s</code>) for <code>%s</code> attribute. It will apply the default value <code>%s</code>',
+                        $msg_title, $value, $name, $default), 2);
+          }
+          $checked_attributes[$name] = $default;
+        }
+
       }
 
     }
@@ -107,7 +169,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
     }
 
     // Uncomment for debug
-    //msg(sprintf('%s %s', $msg_title, print_r($merged_attributes, 1)));
+    // msg(sprintf('%s %s', $msg_title, print_r($merged_attributes, 1)));
 
     return $merged_attributes;
 
@@ -218,6 +280,48 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
     }
 
     return true;
+
+  }
+
+
+  function mergeCoreAttributes($attributes) {
+
+    $core_attributes = array();
+
+    foreach (array_keys($this->core_attributes) as $attribute) {
+      if (isset($attributes[$attribute])) $core_attributes[$attribute] = $attributes[$attribute];
+    }
+
+    return $core_attributes;
+
+  }
+
+
+  function buildAttributes($attributes, $override_attributes = array()) {
+
+    $attributes      = array_merge_recursive($attributes, $override_attributes);
+    $html_attributes = array();
+
+    foreach ($attributes as $attribute => $value) {
+
+      switch($attribute) {
+        case 'class':
+          $value = trim(implode(' ', $value));
+          break;
+        case 'style':
+          foreach ($value as $property => $val) {
+            $value = "$property:$val";
+          }
+          break;
+      }
+
+      if ($value) {
+        $html_attributes[] = sprintf('%s="%s"', $attribute, $value);
+      }
+
+    }
+
+    return implode(' ', $html_attributes);
 
   }
 

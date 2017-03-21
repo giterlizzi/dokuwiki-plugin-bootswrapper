@@ -14,9 +14,9 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_pills extends syntax_plugin_bootswrapper_nav {
 
-    protected $pattern_start = '<pills.*?>(?=.*?</pills>)';
-    protected $pattern_end   = '</pills>';
-
-    protected $type = 'pills';
+  public $pattern_start = '<pills.*?>(?=.*?</pills>)';
+  public $pattern_end   = '</pills>';
+  public $nav_type      = 'pills';
+  public $tag_name      = 'pills';
 
 }

@@ -14,12 +14,12 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_slide extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<slide>';
-    protected $pattern_end   = '</slide>';
+  public $pattern_start  = '<slide>';
+  public $pattern_end    = '</slide>';
+  public $template_start = '<div class="bs-wrap bs-wrap-slide item">';
+  public $template_end   = '</div>';
+  public $tag_name       = 'slide';
 
-    protected $template_start = '<div class="bs-wrap bs-wrap-slide item">';
-    protected $template_end   = '</div>';
-
-    function getPType(){ return 'block'; }
+  function getPType(){ return 'block'; }
 
 }

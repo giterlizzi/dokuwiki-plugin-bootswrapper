@@ -14,12 +14,12 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_thumbnail extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<thumbnail>';
-    protected $pattern_end   = '</thumbnail>';
+  public $pattern_start  = '<thumbnail>';
+  public $pattern_end    = '</thumbnail>';
+  public $template_start = '<div class="bs-wrap bs-wrap-thumbnail thumbnail">';
+  public $template_end   = '</div>';
+  public $tag_name       = 'thumbnail';
 
-    protected $template_start = '<div class="bs-wrap bs-wrap-thumbnail thumbnail">';
-    protected $template_end   = '</div>';
-
-    function getPType(){ return 'block'; }
+  function getPType(){ return 'block'; }
 
 }

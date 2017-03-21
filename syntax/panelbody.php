@@ -14,12 +14,12 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_panelbody extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<panel-body>';
-    protected $pattern_end   = '</panel-body>';
+  public $pattern_start  = '<panel-body>';
+  public $pattern_end    = '</panel-body>';
+  public $template_start = '<div class="bs-wrap bs-wrap-panel-body panel-body">';
+  public $template_end   = '</div>';
+  public $tag_name       = 'panel-body';
 
-    protected $template_start = '<div class="bs-wrap bs-wrap-panel-body panel-body">';
-    protected $template_end   = '</div>';
-
-    function getPType(){ return 'block'; }
+  function getPType(){ return 'block'; }
 
 }

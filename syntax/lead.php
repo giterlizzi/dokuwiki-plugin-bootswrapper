@@ -14,12 +14,12 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_lead extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<lead>';
-    protected $pattern_end   = '</lead>';
+  public $pattern_start  = '<lead>';
+  public $pattern_end    = '</lead>';
+  public $template_start = '<div class="bs-wrap bs-wrap-lead lead">';
+  public $template_end   = '</div>';
+  public $tag_name       = 'lead';
 
-    protected $template_start = '<div class="bs-wrap bs-wrap-lead lead">';
-    protected $template_end   = '</div>';
-
-    function getPType(){ return 'block'; }
+  function getPType(){ return 'block'; }
 
 }

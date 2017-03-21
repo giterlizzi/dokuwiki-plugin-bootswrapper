@@ -14,64 +14,60 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootstrap {
 
-    protected $pattern_start = '<(?:LABEL|label).*?>(?=.*?</(?:LABEL|label)>)';
-    protected $pattern_end   = '</(?:LABEL|label)>';
-    protected $tag_attributes = array(
+  public $pattern_start = '<(?:LABEL|label).*?>(?=.*?</(?:LABEL|label)>)';
+  public $pattern_end   = '</(?:LABEL|label)>';
+  public $tag_name       = 'label';
+  public $tag_attributes = array(
 
-      'type'      => array('type'     => 'string',
-                           'values'   => array('default', 'primary', 'success', 'info', 'warning', 'danger'),
-                           'required' => true,
-                           'default'  => 'default'),
+    'type' => array('type'     => 'string',
+                    'values'   => array('default', 'primary', 'success', 'info', 'warning', 'danger'),
+                    'required' => true,
+                    'default'  => 'default'),
 
-      'icon'      => array('type'     => 'string',
-                           'values'   => null,
-                           'required' => false,
-                           'default'  => null),
+    'icon' => array('type'     => 'string',
+                    'values'   => null,
+                    'required' => false,
+                    'default'  => null),
 
-    );
+  );
 
-    function getPType() { return 'normal';}
+  function getPType() { return 'normal'; }
 
-    function render($mode, Doku_Renderer $renderer, $data) {
+  function render($mode, Doku_Renderer $renderer, $data) {
 
-        if (empty($data)) return false;
+    if (empty($data)) return false;
+    if ($mode !== 'xhtml') return false;
 
-        if ($mode == 'xhtml') {
+    /** @var Doku_Renderer_xhtml $renderer */
+    list($state, $match, $attributes, $is_block) = $data;
 
-            /** @var Doku_Renderer_xhtml $renderer */
-            list($state, $match, $attributes, $is_block) = $data;
+    global $label_tag;
 
-            global $label_tag;
+    switch($state) {
 
-            switch($state) {
+      case DOKU_LEXER_ENTER:
 
-                case DOKU_LEXER_ENTER:
+        $label_tag = (($is_block) ? 'div' : 'span');
+        $type      = $attributes['type'];
+        $icon      = $attributes['icon'];
 
-                    $label_tag = (($is_block) ? 'div' : 'span');
-                    $type      = $attributes['type'];
-                    $icon      = $attributes['icon'];
+        $markup = sprintf('<%s class="bs-wrap bs-wrap-label label label-%s">', $label_tag, $type);
 
-                    $markup = sprintf('<%s class="bs-wrap bs-wrap-label label label-%s">', $label_tag, $type);
-
-                    if ($icon) {
-                      $markup .= sprintf('<i class="%s"></i> ', $icon);
-                    }
-
-                    $renderer->doc .= $markup;
-                    return true;
-
-                case DOKU_LEXER_EXIT:
-                    $renderer->doc .= "</$label_tag>";
-                    return true;
-
-            }
-
-            return true;
-
+        if ($icon) {
+          $markup .= sprintf('<i class="%s"></i> ', $icon);
         }
 
-        return false;
+        $renderer->doc .= $markup;
+        return true;
+
+      case DOKU_LEXER_EXIT:
+        $renderer->doc .= "</$label_tag>";
+        return true;
 
     }
+
+    return true;
+
+  }
 
 }
