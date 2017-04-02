@@ -70,7 +70,7 @@ class syntax_plugin_bootswrapper_button extends syntax_plugin_bootswrapper_boots
 
       case DOKU_LEXER_ENTER:
 
-        $html_attributes = $this->mergeCoreAttributes();
+        $html_attributes = $this->mergeCoreAttributes($attributes);
         $html_attributes['class'][] = 'bs-wrap bs-wrap-button';
 
         foreach (array_keys($this->tag_attributes) as $attribute) {
