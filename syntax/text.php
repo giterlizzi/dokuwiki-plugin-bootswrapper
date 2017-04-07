@@ -87,13 +87,13 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
           if (strtolower($size) == 'small') {
             $classes[] = 'small';
           } else {
-            $styles[] = sprintf('font-size:%s', $size);
+            $styles['font-size'] = $size;
           }
 
         }
 
-        $text_attributes = $this->buildAttributes($attributes, array('class'  => $classes,
-                                                                      'styles' => $styles));
+        $text_attributes = $this->buildAttributes(array('class' => $classes,
+                                                        'style' => $styles));
 
         $markup = sprintf('<%s %s>', $text_tag, $text_attributes);
 
