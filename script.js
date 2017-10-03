@@ -270,6 +270,8 @@ jQuery(document).ready(function() {
             .removeClass('mediaright')
             .removeClass('mediacenter');
 
+    $images.addClass('center-block');
+
     if (! $slides.length) {
       $images.wrap('<div class="item"/>');
     }
