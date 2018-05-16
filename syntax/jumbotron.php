@@ -37,7 +37,7 @@ class syntax_plugin_bootswrapper_jumbotron extends syntax_plugin_bootswrapper_bo
     if ($mode !== 'xhtml') return false;
 
     /** @var Doku_Renderer_xhtml $renderer */
-    list($state, $match, $attributes, $is_block) = $data;
+    list($state, $match, $pos, $attributes, $is_block) = $data;
 
     switch($state) {
 

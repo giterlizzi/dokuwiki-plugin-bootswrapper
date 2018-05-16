@@ -14,9 +14,23 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_wrapper extends syntax_plugin_bootswrapper_bootstrap {
 
-  public $pattern_start = '<(?:WRAPPER|wrapper).*?>(?=.*?</(?:WRAPPER|wrapper)>)';
-  public $pattern_end   = '</(?:WRAPPER|wrapper)>';
-  public $tag_name      = 'wrapper';
+  public $pattern_start  = '<(?:WRAPPER|wrapper).*?>(?=.*?</(?:WRAPPER|wrapper)>)';
+  public $pattern_end    = '</(?:WRAPPER|wrapper)>';
+  public $tag_name       = 'wrapper';
+
+  public $tag_attributes = array(
+
+    'screen'   => array('type'     => 'boolean',
+                        'values'   => array(0, 1),
+                        'required' => false,
+                        'default'  => false),
+
+    'print'    => array('type'     => 'boolean',
+                        'values'   => array(0, 1),
+                        'required' => false,
+                        'default'  => false),
+
+  );
 
   function render($mode, Doku_Renderer $renderer, $data) {
 
@@ -25,7 +39,7 @@ class syntax_plugin_bootswrapper_wrapper extends syntax_plugin_bootswrapper_boot
     if ($mode !== 'xhtml') return false;
 
     /** @var Doku_Renderer_xhtml $renderer */
-    list($state, $match, $attributes, $is_block) = $data;
+    list($state, $match, $pos, $attributes, $is_block) = $data;
 
     global $wrapper_tag;
 

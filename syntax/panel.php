@@ -58,7 +58,7 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
     if ($mode !== 'xhtml') return false;
 
         /** @var Doku_Renderer_xhtml $renderer */
-        list($state, $match, $attributes) = $data;
+        list($state, $match, $pos, $attributes) = $data;
 
         global $nobody, $footer;
 

@@ -39,7 +39,7 @@ class syntax_plugin_bootswrapper_accordion extends syntax_plugin_bootswrapper_bo
     if ($mode !== 'xhtml') return false;
 
     /** @var Doku_Renderer_xhtml $renderer */
-    list($state, $match, $attributes) = $data;
+    list($state, $match, $pos, $pos, $attributes) = $data;
 
     switch($state) {
 

@@ -49,7 +49,7 @@ class syntax_plugin_bootswrapper_carousel extends syntax_plugin_bootswrapper_boo
         if ($mode !== 'xhtml') return false;
 
         /** @var Doku_Renderer_xhtml $renderer */
-        list($state, $match, $attributes) = $data;
+        list($state, $match, $pos, $attributes) = $data;
 
         switch($state) {
 

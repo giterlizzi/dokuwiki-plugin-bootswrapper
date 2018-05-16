@@ -39,7 +39,7 @@ class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootst
     if ($mode !== 'xhtml') return false;
 
     /** @var Doku_Renderer_xhtml $renderer */
-    list($state, $match, $attributes, $is_block) = $data;
+    list($state, $match, $pos, $attributes, $is_block) = $data;
 
     global $label_tag;
 

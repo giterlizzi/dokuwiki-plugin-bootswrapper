@@ -110,9 +110,16 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
       }
 
       switch ($name) {
-        case 'style':
-          $value = explode(';', $value);
-          break;
+//         case 'style':
+//           #$value = explode(';', $value);
+//           $styles = array();
+//           foreach (explode(';', $value) as $item) {
+//             foreach (explode(':', trim($item)) as $property => $key) {
+//               $styles[$property] = $key;
+//             }
+//           }
+//           var_dump($styles);
+//           break;
         case 'class':
           $value = explode(' ', $value);
           break;
@@ -242,14 +249,14 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
         $checked_attributes = $this->checkAttributes($attributes);
 
-        return array($state, $match, $checked_attributes, $is_block);
+        return array($state, $match, $pos, $checked_attributes, $is_block);
 
       case DOKU_LEXER_UNMATCHED:
         $handler->_addCall('cdata', array($match), $pos, null);
         break;
 
       case DOKU_LEXER_EXIT:
-        return array($state, '', $pos, null);
+        return array($state, $match, $pos, null);
 
     }
 
@@ -306,7 +313,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
       switch($attribute) {
         case 'class':
-          $value = trim(implode(' ', $value));
+          $value = trim(implode(' ', array_unique($value)));
           break;
         case 'style':
           foreach ($value as $property => $val) {
