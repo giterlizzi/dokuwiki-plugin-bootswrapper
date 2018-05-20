@@ -58,8 +58,9 @@ class syntax_plugin_bootswrapper_callout extends syntax_plugin_bootswrapper_boot
         case DOKU_LEXER_ENTER:
 
           $type  = $attributes['type'];
-          $icon  = $attributes['icon'];
-          $color = $attributes['color'];
+          $icon  = (isset($attributes['icon'])  ? $attributes['icon']  : '');
+          $color = (isset($attributes['color']) ? $attributes['color'] : false);
+          $title = (isset($attributes['title']) ? $attributes['title'] : false);
 
           $icon_class    = '';
           $text_color    = '';
@@ -128,7 +129,7 @@ class syntax_plugin_bootswrapper_callout extends syntax_plugin_bootswrapper_boot
             $markup .= sprintf('<div class="row"><div class="col-xs-1"><i class="bs-callout-icon %s"%s></i></div><div class="col-xs-11">', $icon_class, $text_color);
           }
 
-          if ($title = $attributes['title']) {
+          if ($title) {
             $markup .= sprintf('<h4%s>%s</h4>', $text_color, $title);
           }
 
