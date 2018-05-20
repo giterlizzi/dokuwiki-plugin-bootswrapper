@@ -42,9 +42,9 @@ class syntax_plugin_bootswrapper_nav extends syntax_plugin_bootswrapper_bootstra
 
   );
 
-  function getPType() { return 'block'; }
+  public function getPType() { return 'block'; }
 
-  function render($mode, Doku_Renderer $renderer, $data) {
+  public function render($mode, Doku_Renderer $renderer, $data) {
 
     if (empty($data)) return false;
     if ($mode !== 'xhtml') return false;

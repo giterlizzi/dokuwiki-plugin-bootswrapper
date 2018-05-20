@@ -36,9 +36,9 @@ class syntax_plugin_bootswrapper_tooltip extends syntax_plugin_bootswrapper_boot
 
   );
 
-  function getPType() { return 'normal'; }
+  public function getPType() { return 'normal'; }
 
-  function render($mode, Doku_Renderer $renderer, $data) {
+  public function render($mode, Doku_Renderer $renderer, $data) {
 
     if (empty($data)) return false;
     if ($mode !== 'xhtml') return false;

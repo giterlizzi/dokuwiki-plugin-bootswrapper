@@ -20,6 +20,6 @@ class syntax_plugin_bootswrapper_thumbnail extends syntax_plugin_bootswrapper_bo
   public $template_end   = '</div>';
   public $tag_name       = 'thumbnail';
 
-  function getPType(){ return 'block'; }
+  public function getPType(){ return 'block'; }
 
 }

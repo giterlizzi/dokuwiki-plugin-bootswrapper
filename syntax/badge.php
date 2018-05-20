@@ -20,6 +20,6 @@ class syntax_plugin_bootswrapper_badge extends syntax_plugin_bootswrapper_bootst
   public $template_end   = '</span>';
   public $tag_name       = 'badge';
 
-  function getPType() { return 'normal'; }
+  public function getPType() { return 'normal'; }
 
 }

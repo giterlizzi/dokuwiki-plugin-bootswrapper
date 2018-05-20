@@ -66,9 +66,9 @@ class syntax_plugin_bootswrapper_modal extends syntax_plugin_bootswrapper_bootst
 
   );
 
-  function getPType() { return 'normal'; }
+  public function getPType() { return 'normal'; }
 
-  function render($mode, Doku_Renderer $renderer, $data) {
+  public function render($mode, Doku_Renderer $renderer, $data) {
 
     if (empty($data)) return false;
 

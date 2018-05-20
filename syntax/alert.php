@@ -35,9 +35,9 @@ class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootst
                          'default'  => null),
   );
 
-  function getPType(){ return 'block'; }
+  public function getPType(){ return 'block'; }
 
-  function render($mode, Doku_Renderer $renderer, $data) {
+  public function render($mode, Doku_Renderer $renderer, $data) {
 
     if (empty($data)) return false;
     if ($mode !== 'xhtml') return false;

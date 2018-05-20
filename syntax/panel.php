@@ -52,7 +52,7 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
   );
 
 
-  function render($mode, Doku_Renderer $renderer, $data) {
+  public function render($mode, Doku_Renderer $renderer, $data) {
 
     if (empty($data)) return false;
     if ($mode !== 'xhtml') return false;

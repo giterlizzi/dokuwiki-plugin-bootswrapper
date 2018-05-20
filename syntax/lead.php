@@ -20,6 +20,6 @@ class syntax_plugin_bootswrapper_lead extends syntax_plugin_bootswrapper_bootstr
   public $template_end   = '</div>';
   public $tag_name       = 'lead';
 
-  function getPType(){ return 'block'; }
+  public function getPType(){ return 'block'; }
 
 }

@@ -56,7 +56,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
     *
     * @param   array  $attributes
     */
-  function checkAttributes($attributes = array()) {
+  protected function checkAttributes($attributes = array()) {
 
     global $ACT;
 
@@ -65,9 +65,8 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
     $checked_attributes = array();
 
     if ($ACT == 'preview') {
-      $msg_title = sprintf('<strong>Bootstrap Wrapper - %s</strong>',
-                            ucfirst(str_replace('syntax_plugin_bootswrapper_',
-                                                '', get_class($this))));
+      $msg_title = '<strong>Bootstrap Wrapper Plugin - ' . (ucfirst(str_replace('syntax_plugin_bootswrapper_',
+                                                '', get_class($this)))) . '</strong>';
     }
 
     $tag_attributes = array_merge($this->core_attributes, $this->tag_attributes);
@@ -82,7 +81,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
       if (! isset($tag_attributes[$name])) {
 
         if ($ACT == 'preview') {
-          msg(sprintf('%s Unknown attribute <code>%s</code>', $msg_title, $name), -1);
+          msg("$msg_title Unknown attribute <code>$name</code>", -1);
         }
 
         continue;
@@ -135,8 +134,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
       } elseif ($item['type'] !== 'multiple' && is_array($values) && ! in_array($value, $values)) {
 
         if ($ACT == 'preview') {
-          msg(sprintf('%s Invalid value (<code>%s</code>) for <code>%s</code> attribute. It will apply the default value <code>%s</code>',
-                      $msg_title, $value, $name, $default), 2);
+          msg("$msg_title Invalid value (<code>$value</code>) for <code>$name</code> attribute. It will apply the default value <code>$default</code>", 2);
         }
 
         $checked_attributes[$name] = $default;
@@ -155,8 +153,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
 
         if ($check) {
           if ($ACT == 'preview') {
-            msg(sprintf('%s Invalid value (<code>%s</code>) for <code>%s</code> attribute. It will apply the default value <code>%s</code>',
-                        $msg_title, $value, $name, $default), 2);
+            msg("$msg_title Invalid value (<code>$value</code>) for <code>$name</code> attribute. It will apply the default value <code>$default</code>", 2);
           }
           $checked_attributes[$name] = $default;
         }
@@ -183,13 +180,13 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
   }
 
 
-  function getType(){ return 'formatting'; }
-  function getAllowedTypes() { return array('container', 'formatting', 'substition', 'protected', 'disabled', 'paragraphs'); }
-  function getPType(){ return 'stack'; }
-  function getSort(){ return 195; }
+  public function getType(){ return 'formatting'; }
+  public function getAllowedTypes() { return array('container', 'formatting', 'substition', 'protected', 'disabled', 'paragraphs'); }
+  public function getPType(){ return 'stack'; }
+  public function getSort(){ return 195; }
 
 
-  function connectTo($mode) {
+  public function connectTo($mode) {
     $this->Lexer->addEntryPattern($this->pattern_start, $mode, 'plugin_bootswrapper_'.$this->getPluginComponent());
   }
 
@@ -200,7 +197,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
   }
 
 
-  function handle($match, $state, $pos, Doku_Handler $handler) {
+  public function handle($match, $state, $pos, Doku_Handler $handler) {
 
     switch ($state) {
 
@@ -228,7 +225,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
           global $ACT;
 
           if ($ACT == 'preview') {
-            msg(sprintf('<strong>Bootstrap Wrapper</strong> - Malformed tag (<code>%s</code>). Please check your code!', hsc($match)), -1);
+            msg('<strong>Bootstrap Wrapper</strong> - Malformed tag (<code>'. hsc($match) .'</code>). Please check your code!', -1);
           }
 
         }
@@ -265,7 +262,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
   }
 
 
-  function render($mode, Doku_Renderer $renderer, $data) {
+  public function render($mode, Doku_Renderer $renderer, $data) {
 
     if (empty($data)) return false;
     if ($mode !== 'xhtml') return false;
@@ -291,7 +288,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
   }
 
 
-  function mergeCoreAttributes($attributes) {
+  protected function mergeCoreAttributes($attributes) {
 
     $core_attributes = array();
 
@@ -304,7 +301,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
   }
 
 
-  function buildAttributes($attributes, $override_attributes = array()) {
+  protected function buildAttributes($attributes, $override_attributes = array()) {
 
     $attributes      = array_merge_recursive($attributes, $override_attributes);
     $html_attributes = array();
@@ -323,7 +320,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
       }
 
       if ($value) {
-        $html_attributes[] = sprintf('%s="%s"', $attribute, $value);
+        $html_attributes[] = "$attribute=\"$value\"";
       }
 
     }

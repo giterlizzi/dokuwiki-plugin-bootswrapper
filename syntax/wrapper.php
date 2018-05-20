@@ -32,7 +32,7 @@ class syntax_plugin_bootswrapper_wrapper extends syntax_plugin_bootswrapper_boot
 
   );
 
-  function render($mode, Doku_Renderer $renderer, $data) {
+  public function render($mode, Doku_Renderer $renderer, $data) {
 
     if (empty($data)) return false;
 

@@ -20,6 +20,6 @@ class syntax_plugin_bootswrapper_panelbody extends syntax_plugin_bootswrapper_bo
   public $template_end   = '</div>';
   public $tag_name       = 'panel-body';
 
-  function getPType(){ return 'block'; }
+  public function getPType(){ return 'block'; }
 
 }

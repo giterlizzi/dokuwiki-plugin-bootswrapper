@@ -20,6 +20,6 @@ class syntax_plugin_bootswrapper_caption extends syntax_plugin_bootswrapper_boot
     public $template_end   = '</div>';
     public $tag_name       = 'caption';
 
-    function getPType() { return 'block'; }
+    public function getPType() { return 'block'; }
 
 }
