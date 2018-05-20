@@ -61,11 +61,13 @@ class action_plugin_bootswrapper extends DokuWiki_Action_Plugin {
     */
   function _secedit_button(Doku_Event $event) {
 
+    global $lang;
+
     if (! in_array($event->data['target'], $this->section_edit_buttons)) {
       return;
     }
 
-    $event->data['name'] = $this->getLang('secedit');
+    $event->data['name'] = $lang['btn_secedit'] . ' - ' . ucfirst(str_replace('plugin_bootswrapper_', '', $event->data['target']));
 
   }
 
