@@ -20,6 +20,6 @@ class syntax_plugin_bootswrapper_hidden extends syntax_plugin_bootswrapper_boots
   public $template_end   = '</div>';
   public $tag_name       = 'hidden';
 
-  function getPType(){ return 'block'; }
+  public function getPType(){ return 'block'; }
 
 }

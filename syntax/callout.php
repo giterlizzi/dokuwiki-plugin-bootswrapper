@@ -41,15 +41,15 @@ class syntax_plugin_bootswrapper_callout extends syntax_plugin_bootswrapper_boot
 
     );
 
-    function getPType(){ return 'block'; }
+    public function getPType(){ return 'block'; }
 
-    function render($mode, Doku_Renderer $renderer, $data) {
+    public function render($mode, Doku_Renderer $renderer, $data) {
 
       if (empty($data)) return false;
       if ($mode !== 'xhtml') return false;
 
       /** @var Doku_Renderer_xhtml $renderer */
-      list($state, $match, $attributes) = $data;
+      list($state, $match, $pos, $attributes) = $data;
 
       global $icon;
 

@@ -20,6 +20,6 @@ class syntax_plugin_bootswrapper_slide extends syntax_plugin_bootswrapper_bootst
   public $template_end   = '</div>';
   public $tag_name       = 'slide';
 
-  function getPType(){ return 'block'; }
+  public function getPType(){ return 'block'; }
 
 }

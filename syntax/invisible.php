@@ -20,6 +20,6 @@ class syntax_plugin_bootswrapper_invisible extends syntax_plugin_bootswrapper_bo
   public $template_end   = '</div>';
   public $tag_name       = 'invisible';
 
-  function getPType(){ return 'block'; }
+  public function getPType(){ return 'block'; }
 
 }

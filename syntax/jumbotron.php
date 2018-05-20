@@ -31,13 +31,13 @@ class syntax_plugin_bootswrapper_jumbotron extends syntax_plugin_bootswrapper_bo
 
   );
 
-  function render($mode, Doku_Renderer $renderer, $data) {
+  public function render($mode, Doku_Renderer $renderer, $data) {
 
     if (empty($data)) return false;
     if ($mode !== 'xhtml') return false;
 
     /** @var Doku_Renderer_xhtml $renderer */
-    list($state, $match, $attributes, $is_block) = $data;
+    list($state, $match, $pos, $attributes, $is_block) = $data;
 
     switch($state) {
 

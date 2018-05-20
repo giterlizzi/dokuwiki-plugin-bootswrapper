@@ -31,15 +31,15 @@ class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootst
 
   );
 
-  function getPType() { return 'normal'; }
+  public function getPType() { return 'normal'; }
 
-  function render($mode, Doku_Renderer $renderer, $data) {
+  public function render($mode, Doku_Renderer $renderer, $data) {
 
     if (empty($data)) return false;
     if ($mode !== 'xhtml') return false;
 
     /** @var Doku_Renderer_xhtml $renderer */
-    list($state, $match, $attributes, $is_block) = $data;
+    list($state, $match, $pos, $attributes, $is_block) = $data;
 
     global $label_tag;
 

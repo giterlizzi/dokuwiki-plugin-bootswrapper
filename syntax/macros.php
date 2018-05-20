@@ -21,7 +21,7 @@ class syntax_plugin_bootswrapper_macros extends DokuWiki_Syntax_Plugin {
 
   function getType() { return 'substition'; }
   function getSort() { return 99; }
-  function getPType(){ return 'normal'; }
+  public function getPType(){ return 'normal'; }
 
   function connectTo($mode) {
 
@@ -35,7 +35,7 @@ class syntax_plugin_bootswrapper_macros extends DokuWiki_Syntax_Plugin {
     return array($match, $state, $pos);
   }
 
-  function render($mode, Doku_Renderer $renderer, $data) {
+  public function render($mode, Doku_Renderer $renderer, $data) {
 
     if (empty($data)) return false;
     if ($mode !== 'xhtml') return false;

@@ -20,6 +20,6 @@ class syntax_plugin_bootswrapper_show extends syntax_plugin_bootswrapper_bootstr
   public $template_end   = '</div>';
   public $tag_name       = 'show';
 
-  function getPType(){ return 'block'; }
+  public function getPType(){ return 'block'; }
 
 }
