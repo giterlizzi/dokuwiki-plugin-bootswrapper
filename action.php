@@ -17,6 +17,13 @@ if(!defined('DOKU_INC')) die();
  */
 class action_plugin_bootswrapper extends DokuWiki_Action_Plugin {
 
+
+  private $section_edit_buttons = array(
+    'plugin_bootswrapper_pane',
+    'plugin_bootswrapper_panel'
+  );
+
+
   /**
     * Register events
     *
@@ -37,7 +44,7 @@ class action_plugin_bootswrapper extends DokuWiki_Action_Plugin {
     */
   function _editform(Doku_Event $event) {
 
-    if ($event->data['target'] !== 'plugin_bootswrapper_pane') {
+    if (! in_array($event->data['target'], $this->section_edit_buttons)) {
       return;
     }
 
@@ -54,7 +61,7 @@ class action_plugin_bootswrapper extends DokuWiki_Action_Plugin {
     */
   function _secedit_button(Doku_Event $event) {
 
-    if($event->data['target'] !== 'plugin_bootswrapper_pane') {
+    if (! in_array($event->data['target'], $this->section_edit_buttons)) {
       return;
     }
 

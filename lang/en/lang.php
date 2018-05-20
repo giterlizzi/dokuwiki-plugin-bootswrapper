@@ -7,4 +7,4 @@
  */
  
 // for the configuration manager
-$lang['secedit'] = "Edit Panel";
+$lang['secedit'] = "Edit";
