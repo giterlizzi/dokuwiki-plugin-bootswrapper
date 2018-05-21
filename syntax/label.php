@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -51,10 +51,10 @@ class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootst
         $type      = $attributes['type'];
         $icon      = $attributes['icon'];
 
-        $markup = sprintf('<%s class="bs-wrap bs-wrap-label label label-%s">', $label_tag, $type);
+        $markup = '<'. $label_tag .' class="bs-wrap bs-wrap-label label label-'. $type .'">';
 
         if ($icon) {
-          $markup .= sprintf('<i class="%s"></i> ', $icon);
+          $markup .= '<i class="'. $icon .'"></i> ';
         }
 
         $renderer->doc .= $markup;

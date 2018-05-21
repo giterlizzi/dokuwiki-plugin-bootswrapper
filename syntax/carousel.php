@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -58,10 +58,10 @@ class syntax_plugin_bootswrapper_carousel extends syntax_plugin_bootswrapper_boo
             $html5_attributes = array();
 
             foreach ($attributes as $attribute => $value) {
-              $html5_attributes[] = sprintf('data-%s="%s"', $attribute, $value);
+              $html5_attributes[] = 'data-'. $attribute .'="'. $value .'"';
             }
 
-            $markup = sprintf('<div class="bs-wrap bs-wrap-carousel carousel slide" data-ride="carousel" %s><ol class="carousel-indicators"></ol><div class="carousel-inner" role="listbox">', implode(' ', $html5_attributes));
+            $markup = '<div class="bs-wrap bs-wrap-carousel carousel slide" data-ride="carousel" '. implode(' ', $html5_attributes) .'><ol class="carousel-indicators"></ol><div class="carousel-inner" role="listbox">';
 
             $renderer->doc .= $markup;
             return true;

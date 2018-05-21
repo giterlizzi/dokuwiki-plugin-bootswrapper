@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -118,19 +118,19 @@ class syntax_plugin_bootswrapper_callout extends syntax_plugin_bootswrapper_boot
 
           if ($color) {
             $html_attributes['style']['border-left-color'] = $color;
-            $text_color = sprintf(' style="color:%s"', $color);
+            $text_color = ' style="color:'. $color .'"';
           }
 
           $html_attributes['class'][] = "bs-callout-$type";
 
-          $markup = sprintf('<div %s>', $this->buildAttributes($html_attributes));
+          $markup = '<div '. $this->buildAttributes($html_attributes) .'>';
 
           if ($icon && $icon_class) {
-            $markup .= sprintf('<div class="row"><div class="col-xs-1"><i class="bs-callout-icon %s"%s></i></div><div class="col-xs-11">', $icon_class, $text_color);
+            $markup .= '<div class="row"><div class="col-xs-1"><i class="bs-callout-icon '. $icon_class .'"'. $text_color .'></i></div><div class="col-xs-11">';
           }
 
           if ($title) {
-            $markup .= sprintf('<h4%s>%s</h4>', $text_color, $title);
+            $markup .= '<h4'. $text_color .'>'. $title .'</h4>';
           }
 
           $renderer->doc .= $markup;

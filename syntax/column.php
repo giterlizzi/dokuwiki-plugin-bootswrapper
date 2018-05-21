@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -66,10 +66,10 @@ class syntax_plugin_bootswrapper_column extends syntax_plugin_bootswrapper_boots
         $col = '';
 
         foreach (array('lg', 'md', 'sm', 'xs') as $device) {
-            $col .= isset($attributes[$device]) ? sprintf('col-%s-%s ', $device, $attributes[$device]) : '';
+            $col .= isset($attributes[$device]) ? "col-$device-{$attributes[$device]} " : '';
         }
 
-        $markup = sprintf('<div class="bs-wrap bs-wrap-col %s">', trim($col));
+        $markup = '<div class="bs-wrap bs-wrap-col '. trim($col) .'">';
 
         $renderer->doc .= $markup;
         return true;

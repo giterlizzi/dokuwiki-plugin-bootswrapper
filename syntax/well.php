@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -42,7 +42,7 @@ class syntax_plugin_bootswrapper_well extends syntax_plugin_bootswrapper_bootstr
       case DOKU_LEXER_ENTER:
 
         $size   = ($attributes['size']) ? 'well-'.$attributes['size'] : '';
-        $markup = sprintf('<div class="bs-wrap bs-wrap-well well %s">', $size);
+        $markup = '<div class="bs-wrap bs-wrap-well well '. $size .">";
 
         $renderer->doc .= $markup;
         return true;

@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2016, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -52,7 +52,9 @@ class syntax_plugin_bootswrapper_wrapper extends syntax_plugin_bootswrapper_boot
 
         $wrap_classes[]  = 'bs-wrapper';
 
-        $markup = sprintf('<%s %s>', $wrapper_tag, $this->buildAttributes($attributes, array('class' => $wrap_classes)));
+        $wrapper_attributes = $this->buildAttributes($attributes, array('class' => $wrap_classes));
+
+        $markup = "<$wrapper_tag $wrapper_attributes>";
 
         $renderer->doc .= $markup;
 

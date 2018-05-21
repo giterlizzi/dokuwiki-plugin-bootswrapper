@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -48,7 +48,7 @@ class syntax_plugin_bootswrapper_collapse extends syntax_plugin_bootswrapper_boo
 
             $id        = $attributes['id'];
             $collapsed = $attributes['collapsed'];
-            $markup    = sprintf('<div class="bs-wrap bs-wrap-collapse collapse %s" id="%s">', ($collapsed ? '' : 'in'), $id);
+            $markup    = '<div class="bs-wrap bs-wrap-collapse collapse '. ($collapsed ? '' : 'in') .'" id="'. $id .'">';
 
             $renderer->doc .= $markup;
             return true;

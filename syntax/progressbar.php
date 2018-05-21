@@ -5,7 +5,7 @@
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     HavocKKS
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -62,28 +62,34 @@ class syntax_plugin_bootswrapper_progressbar extends syntax_plugin_bootswrapper_
 
       case DOKU_LEXER_ENTER:
 
-        extract($attributes);
+        #extract($attributes);
 
-        $classCode = "";
+        $classes = "";
 
-        if($striped){
-            $classCode = "progress-bar-striped";
+        $striped   = (isset($attributes['striped'])   ? $attributes['striped']   : $this->tag_attributes['striped']['default']);
+        $animate   = (isset($attributes['animate'])   ? $attributes['animate']   : $this->tag_attributes['animate']['default']);
+        $showvalue = (isset($attributes['showvalue']) ? $attributes['showvalue'] : $this->tag_attributes['showvalue']['default']);
+        $value     = (isset($attributes['value'])     ? $attributes['value']     : $this->tag_attributes['value']['default']);
+        $type      = (isset($attributes['type'])      ? $attributes['type']      : $this->tag_attributes['type']['default']);
+
+        if ($striped) {
+          $classes = "progress-bar-striped";
         }
 
-        if($animate){
-            $classCode .= " active";
+        if ($animate) {
+          $classes .= " active";
         }
 
-        $markup = sprintf('<div class="bs-wrap bs-wrap-progress-bar progress-bar progress-bar-%s %s" role="progressbar" aria-valuenow="%s" aria-valuemin="0" aria-valuemax="100" style="width: %s%%;%s">',
-                          $type, $classCode, $value, $value, ($showvalue ? 'min-width: 2em;' : ''));
+        $markup = '<div class="bs-wrap bs-wrap-progress-bar progress-bar progress-bar-' . $type . ' ' . $classes . '" role="progressbar" aria-valuenow="' . $value . '" aria-valuemin="0" aria-valuemax="100" style="width:' . $value . '%;' . ($showvalue ? 'min-width: 2em;' : '') . '">';
 
-        if ($showvalue){
-            $markup .= sprintf('%s%% ', $value);
+        if ($showvalue) {
+          $markup .= "$value%";
         } else {
-            $markup .= sprintf('<span class="sr-only">%s%%</span> ', $value);
+          $markup .= '<span class="sr-only">' . $value . '%</span> ';
         }
 
         $renderer->doc .= $markup;
+
         return true;
 
       case DOKU_LEXER_EXIT:

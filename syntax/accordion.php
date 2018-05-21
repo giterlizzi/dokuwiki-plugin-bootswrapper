@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
 
 // must be run within Dokuwiki
@@ -53,7 +53,8 @@ class syntax_plugin_bootswrapper_accordion extends syntax_plugin_bootswrapper_bo
           $html_attributes['class'][] = 'bs-wrap-accordion-collapsed';
         }
 
-        $markup = sprintf('<div %s>', $this->buildAttributes($html_attributes));
+        $markup_attributes = $this->buildAttributes($html_attributes);
+        $markup = "<div $markup_attributes>";
 
         $renderer->doc .= $markup;
         return true;

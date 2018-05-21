@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -41,7 +41,7 @@ class syntax_plugin_bootswrapper_pane extends syntax_plugin_bootswrapper_bootstr
       case DOKU_LEXER_ENTER:
 
         $id     = $attributes['id'];
-        $markup = sprintf('<div role="tabpanel" class="bs-wrap bs-wrap-tab-pane tab-pane" id="%s">', $id);
+        $markup = '<div role="tabpanel" class="bs-wrap bs-wrap-tab-pane tab-pane" id="'. $id .'">';
 
         $renderer->doc .= $markup;
 

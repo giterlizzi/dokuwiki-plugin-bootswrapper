@@ -4,7 +4,7 @@
  *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
 
 // must be run within Dokuwiki
@@ -95,7 +95,7 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
         $text_attributes = $this->buildAttributes(array('class' => $classes,
                                                         'style' => $styles));
 
-        $markup = sprintf('<%s %s>', $text_tag, $text_attributes);
+        $markup = "<$text_tag $text_attributes>";
 
         $renderer->doc .= $markup;
         return true;

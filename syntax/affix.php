@@ -4,7 +4,7 @@
  *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
 
 // must be run within Dokuwiki
@@ -115,7 +115,7 @@ class syntax_plugin_bootswrapper_affix extends syntax_plugin_bootswrapper_bootst
 
         if ($top)    $html5_data[] = "data-offset-top=$top ";
         if ($bottom) $html5_data[] = "data-offset-bottom=$bottom ";
-        if ($target) $html5_data[] = sprintf('data-target="%s"', $target);
+        if ($target) $html5_data[] = 'data-target="'. $target .'"';
 
         if ($position)        $styles[] = "position:$position";
         if ($position_top)    $styles[] = "top:$position_top";
@@ -123,8 +123,7 @@ class syntax_plugin_bootswrapper_affix extends syntax_plugin_bootswrapper_bootst
         if ($position_left)   $styles[] = "left:$position_left";
         if ($position_right)  $styles[] = "right:$position_right";
 
-        $markup = sprintf('<div style="z-index:1024;%s" class="bs-wrap bs-wrap-affix" data-spy="affix" %s>',
-          implode(';', $styles), implode(' ', $html5_data));
+        $markup = '<div style="z-index:1024;'. implode(';', $styles) .'" class="bs-wrap bs-wrap-affix" data-spy="affix" '. implode(' ', $html5_data) .'>';
 
         $renderer->doc .= $markup;
         return true;

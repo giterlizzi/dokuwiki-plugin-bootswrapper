@@ -4,7 +4,7 @@
  *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
 // must be run within Dokuwiki
 if (!defined('DOKU_INC')) die();
@@ -173,7 +173,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin {
     }
 
     // Uncomment for debug
-    // msg(sprintf('%s %s', $msg_title, print_r($merged_attributes, 1)));
+    // msg("$msg_title " . print_r($merged_attributes, 1));
 
     return $merged_attributes;
 

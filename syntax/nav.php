@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -63,10 +63,10 @@ class syntax_plugin_bootswrapper_nav extends syntax_plugin_bootswrapper_bootstra
         }
 
         foreach ($attributes as $key => $value) {
-            $html5data[] = sprintf('data-nav-%s="%s"', $key, $value);
+            $html5data[] = 'data-nav-'. $key .'="'. $value .'"';
         }
 
-        $markup = sprintf('<div class="bs-wrap bs-wrap-nav" %s>', implode(' ', $html5data));
+        $markup = '<div class="bs-wrap bs-wrap-nav" '. implode(' ', $html5data) .'>';
 
         $renderer->doc .= $markup;
         return true;

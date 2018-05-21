@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -58,7 +58,7 @@ class syntax_plugin_bootswrapper_tooltip extends syntax_plugin_bootswrapper_boot
           $title = hsc(p_render('xhtml',p_get_instructions($title), $info));
         }
 
-        $markup = sprintf('<span class="bs-wrap bs-wrap-tooltip" data-toggle="tooltip" data-html="%s" data-placement="%s" title="%s" style="border-bottom:1px dotted">', $html, $placement, $title);
+        $markup = '<span class="bs-wrap bs-wrap-tooltip" data-toggle="tooltip" data-html="'. $html .'" data-placement="'. $placement .'" title="'. $title .'" style="border-bottom:1px dotted">';
 
         $renderer->doc .= $markup;
         return true;

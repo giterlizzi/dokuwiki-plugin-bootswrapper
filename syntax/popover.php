@@ -5,7 +5,7 @@
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Jos Roossien <mail@jroossien.com>
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -90,12 +90,12 @@ class syntax_plugin_bootswrapper_popover extends syntax_plugin_bootswrapper_boot
           $content = hsc(p_render('xhtml',p_get_instructions($content), $info));
         }
 
-        if ($trigger)   $html5_data[] = sprintf('data-trigger="%s"',   $trigger);
-        if ($animation) $html5_data[] = sprintf('data-animation="%s"', $animation);
-        if ($html)      $html5_data[] = sprintf('data-html="%s"',      $html);
-        if ($placement) $html5_data[] = sprintf('data-placement="%s"', $placement);
-        if ($content)   $html5_data[] = sprintf('data-content="%s"',   $content);
-        if ($delay)     $html5_data[] = sprintf('data-delay="%s"',     $delay);
+        if ($trigger)   $html5_data[] = 'data-trigger="'   . $trigger   . '"';
+        if ($animation) $html5_data[] = 'data-animation="' . $animation . '"';
+        if ($html)      $html5_data[] = 'data-html="'      . $html      . '"';
+        if ($placement) $html5_data[] = 'data-placement="' . $placement . '"';
+        if ($content)   $html5_data[] = 'data-content="'   . $content   . '"';
+        if ($delay)     $html5_data[] = 'data-delay="'     . $delay     . '"';
 
         if (! $delay && ($attributes['delay-hide'] || $attributes['delay-show'])) {
 
@@ -106,12 +106,11 @@ class syntax_plugin_bootswrapper_popover extends syntax_plugin_bootswrapper_boot
           if ($hide) $delays['hide'] = $hide;
           if ($show) $delays['show'] = $show;
 
-          $html5_data[] = sprintf('data-delay=\'%s\'', json_encode($delays));
+          $html5_data[] = "data-delay='". json_encode($delays) ."'";
 
         }
 
-        $markup = sprintf('<span class="bs-wrap bs-wrap-popover" data-toggle="popover" title="%s" %s>',
-            $title, implode(' ', $html5_data));
+        $markup = '<span class="bs-wrap bs-wrap-popover" data-toggle="popover" title="'. $title .'" '. implode(' ', $html5_data) .'>';
 
         $renderer->doc .= $markup;
         return true;

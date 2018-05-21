@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -18,10 +18,10 @@ class syntax_plugin_bootswrapper_image extends syntax_plugin_bootswrapper_bootst
   public $pattern_end    = '</image>';
   public $tag_name       = 'image';
   public $tag_attributes = array(
-    'shape' => array('type'    => 'string',
-                      'values'   => array('rounded', 'circle', 'thumbnail', 'responsive'),
-                      'required' => false,
-                      'default'  => ''),
+    'shape' => array('type'     => 'string',
+                     'values'   => array('rounded', 'circle', 'thumbnail', 'responsive'),
+                     'required' => false,
+                     'default'  => ''),
   );
 
   public function getPType(){ return 'block'; }
@@ -43,10 +43,10 @@ class syntax_plugin_bootswrapper_image extends syntax_plugin_bootswrapper_bootst
         $html5_data = array();
 
         if ($shape) {
-          $html5_data[] = sprintf('data-img-shape="%s"', $shape);
+          $html5_data[] = 'data-img-shape="'. $shape .'"';
         }
 
-        $markup = sprintf('<span class="bs-wrap bs-wrap-image" %s>', implode(' ', $html5_data));
+        $markup = '<span class="bs-wrap bs-wrap-image" '. implode(' ', $html5_data) .'>';
 
         $renderer->doc .= $markup;
         return true;

@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Jos Roossien <mail@jroossien.com>
- * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki
@@ -59,10 +59,10 @@ class syntax_plugin_bootswrapper_modal extends syntax_plugin_bootswrapper_bootst
                         'required' => false,
                         'default'  => null),
 
-    'remote'     => array('type'     => 'string',
-                          'values'   => null,
-                          'required' => false,
-                          'default'  => null),
+    'remote'   => array('type'     => 'string',
+                        'values'   => null,
+                        'required' => false,
+                        'default'  => null),
 
   );
 
@@ -114,18 +114,22 @@ class syntax_plugin_bootswrapper_modal extends syntax_plugin_bootswrapper_bootst
         }
 
         //Modal
-        $markup = sprintf('<div class="bs-wrap bs-wrap-modal modal %s" id="%s" role="dialog" tabindex="-1" %s>',
-          $fade, $id, $this->buildAttributes($html5_attributes));
-        $markup .= sprintf('<div class="bs-wrap modal-dialog modal-%s" role="document"><div class="bs-wrap modal-content">', $size);
+        $markup = '<div class="bs-wrap bs-wrap-modal modal '. $fade .'" id="'. $id .'" role="dialog" tabindex="-1" '. $this->buildAttributes($html5_attributes) .'>';
+
+        $markup .= '<div class="bs-wrap modal-dialog modal-'. $size .'" role="document"><div class="bs-wrap modal-content">';
 
         //Header/Title
         if ($title) {
+
           $markup .= '<div class="bs-wrap modal-header">';
+
           if ($dismiss === true) {
             $markup .= '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
           }
-          $markup .= sprintf('<h4 class="bs-wrap modal-title">%s</h4>', $title);
+
+          $markup .= '<h4 class="bs-wrap modal-title">'. $title .'</h4>';
           $markup .= '</div>';
+
         }
 
         //Body
