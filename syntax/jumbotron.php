@@ -3,8 +3,8 @@
  * Bootstrap Wrapper Plugin: Jumbotron
  *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
- * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
+ * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>, Eric Maeker <eric.maeker@gmail.com>
+ * @copyright  (C) 2015-2018, Eric Maeker
  */
 
 // must be run within Dokuwiki
