@@ -3,7 +3,7 @@
  * Bootstrap Wrapper Plugin: Jumbotron
  *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
- * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>, Eric Maeker <eric@maeker.fr>
+ * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
  */
 
@@ -19,6 +19,11 @@ class syntax_plugin_bootswrapper_jumbotron extends syntax_plugin_bootswrapper_bo
     protected $tag_attributes = array(
 
       'background' => array('type'     => 'string',
+                            'values'   => null,
+                            'required' => false,
+                            'default'  => null),
+
+      'background-color' => array('type'     => 'string',
                             'values'   => null,
                             'required' => false,
                             'default'  => null),
@@ -63,6 +68,7 @@ class syntax_plugin_bootswrapper_jumbotron extends syntax_plugin_bootswrapper_bo
                 case DOKU_LEXER_ENTER:
 
                     $background = $attributes['background'];
+                    $backgroundcolor = $attributes['background-color'];
                     $color      = $attributes['color'];
                     $height     = $attributes['height'];
                     $paddingtop = $attributes['padding-top'];
@@ -71,8 +77,13 @@ class syntax_plugin_bootswrapper_jumbotron extends syntax_plugin_bootswrapper_bo
 
                     $styles = array();
 
+
                     if ($background) {
                       $styles[] = sprintf('background-image:url(%s)', ml($background));
+                    }
+                    
+                    if ($backgroundcolor) {
+                      $styles[] = sprintf('background-color:%s', $backgroundcolor);
                     }
 
                     if ($color) {
