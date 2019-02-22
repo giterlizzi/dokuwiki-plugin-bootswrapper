@@ -92,6 +92,9 @@ aside ul.dropdown-menu {
   color: #5bc0de;
 }
 
+.bs-callout {
+  overflow: hidden;
+}
 
 
 i.bs-callout-icon { font-size: 2em; }
