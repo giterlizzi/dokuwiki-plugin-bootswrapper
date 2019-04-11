@@ -14,7 +14,7 @@ require_once(dirname(__FILE__).'/bootstrap.php');
 
 class syntax_plugin_bootswrapper_column extends syntax_plugin_bootswrapper_bootstrap {
 
-  public $pattern_start  = '<col.*?>(?=.*?</col>)';
+  public $pattern_start  = '<col\b.*?>(?=.*?</col>)';
   public $pattern_end    = '</col>';
   public $tag_name       = 'col';
   public $tag_attributes = array(
