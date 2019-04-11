@@ -4,17 +4,21 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2019, Giuseppe Di Terlizzi
  */
-if(!defined('DOKU_INC')) define('DOKU_INC', dirname(__FILE__).'/../../../../');
-define('DOKU_MEDIAMANAGER', 1); // needed to get proper CSS/JS
 
-require_once(DOKU_INC.'inc/init.php');
-require_once(DOKU_INC.'inc/template.php');
+if (!defined('DOKU_INC')) define('DOKU_INC', dirname(__FILE__).'/../../../../');
+
+define('DOKU_MEDIAMANAGER', 1); // needed to get proper CSS/JS
 
 global $lang;
 global $conf;
 global $JSINFO;
+
+require_once(DOKU_INC.'inc/init.php');
+require_once(DOKU_INC.'inc/template.php');
+require_once(DOKU_INC.'inc/lang/en/lang.php');
+require_once(DOKU_INC.'inc/lang/'.$conf['lang'].'/lang.php');
 
 $JSINFO['id']        = '';
 $JSINFO['namespace'] = '';
@@ -25,8 +29,8 @@ session_write_close();  //close session
 
 if ($conf['template'] == 'bootstrap3') {
 
-  include_once(DOKU_INC.'lib/tpl/'.$conf['template'].'/tpl_functions.php');
-  include_once(DOKU_INC.'lib/tpl/'.$conf['template'].'/tpl_global.php');
+  include_once(DOKU_INC.'lib/tpl/bootstrap3/tpl_functions.php');
+  include_once(DOKU_INC.'lib/tpl/bootstrap3/tpl_global.php');
 
   $syntax = array();
 
@@ -37,6 +41,8 @@ if ($conf['template'] == 'bootstrap3') {
     $file = str_replace('.php', '', $file);
     $syntax_class_name = "syntax_plugin_bootswrapper_$file";
     $syntax_class      = new $syntax_class_name;
+
+    if ($file == 'macros') continue;
 
     if ($tag_name = $syntax_class->tag_name) {
       $tag_attributes = $syntax_class->tag_attributes;
@@ -72,6 +78,12 @@ header('X-UA-Compatible: IE=edge,chrome=1');
   <script type="text/javascript">
 
     jQuery(document).ready(function() {
+
+      jQuery('.help-btn').on('click', function(e) {
+        jQuery('#help-modal .modal-body').load(jQuery(this).data('help'), function(){
+          jQuery.getScript('../script.js');
+        });
+      });
 
       var $component = jQuery('#component'),
           $output    = jQuery('#output'),
@@ -176,7 +188,14 @@ header('X-UA-Compatible: IE=edge,chrome=1');
       <?php foreach ($syntax as $tag => $item) :?>
       <div id="tab-<?php echo $tag ?>" class="tab-pane fade">
 
+        <?php if (file_exists(dirname(__FILE__) . '/help/' . $tag . '.txt')): ?>
+        <div class="text-right">
+          <button title="Help <?php echo $tag ?>" type="button" data-help="help.php?syntax=<?php echo $tag ?>" data-toggle="modal" data-target="#help-modal" class="btn btn-xs btn-primary help-btn"><i class="fa fa-question-circle"></i></button>
+        </div>
+        <?php endif; ?>
+
         <h3><?php echo $tag ?></h3>
+        <p>&nbsp;</p>
 
         <form class="form-horizontal">
           <?php foreach ($item as $type => $data): ?>
@@ -204,7 +223,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
                       break;
 
                     case 'integer':
-                      echo '<input type="number" min="'. $data['min'] .'" max="'. $data['max'] .'" value="'. $data['default'] .'" class="form-control" />';
+                      echo '<input type="number" min="'. @$data['min'] .'" max="'. @$data['max'] .'" value="'. $data['default'] .'" class="form-control" />';
                       break;
                   }
                 ?>
@@ -243,6 +262,21 @@ header('X-UA-Compatible: IE=edge,chrome=1');
       </div>
     </nav>
   </footer>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="help-modal">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><i class="fa fa-question-circle"></i> Help</h4>
+        </div>
+        <div class="modal-body px-5"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

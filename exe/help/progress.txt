@@ -1,0 +1,167 @@
+====== Progress Bar ======
+
+Provide up-to-date feedback on the progress of a workflow or action with simple yet flexible progress bars.
+
+===== Examples =====
+
+==== Basic example =====
+
+Default progress bar.
+
+<progress>
+<bar value="60"></bar>
+</progress>
+
+\\
+
+<code html5>
+<progress>
+<bar value="60"></bar>
+</progress>
+</code>
+
+\\
+
+==== With label ====
+
+<progress>
+<bar value="60" showvalue="true"></bar>
+</progress>
+
+\\
+
+<code html5><progress>
+<bar value="60" showvalue="true"></bar>
+</progress></code>
+
+\\
+
+==== Contextual alternatives ====
+
+Progress bars use some of the same button and alert classes for consistent styles.
+
+<progress>
+<bar value="40" type="success"></bar>
+</progress>
+
+<progress>
+<bar value="20" type="info"></bar>
+</progress>
+
+<progress>
+<bar value="60" type="warning"></bar>
+</progress>
+
+<progress>
+<bar value="80" type="danger"></bar>
+</progress>
+
+\\
+
+<code html5>
+<progress>
+<bar value="40" type="success"></bar>
+</progress>
+
+<progress>
+<bar value="20" type="info"></bar>
+</progress>
+
+<progress>
+<bar value="60" type="warning"></bar>
+</progress>
+
+<progress>
+<bar value="80" type="danger"></bar>
+</progress>
+</code>
+
+\\
+
+==== Striped ====
+
+Uses a gradient to create a striped effect. Not available in IE9 and below.
+
+<progress>
+<bar value="40" type="success" striped="true"></bar>
+</progress>
+
+<progress>
+<bar value="20" type="info" striped="true"></bar>
+</progress>
+
+<progress>
+<bar value="60" type="warning" striped="true"></bar>
+</progress>
+
+<progress>
+<bar value="80" type="danger" striped="true"></bar>
+</progress>
+
+\\
+
+<code html5>
+<progress>
+<bar value="40" type="success" striped="true"></bar>
+</progress>
+
+<progress>
+<bar value="20" type="info" striped="true"></bar>
+</progress>
+
+<progress>
+<bar value="60" type="warning" striped="true"></bar>
+</progress>
+
+<progress>
+<bar value="80" type="danger" striped="true"></bar>
+</progress>
+</code>
+
+\\
+
+==== Animated ====
+
+Add ''animate="true"'' to a striped progress bar to animate the stripes right to left. Not available in IE9 and below.
+
+<progress>
+<bar value="45" type="info" striped="true" animate="true"></bar>
+</progress>
+
+\\
+
+<code html5><progress>
+<bar value="45" type="info" striped="true" animate="true"></bar>
+</progress></code>
+
+\\
+
+==== Stacked ====
+
+Place multiple bars into the same ''<nowiki><progress/></nowiki>'' tag to stack them.
+
+<progress>
+<bar value="35" type="success" striped="true"></bar>
+<bar value="20" type="warning" striped="true"></bar>
+<bar value="10" type="danger" striped="true"></bar>
+</progress>
+
+\\
+
+<code html5><progress>
+<bar value="35" type="success" striped="true"></bar>
+<bar value="20" type="warning" striped="true"></bar>
+<bar value="10" type="danger" striped="true"></bar>
+</progress></code>
+
+\\
+
+===== Options =====
+
+<datatable info="false" paging="false" searching="true">
+^ Attribute     ^ Default Value ^ Allowed Values ^ Description ^
+| ''type''      | ''info'' | ''success'' ''info'' ''warning'' ''danger'' | Type of progress bar |
+| ''animate''   | optional | ''true'' | Animate the progress bar |
+| ''striped''   | optional | ''true'' | Add a striped effect to progress bar |
+| ''showvalue'' | optional | ''true'' | Display current value of progress bar |
+</datatable>

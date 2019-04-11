@@ -1,0 +1,130 @@
+====== Modal ======
+
+Modals are streamlined, but flexible, dialog prompts with the minimum required functionality and smart defaults.
+
+
+===== Examples =====
+
+==== Live Demo ====
+
+<btn type="primary" size="lg" modal="modal-demo">Launch demo modal</btn>
+
+<modal id="modal-demo" title="Modal title">
+=== Text in a modal ===
+
+Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+
+=== Popover in a modal ===
+
+This <popover title="A Title" content="And here's some amazing content. It's very engaging. right?"><btn type="default">button</btn></popover> should trigger a popover on click.
+
+=== Tooltips in a modal ===
+
+This <tooltip title="Tooltip">[[modal|link]]</tooltip> and that <tooltip title="Tooltip">[[modal|link]]</tooltip> should have tooltips on hover.
+
+=== Overflowing text to show scroll behavior ===
+
+Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+
+Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+
+Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+
+Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+
+Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+
+Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+
+Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+</modal>
+
+\\
+
+<code html5>
+<btn type="primary" size="lg" modal="modal-demo">Launch demo modal</btn>
+
+<modal id="modal-demo" title="Modal title">
+=== Text in a modal ===
+
+Duis mollis, est non commodo luctus, nisi erat porttitor ligula. [...]
+</modal>
+</code>
+
+\\
+
+==== Optional sizes ====
+
+Modals have two optional sizes, available via ''size'' attribute.
+
+<btn type="primary" modal="modal-large">Large modal</btn> <btn type="primary" modal="modal-small">Small modal</btn>
+
+<modal id="modal-large" size="lg" title="Large modal">...</modal>
+<modal id="modal-small" size="sm" title="Small modal">...</modal>
+
+\\
+
+<code html5>
+<btn type="primary" modal="modal-large">Large modal</btn> <btn type="primary" modal="modal-small">Small modal</btn>
+
+<modal id="modal-large" size="lg" title="Large modal">...</modal>
+<modal id="modal-small" size="sm" title="Small modal">...</modal>
+</code>
+
+\\
+
+===== Remove animation =====
+
+For modals that simply appear rather than fade in to view, set to ''false'' the ''fade'' attribute.
+
+<btn type="primary" modal="modal-no-fade">No fade animation</btn>
+
+<modal id="modal-no-fade" fade="false" title="No fade animation">...</modal>
+
+
+\\
+
+<code html5>
+<btn type="primary" modal="modal-no-fade">No fade animation</btn>
+
+<modal id="modal-no-fade" fade="false" title="No fade animation">...</modal>
+</code>
+
+\\
+
+===== Remote =====
+
+Use ''remote'' attribute to display DokuWiki pages inside a modal window.
+
+<btn type="primary" modal="modal-remote">Welcome to DokuWiki!</btn>
+
+<modal id="modal-remote" remote=":wiki:welcome"></modal>
+
+\\
+
+<code html5>
+<btn type="primary" modal="modal-remote">Welcome to DokuWiki!</btn>
+
+<modal id="modal-remote" remote=":wiki:welcome"></modal>
+</code>
+
+\\
+
+===== Options =====
+
+<datatable info="false" paging="false" searching="true">
+^ Name ^ Default ^ Values ^ Description ^
+| ''backdrop'' | ''true'' | ''true'' ''false'' ''static'' | Includes a modal-backdrop element. Alternatively, specify ''static'' for a backdrop which doesn't close the modal on click. |
+| ''keyboard'' | ''true'' | ''true'' ''false'' | Closes the modal when escape key is pressed |
+| ''show'' | ''false'' | ''true'' ''false'' | Shows the modal when initialized |
+| ''fade'' | ''false'' | ''true'' ''false'' | Enable the fade animation |
+| ''dismiss'' | ''true'' | ''true'' ''false'' | Display a dismiss button |
+| ''size'' | NULL | ''sm'' ''lg'' | Modal size with |
+| ''id''   | NULL | | Modal ID (see [[button]]) |
+| ''title'' | NULL | | Modal title |
+| ''remote'' | NULL | | Display DokuWiki pages inside a Modal window |
+</datatable>

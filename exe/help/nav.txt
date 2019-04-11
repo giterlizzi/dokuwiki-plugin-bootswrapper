@@ -1,0 +1,247 @@
+====== Navs (Tabs & Pills) ======
+
+===== Tabs with DropDown menu =====
+
+<code html><nav type="tabs">
+  * [[:start]]
+  * [[:wiki:plugin:bootswrapper:nav|Nav Plugin]]
+  * [[playground:playground]]
+  * DokuWiki
+    * [[:wiki:welcome]]
+    * [[:wiki:syntax]]
+</nav></code>
+
+\\
+
+<nav type="tabs">
+  * [[:start]]
+  * [[:wiki:plugin:bootswrapper:nav|Nav Plugin]]
+  * [[playground:playground]]
+  * DokuWiki
+    * [[:wiki:welcome]]
+    * [[:wiki:syntax]]
+</nav>
+
+\\
+
+<callout type="tip" icon="true">
+Instead of ''<nowiki><nav type="tabs"></nowiki>'' you can use ''<nowiki><tabs></nowiki>'' alias.
+</callout>
+
+\\
+
+===== Pills with DropDown menu =====
+
+<code html><nav type="pills">
+  * [[:start]]
+  * [[:wiki:plugin:bootswrapper:nav|Nav Plugin]]
+  * [[playground:playground]]
+  * DokuWiki
+    * [[:wiki:welcome]]
+    * [[:wiki:syntax]]
+</nav></code>
+
+\\
+
+<nav type="pills">
+  * [[:start]]
+  * [[:wiki:plugin:bootswrapper:nav|Nav Plugin]]
+  * [[playground:playground]]
+  * DokuWiki
+    * [[:wiki:welcome]]
+    * [[:wiki:syntax]]
+</nav>
+
+\\
+
+<callout type="tip" icon="true">
+Instead of ''<nowiki><nav type="pills"></nowiki>'' you can use ''<nowiki><pills></nowiki>'' alias.
+</callout>
+
+\\
+
+===== Pills stacked =====
+
+<code html><nav type="pills" stacked="true">
+  * [[:start]]
+  * [[:wiki:plugin:bootswrapper:nav|Nav Plugin]]
+  * [[playground:playground]]
+  * DokuWiki
+    * [[:wiki:welcome]]
+    * [[:wiki:syntax]]
+</nav></code>
+
+\\
+
+<nav type="pills" stacked="true">
+  * [[:start]]
+  * [[:wiki:plugin:bootswrapper:nav|Nav Plugin]]
+  * [[playground:playground]]
+  * DokuWiki
+    * [[:wiki:welcome]]
+    * [[:wiki:syntax]]
+</nav>
+
+\\
+
+===== Pills justified =====
+
+<code html><nav type="pills" justified="true">
+  * [[:start]]
+  * [[:wiki:plugin:bootswrapper:nav|Nav Plugin]]
+  * [[playground:playground]]
+  * DokuWiki
+    * [[:wiki:welcome]]
+    * [[:wiki:syntax]]
+</nav></code>
+
+\\
+
+<nav type="pills" justified="true">
+  * [[:start]]
+  * [[:wiki:plugin:bootswrapper:nav|Nav Plugin]]
+  * [[playground:playground]]
+  * DokuWiki
+    * [[:wiki:welcome]]
+    * [[:wiki:syntax]]
+</nav>
+
+\\
+
+===== Tabs justified =====
+
+<code html5><nav type="tabs" justified="true">
+  * [[:start]]
+  * [[:wiki:plugin:bootswrapper:nav|Nav Plugin]]
+  * [[playground:playground]]
+  * DokuWiki
+    * [[:wiki:welcome]]
+    * [[:wiki:syntax]]
+</nav></code>
+
+\\
+
+<nav type="tabs" justified="true">
+  * [[:start]]
+  * [[:wiki:plugin:bootswrapper:nav|Nav Plugin]]
+  * [[playground:playground]]
+  * DokuWiki
+    * [[:wiki:welcome]]
+    * [[:wiki:syntax]]
+</nav>
+
+\\
+
+===== With Icons Plugin =====
+
+<tabs>
+  * {{fa>home}} DokuWiki
+    * [[wiki:welcome]]
+    * [[wiki:syntax]]
+</tabs>
+
+\\
+
+<code .html5>
+<tabs>
+  * {{fa>home}} DokuWiki
+    * [[wiki:welcome]]
+    * [[wiki:syntax]]
+</tabs>
+</code>
+
+\\
+
+<tabs>
+  * File
+    * {{fa>file-o?fw}} [[#new|New]]
+    * {{fa>folder-open?fw}} [[#open|Open]]
+    * {{fa>print?fw}} [[#print|Print]]
+    * {{fa>close?fw}} [[#close|Close]]
+  * ?
+    * {{fa>info?fw}} [[#about|About...]]
+</tabs>
+
+\\
+
+<code html5>
+<tabs>
+  * File
+    * {{fa>file-o?fw}} [[#new|New]]
+    * {{fa>folder-open?fw}} [[#open|Open]]
+    * {{fa>print?fw}} [[#print|Print]]
+    * {{fa>close?fw}} [[#close|Close]]
+  * ?
+    * {{fa>info?fw}} [[#about|About...]]
+</tabs>
+</code>
+
+\\
+
+===== Tab Pane =====
+
+<code html><tabs>
+  * [[#tab-foo|Foo]]
+  * [[#tab-bar|Bar]]
+
+<pane id="tab-foo">
+=== Foo ===
+Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</pane>
+
+<pane id="tab-bar">
+=== Bar ===
+Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</pane>
+
+</tabs></code>
+
+\\
+
+<tabs>
+  * [[#tab-foo|Foo]]
+  * [[#tab-bar|Bar]]
+
+<pane id="tab-foo">
+=== Foo ===
+Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</pane>
+
+<pane id="tab-bar">
+=== Bar ===
+Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</pane>
+
+</tabs>
+
+\\
+
+==== Tab Pane and Include Plugin ====
+
+Use Include Plugin with ''inline'' flag to prevent unexpected behavior.
+
+<code html><pane id="tab-bar">
+{{page>:wiki:syntax#Tables&inline}}
+</pane></code>
+
+<callout type="tip" icon="true">
+=== Include plugin Documentation ===
+
+[...] Don't close/open sections when including a page. This flag should be used when the include syntax is used inside other syntax elements like lists or tables or inside other plugin syntax. [...] \\ (see [[doku>plugin:include]])
+</callout>
+
+<callout type="tip" icon="true">
+=== Note for TOC ===
+
+I suggest to add ''<nowiki>~~NOTOC~~</nowiki>'' because the TOC is displayed between the tab bar and the content.
+</callout>
+
+\\
+
+===== Attributes =====
+
+^ Attribute     ^ Default Value ^ Allowed Values ^ Description ^
+| ''type''      | ''pills'' | ''tabs'', ''pills'' | Type of nav |
+| ''stacked''   | optional  | ''true'' | Stacked nav items |
+| ''justified'' | optional  | ''true'' | Justify nav items |
+| ''fade''      | optional  | ''true'' | Enable fade effect on tabs |

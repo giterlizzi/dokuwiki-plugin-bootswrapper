@@ -4,7 +4,7 @@
  * 
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Jos Roossien <mail@jroossien.com>
- * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2019, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki

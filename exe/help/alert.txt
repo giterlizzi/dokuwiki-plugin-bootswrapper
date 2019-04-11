@@ -1,0 +1,51 @@
+====== Alerts ======
+
+Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.
+
+===== Examples =====
+
+<alert type="success">
+**Well done!** You successfully read this important alert message.
+</alert>
+
+<alert type="info">
+**Heads up!** This alert needs your attention, but it's not super important.
+</alert>
+
+<alert type="warning">
+**Warning!** Better check yourself, you're not looking too good.
+</alert>
+
+<alert type="danger">
+**Oh snap!** Change a few things up and try submitting again.
+</alert>
+
+<code html5>
+<alert type="success">...</alert>
+<alert type="info">...</alert>
+<alert type="warning">...</alert>
+<alert type="danger">...</alert>
+</code>
+
+==== Dismissible alerts ====
+
+Build on any alert by adding an optional ''dismiss'' option.
+
+<alert type="warning" dismiss="true">**Warning!** Better check yourself, you're not looking too good.</alert>
+
+<code html5><alert type="warning" dismiss="true">**Warning!** Better check yourself, you're not looking too good.</alert></code>
+
+==== Alert with icon ====
+
+<alert type="warning" dismiss="true" icon="fa fa-warning">**Warning!** Better check yourself, you're not looking too good.</alert>
+
+<code html5><alert type="warning" dismiss="true" icon="fa fa-warning">**Warning!** Better check yourself, you're not looking too good.</alert></code>
+
+===== Options =====
+
+<datatable info="false" paging="false" searching="true">
+^ Name ^ Default ^ Values ^ Description ^
+| ''type''     | ''info'' | ''success'' ''info'' ''warning'' ''danger'' | Type of alert |
+| ''dismiss''  | optional | ''true'' | Create a dismissible alert |
+| ''icon''     | optional | | Font icon class (eg. Glyphicon or Font-Awesome) |
+</datatable>

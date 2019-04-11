@@ -1,0 +1,45 @@
+====== Jumbotron ======
+
+A lightweight, flexible component that can optionally extend the entire viewport to showcase key content on your site.
+
+<jumbotron>
+<html><h1></html> Hello, world! <html></h1></html>
+
+This is a simple hero unit, a simple jumbotron-style 
+component for calling extra attention to featured
+content or information.
+
+<btn type="primary">[[#|Learn more]]</btn>
+</jumbotron>
+
+\\
+
+<code html5><jumbotron>
+====== Hello, world! ======
+
+This is a simple hero unit, a simple jumbotron-style 
+component for calling extra attention to featured
+content or information.
+
+<btn type="primary">[[#|Learn more]]</btn>
+</jumbotron></code>
+
+===== Background and text colors =====
+
+<code html><jumbotron background=":wiki:plugin:bootswrapper:35723-fielx.jpg" color="#fff">
+====== Lorem ipsum! ======
+
+Lorem ipsum dolor sit amet, [...]
+</jumbotron></code>
+
+<jumbotron background=":wiki:plugin:bootswrapper:35723-fielx.jpg" color="#fff">
+====== Lorem ipsum! ======
+
+Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+<btn type="primary">Link</btn>
+</jumbotron>
+
+^ Attribute ^ Description ^
+| ''background'' | Background URL or DokuWiki Media link (eg '':wiki:logo.png'') |
+| ''color''      | Color name or HEX (eg. ''#ffffff'') of text |

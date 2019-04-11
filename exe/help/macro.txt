@@ -1,0 +1,7 @@
+====== Macros ======
+
+This plugin provide a special macro to control the flow of the page.
+
+^ Macro ^ Description ^
+| ''<nowiki>~~CLEARFIX~~</nowiki>'' | Clear the float |
+| ''<nowiki>~~PAGEBREAK~~</nowiki>'' | Add a page break |

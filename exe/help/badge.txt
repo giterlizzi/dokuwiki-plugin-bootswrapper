@@ -1,0 +1,15 @@
+====== Badges ======
+
+===== Examples =====
+
+<code html>
+Inbox <badge>42</badge>
+
+<btn type="primary">Messages <badge>4</badge></btn>
+</code>
+
+\\
+
+Inbox <badge>42</badge>
+
+<btn type="primary">Messages <badge>4</badge></btn>

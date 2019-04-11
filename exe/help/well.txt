@@ -1,0 +1,28 @@
+====== Wells ======
+
+Use the well as a simple effect on an element to give it an inset effect.
+
+===== Examples =====
+
+==== Default ====
+
+<well>Look, I'm in a well!</well>
+\\
+<code html5><well>Look, I'm in a well!</well></code>
+\\
+==== Small size ====
+
+<well size="sm">Look, I'm in a small well!</well>
+\\
+<code html5><well size="sm">Look, I'm in a small well!</well></code>
+\\
+==== Large size ====
+
+<well size="lg">Look, I'm in a large well!</well>
+\\
+<code html5><well size="lg">Look, I'm in a large well!</well></code>
+\\
+===== Options =====
+
+^ Attribute ^ Default Value ^ Allowed Values | Description
+| ''size'' | optional | ''sm'' ''lg'' | Size of well |

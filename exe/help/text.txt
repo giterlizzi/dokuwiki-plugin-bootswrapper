@@ -1,0 +1,125 @@
+====== Text ======
+
+<callout type="tip" icon="true">
+This syntax have two version (lowercase and uppercase).
+
+  * The //lowercase// version ''<nowiki><text></nowiki>'' create a __inline__ element (eg. ''<nowiki><span></nowiki>'').
+  * The //uppercase// version ''<nowiki><TEXT></nowiki>'' create a __block__ element (eg. ''<nowiki><div></nowiki>'').
+
+See the samples.
+</callout>
+
+
+===== Examples =====
+
+==== Alignment ====
+
+Easily realign text to components with text alignment attribute.
+
+<TEXT align="left">Left aligned text.</TEXT>
+
+<TEXT align="center">Center aligned text.</TEXT>
+
+<TEXT align="right">Right aligned text.</TEXT>
+
+<TEXT align="justify">Justified text.</TEXT>
+
+<TEXT align="nowrap">No wrap text.</TEXT>
+
+\\
+
+<code html5>
+<TEXT align="left">Left aligned text.</TEXT>
+<TEXT align="center">Center aligned text.</TEXT>
+<TEXT align="right">Right aligned text.</TEXT>
+<TEXT align="justify">Justified text.</TEXT>
+<TEXT align="nowrap">No wrap text.</TEXT>
+</code>
+
+\\
+
+==== Transformation ====
+
+Transform text in components with text capitalization attribute.
+
+<TEXT transform="lowercase">Lowercased text.</TEXT>
+
+<TEXT transform="uppercase">Uppercased text.</TEXT>
+
+<TEXT transform="capitalize">Capitalized text.</TEXT>
+
+\\
+
+<code html5>
+<text transform="lowercase">Lowercased text.</text>
+<text transform="uppercase">Uppercased text.</text>
+<text transform="capitalize">Capitalized text.</text>
+</code>
+
+\\
+
+==== Contextual colors ====
+
+Convey meaning through color with a handful of emphasis utility attributes. These may also be applied to links and will darken on hover just like our default link styles.
+
+<TEXT type="muted">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</TEXT>
+
+<TEXT type="primary">Nullam id dolor id nibh ultricies vehicula ut id elit.</TEXT>
+
+<TEXT type="success">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</TEXT>
+
+<TEXT type="info">Maecenas sed diam eget risus varius blandit sit amet non magna.</TEXT>
+
+<TEXT type="warning">Etiam porta sem malesuada magna mollis euismod.</TEXT>
+
+<TEXT type="danger">Donec ullamcorper nulla non metus auctor fringilla.</TEXT>
+
+\\
+
+<code html5>
+<text type="muted"> [...] </text>
+<text type="primary"> [...] </text>
+<text type="success"> [...] </text>
+<text type="info"> [...] </text>
+<text type="warning"> [...] </text>
+<text type="danger"> [...] </text>
+</code>
+
+\\
+
+==== Contextual backgrounds ====
+
+Similar to the contextual text color attributes, easily set the background of an element to any contextual attribute. Anchor components will darken on hover, just like the text attributes.
+
+<TEXT background="primary">Nullam id dolor id nibh ultricies vehicula ut id elit.</TEXT>
+
+<TEXT background="success">Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</TEXT>
+
+<TEXT background="info">Maecenas sed diam eget risus varius blandit sit amet non magna.</TEXT>
+
+<TEXT background="warning">Etiam porta sem malesuada magna mollis euismod.</TEXT>
+
+<TEXT background="danger">Donec ullamcorper nulla non metus auctor fringilla.</TEXT>
+
+\\
+
+<code html5>
+<text background="primary"> [...] </text>
+<text background="success"> [...] </text>
+<text background="info"> [...] </text>
+<text background="warning"> [...] </text>
+<text background="danger"> [...] </text>
+</code>
+
+\\
+
+===== Options =====
+
+<datatable info="false" paging="false" searching="true">
+^ Attribute      ^ Allowed Values ^ Description ^
+| ''type''       | ''muted'' ''primary'' ''success'' ''info'' ''warning'' ''danger'' | Contextual color of text |
+| ''background'' | ''primary'' ''success'' ''info'' ''warning'' ''danger'' | Contextual background of text |
+| ''align''      | ''left'' ''right'' ''center'', ''justify'' ''nowrap'' | Text align |
+| ''transform''  | ''lowercase'' ''uppercase'' ''capitalize'' | Text transformation |
+| ''size''       | ''medium'' ''xx-small'' ''x-small'' ''small'' ''large'' ''x-large'' ''xx-large'' ''smaller'' ''larger'' //''length''// //(%, em, px, etc.)// | Text sizes |
+</datatables>

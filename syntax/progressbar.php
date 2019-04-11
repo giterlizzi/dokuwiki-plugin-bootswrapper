@@ -5,7 +5,7 @@
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     HavocKKS
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015-2018, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2019, Giuseppe Di Terlizzi
  */
  
 // must be run within Dokuwiki

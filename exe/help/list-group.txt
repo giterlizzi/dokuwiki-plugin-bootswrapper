@@ -1,0 +1,81 @@
+====== List Group ======
+
+===== Basic example =====
+
+<code html><list-group>
+  * Cras justo odio
+  * Dapibus ac facilisis in
+  * Morbi leo risus
+  * Porta ac consectetur ac
+  * Vestibulum at eros
+</list-group></code>
+
+\\
+
+<list-group>
+  * Cras justo odio
+  * Dapibus ac facilisis in
+  * Morbi leo risus
+  * Porta ac consectetur ac
+  * Vestibulum at eros
+</list-group>
+
+===== Badges =====
+
+<code html><list-group>
+  * Cras justo odio <badge>14</badge>
+  * Dapibus ac facilisis in <badge>2</badge>
+  * Morbi leo risus <badge>1</badge>
+</list-group></code>
+
+\\
+
+<list-group>
+  * Cras justo odio <badge>14</badge>
+  * Dapibus ac facilisis in <badge>2</badge>
+  * Morbi leo risus <badge>1</badge>
+</list-group>
+
+===== Linked items =====
+
+<code html><list-group>
+  * [[.:]]
+  * [[:wiki:welcome]]
+  * [[:wiki:syntax]]
+</list-group></code>
+
+\\
+
+<list-group>
+  * [[.:]]
+  * [[:wiki:welcome]]
+  * [[:wiki:syntax]]
+</list-group>
+
+===== Custom content =====
+
+<code html><list-group>
+  * [[.:]] \\ Bootstrap samples
+  * [[:wiki:welcome]] \\ DokuWiki Welcome
+  * [[:wiki:syntax]] \\ DokuWiki Syntax
+</list-group></code>
+
+\\
+
+<list-group>
+  * [[.:]] \\ Bootstrap samples
+  * [[:wiki:welcome]] \\ DokuWiki Welcome
+  * [[:wiki:syntax]] \\ DokuWiki Syntax
+</list-group>
+
+===== Icons Plugin =====
+
+<code html><list-group>
+  * {{fa>home}} [[:start|Home-Page]]
+</list-group></code>
+
+\\
+
+<list-group>
+  * {{fa>home}} [[:start|Home-Page]]
+</list-group>

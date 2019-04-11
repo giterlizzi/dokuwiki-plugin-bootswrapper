@@ -1,0 +1,18 @@
+====== Image ======
+
+===== Shapes =====
+
+| <image shape="rounded">{{:wiki:dokuwiki-128.png?nolink&100|}}</image>   | <code html><image shape="rounded">
+{{:wiki:dokuwiki-128.png?nolink&100|}}
+</image></code> |
+| <image shape="circle">{{:wiki:dokuwiki-128.png?nolink&100|}}</image>    | <code html><image shape="circle">
+{{:wiki:dokuwiki-128.png?nolink&100|}}
+</image></code> |
+| <image shape="thumbnail">{{:wiki:dokuwiki-128.png?nolink&100|}}</image> | <code html><image shape="thumbnail">
+{{:wiki:dokuwiki-128.png?nolink&100|}}
+</image></code> |
+
+==== Attributes ====
+
+^ Attribute ^ Allowed Values ^ Description ^
+| ''shape''  | ''rounded'', ''circle'', ''thumbnail'' | Image shape |
