@@ -7,10 +7,6 @@
  * @copyright  (C) 2015-2020, Giuseppe Di Terlizzi
  */
 
-// must be run within Dokuwiki
-if (!defined('DOKU_INC')) {
-    die();
-}
 
 /**
  * Bootstrap Wrapper Action Plugin
