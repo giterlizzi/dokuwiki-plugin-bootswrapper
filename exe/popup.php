@@ -37,17 +37,20 @@ if (!file_exists(DOKU_INC)) {
 
 define('DOKU_MEDIAMANAGER', 1); // needed to get proper CSS/JS
 
-global $lang;
-global $conf;
-global $JSINFO;
-
 require_once DOKU_INC . 'inc/init.php';
 require_once DOKU_INC . 'inc/template.php';
 require_once DOKU_INC . 'inc/lang/en/lang.php';
 require_once DOKU_INC . 'inc/lang/' . $conf['lang'] . '/lang.php';
 
+global $lang;
+global $conf;
+global $JSINFO;
+global $INPUT;
+
 $JSINFO['id']        = '';
 $JSINFO['namespace'] = '';
+
+$NS = cleanID($INPUT->str('ns'));
 
 $tmp = array();
 trigger_event('MEDIAMANAGER_STARTED', $tmp);
@@ -92,6 +95,11 @@ header('X-UA-Compatible: IE=edge,chrome=1');
   <title>Bootstrap Wrapper Plugin</title>
   <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <?php
+        if (tpl_getConf('themeByNamespace')) {
+            echo '<link href="' . tpl_basedir() . 'css.php?id='. cleanID("$NS:start") .'" rel="stylesheet" />';
+        }
+  ?>
   <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
   <?php tpl_metaheaders()?>
   <!--[if lt IE 9]>
