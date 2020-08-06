@@ -1,0 +1,120 @@
+====== Buttons ======
+
+===== Examples =====
+
+| <btn type="default">Default</btn> | Standard button |
+| <btn type="primary">Primary</btn> | Provides extra visual weight and identifies the primary action in a set of buttons |
+| <btn type="success">Success</btn> | Indicates a successful or positive action |
+| <btn type="info">Info</btn>       | Contextual button for informational alert messages |
+| <btn type="warning">Warning</btn> | Indicates caution should be taken with this action |
+| <btn type="danger">Danger</btn>   | Indicates a dangerous or potentially negative action |
+| <btn type="link">Link</btn>       | Deemphasize a button by making it look like a link while maintaining button behavior |
+
+\\
+
+<code html5>
+<btn type="default">Default</btn>
+<btn type="primary">Primary</btn>
+<btn type="success">Success</btn>
+<btn type="info">Info</btn>
+<btn type="warning">Warning</btn>
+<btn type="danger">Danger</btn>
+<btn type="link">Link</btn>
+</code>
+
+\\
+
+==== Link button ====
+
+<code html><btn type="success" size="lg" icon="glyphicon glyphicon-edit">[[:wiki:welcome]]</btn></code>
+
+<btn type="success" icon="glyphicon glyphicon-edit">[[:wiki:welcome]]</btn>
+
+\\
+
+==== Sizes ====
+
+Fancy larger or smaller buttons? Add ''size="lg"'', ''size="sm"'', or ''size="xs"'' for additional sizes.
+
+<btn type="primary" size="lg">Large button</btn>
+<btn type="default" size="lg">Large button</btn>
+
+<btn type="primary">Default button</btn>
+<btn type="default">Default button</btn>
+
+<btn type="primary" size="sm">Small button</btn>
+<btn type="default" size="sm">Small button</btn>
+
+<btn type="primary" size="xs">Extra small button</btn>
+<btn type="default" size="xs">Extra small button</btn>
+
+\\
+
+<code html5>
+<btn type="primary" size="lg">Large button</btn>
+<btn type="default" size="lg">Large button</btn>
+
+<btn type="primary">Default button</btn>
+<btn type="default">Default button</btn>
+
+<btn type="primary" size="sm">Small button</btn>
+<btn type="default" size="sm">Small button</btn>
+
+<btn type="primary" size="xs">Extra small button</btn>
+<btn type="default" size="xs">Extra small button</btn>
+</code>
+
+\\
+
+==== Block ====
+
+Create block level buttons—those that span the full width of a parent -- by adding ''block="true"'' option.
+
+<btn type="primary" size="lg" block="true">Block level button</btn>
+\\
+<btn type="default" size="lg" block="true">Block level button</btn>
+
+\\
+
+<code html5>
+<btn type="primary" size="lg" block="true">Block level button</btn>
+<btn type="default" size="lg" block="true">Block level button</btn>
+</code>
+
+\\
+
+
+==== Active state ====
+
+Buttons will appear pressed (with a darker background, darker border, and inset shadow) when active. Bootstrap Wrapper Plugin detect automatically the active state of current page.
+
+<btn type="primary">[[button]]</btn> <btn type="default">[[panel]]</btn>
+
+<code html5>
+<btn type="primary">[[button]]</btn> <btn type="default">[[panel]]</btn>
+</code>
+
+\\
+
+==== Disabled state ====
+
+Make buttons look unclickable by fading them back with ''opacity''.
+
+<btn type="primary" disabled="true">[[button]]</btn> <btn type="default" disabled="true">[[panel]]</btn>
+
+<code html5>
+<btn type="primary" disabled="true">[[button]]</btn> <btn type="default" disabled="true">[[panel]]</btn>
+</code>
+
+===== Options =====
+
+<datatable info="false" paging="false" searching="true">
+^ Attribute ^ Default Value ^ Allowed Values ^ Description ^
+| ''type'' | ''default'' | ''default'' ''primary'' ''success'' ''info'' ''warning'' ''danger'' ''link'' | Type of button |
+| ''icon'' | optional | | Font icon class (eg. Glyphicon or Font-Awesome) |
+| ''size'' | optional | ''lg'' ''sm'' | Button size |
+| ''block'' | optional | ''true'' ''false'' | Block level buttons |
+| ''collapse'' | optional | | Target element selector to collapse (see [[collapse]]) |
+| ''disabled'' | optional | ''true'' ''false'' | Disable the button |
+| ''modal'' | optional | | Modal ID (see [[modal]]) |
+</datatable>

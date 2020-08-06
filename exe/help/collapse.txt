@@ -1,0 +1,29 @@
+====== Collapse ======
+
+===== Examples =====
+
+<button collapse="foo">Click Me</button>
+
+<collapse id="foo" collapsed="true"><well>
+Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</well></collapse>
+
+\\
+
+<code html>
+<button collapse="foo">Click Me</button>
+
+<collapse id="foo" collapsed="true"><well>
+Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</well></collapse>
+</code>
+
+==== Accordion ====
+
+See [[accordion]] example page.
+
+===== Options =====
+
+<datatable info="false" paging="false" searching="true">
+^ Attribute ^ Default Value ^ Allowed values ^ Description ^
+| ''id''        | | | Target id of collapsed element |
+| ''collapsed'' | ''false'' | ''true'' ''false'' | Enable/Disable collapsed status |
+</datatable>

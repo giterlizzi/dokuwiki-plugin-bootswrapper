@@ -1,0 +1,31 @@
+~~NOTOC~~
+====== Affix ======
+
+The affix plugin toggles ''position: fixed;'' on and off, emulating the effect found with ''position: sticky;''.
+
+==== Sample ====
+
+<code html5>
+<affix offset-top="50" position-top="100" position-right="20">
+<panel title="Affix">
+Scroll the page!
+</panel>
+</affix>
+</code>
+
+<affix offset-top="50" position-top="100" position-right="20">
+<panel title="Affix">
+Scroll the page!
+</panel>
+</affix>
+
+==== Options ====
+
+^ Attribute            ^ Default Value ^ Description
+| ''offset-top''       | optional | Offset from top of target (in ''px|em|%'') |
+| ''offset-bottom''    | optional | Offset from bottom of target (in ''px|em|%'') |
+| ''position-top''     | optional | Top position of Affix element (in ''px|em|%'') |
+| ''position-bottom''  | optional | Bottom position of Affix element (in ''px|em|%'') |
+| ''position-left''    | optional | Left position of Affix element (in ''px|em|%'') |
+| ''position-right''   | optional | Right position of Affix element (in ''px|em|%'') |
+| ''target''           | Window Document | Target element (eg. ''#dokuwiki__site'') |

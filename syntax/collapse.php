@@ -1,66 +1,64 @@
 <?php
 /**
  * Bootstrap Wrapper Plugin: Collapse
- * 
+ *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015-2016, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2020, Giuseppe Di Terlizzi
  */
- 
-// must be run within Dokuwiki
-if(!defined('DOKU_INC')) die();
 
-require_once(dirname(__FILE__).'/bootstrap.php');
+class syntax_plugin_bootswrapper_collapse extends syntax_plugin_bootswrapper_bootstrap
+{
 
-class syntax_plugin_bootswrapper_collapse extends syntax_plugin_bootswrapper_bootstrap {
-
+    public $p_type         = 'block';
     public $pattern_start  = '<collapse.*?>(?=.*?</collapse>)';
     public $pattern_end    = '</collapse>';
     public $tag_name       = 'collapse';
     public $tag_attributes = array(
 
-      'id'        => array('type'     => 'string',
-                           'values'   => null,
-                           'required' => true,
-                           'default'  => null),
+        'id'        => array(
+            'type'     => 'string',
+            'values'   => null,
+            'required' => true,
+            'default'  => null),
 
-      'collapsed' => array('type'     => 'boolean',
-                           'values'   => array(0, 1),
-                           'required' => false,
-                           'default'  => false),
+        'collapsed' => array(
+            'type'     => 'boolean',
+            'values'   => array(0, 1),
+            'required' => false,
+            'default'  => false),
 
     );
 
-    function getPType() { return 'block'; }
+    public function render($mode, Doku_Renderer $renderer, $data)
+    {
 
+        if (empty($data)) {
+            return false;
+        }
 
-    function render($mode, Doku_Renderer $renderer, $data) {
-
-        if (empty($data)) return false;
-        if ($mode !== 'xhtml') return false;
+        if ($mode !== 'xhtml') {
+            return false;
+        }
 
         /** @var Doku_Renderer_xhtml $renderer */
-        list($state, $match, $attributes) = $data;
+        list($state, $match, $pos, $attributes) = $data;
 
-        switch($state) {
-
-          case DOKU_LEXER_ENTER:
-
+        if ($state == DOKU_LEXER_ENTER) {
             $id        = $attributes['id'];
             $collapsed = $attributes['collapsed'];
-            $markup    = sprintf('<div class="bs-wrap bs-wrap-collapse collapse %s" id="%s">', ($collapsed ? '' : 'in'), $id);
+            $markup    = '<div class="bs-wrap bs-wrap-collapse collapse ' . ($collapsed ? '' : 'in') . '" id="' . $id . '">';
 
             $renderer->doc .= $markup;
             return true;
 
-          case DOKU_LEXER_EXIT:
+        }
+
+        if ($state == DOKU_LEXER_EXIT) {
             $renderer->doc .= '</div>';
             return true;
-
         }
 
         return true;
-
     }
-
 }

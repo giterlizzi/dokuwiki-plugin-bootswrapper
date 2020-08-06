@@ -61,7 +61,7 @@ jQuery(document).ready(function() {
 
     var $nav = $nav_wrap.find('.nav');
 
-    $nav.find('div.li *').unwrap();
+    $nav.find('div.li > *').unwrap();
     $nav.find('li').attr('role', 'presentation');
     $nav.find('.curid').parent('li').addClass('active');
 
@@ -178,7 +178,7 @@ jQuery(document).ready(function() {
 
       var $list_wrap = jQuery(this);
 
-      var $icon_links = $list_wrap.find('li i + a');
+      var $icon_links = $list_wrap.find('li .dw-icons + a');
 
       if ($icon_links.length) {
         jQuery.each($icon_links, function() {
@@ -269,6 +269,8 @@ jQuery(document).ready(function() {
             .removeClass('medialeft')
             .removeClass('mediaright')
             .removeClass('mediacenter');
+
+    $images.addClass('center-block');
 
     if (! $slides.length) {
       $images.wrap('<div class="item"/>');

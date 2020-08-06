@@ -1,56 +1,88 @@
 <?php
 /**
  * Bootstrap Wrapper: Popup helper
- * 
+ *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2020, Giuseppe Di Terlizzi
  */
-if(!defined('DOKU_INC')) define('DOKU_INC', dirname(__FILE__).'/../../../../');
+
+$doku_inc_dirs = array(
+    '/opt/bitnami/dokuwiki',                       # Bitnami (Docker)
+    '/usr/share/webapps/dokuwiki',                 # Arch Linux
+    '/usr/share/dokuwiki',                         # Debian/Ubuntu
+    '/app/dokuwiki',                               # LinuxServer.io (Docker),
+    realpath(dirname(__FILE__) . '/../../../../'), # Default DokuWiki path
+);
+
+# Load doku_inc.php file
+#
+if (file_exists(dirname(__FILE__) . '/../doku_inc.php')) {
+    require_once dirname(__FILE__) . '/../doku_inc.php';
+}
+
+if (!defined('DOKU_INC')) {
+    foreach ($doku_inc_dirs as $dir) {
+        if (!defined('DOKU_INC') && @file_exists("$dir/inc/init.php")) {
+            define('DOKU_INC', "$dir/");
+        }
+    }
+}
+
+if (!file_exists(DOKU_INC)) {
+    print 'Problem with DOKU_INC directory. Please check your DokuWiki installation directory!';
+    die;
+}
+
+
 define('DOKU_MEDIAMANAGER', 1); // needed to get proper CSS/JS
 
-require_once(DOKU_INC.'inc/init.php');
-require_once(DOKU_INC.'inc/template.php');
+require_once DOKU_INC . 'inc/init.php';
+require_once DOKU_INC . 'inc/template.php';
+require_once DOKU_INC . 'inc/lang/en/lang.php';
+require_once DOKU_INC . 'inc/lang/' . $conf['lang'] . '/lang.php';
 
 global $lang;
 global $conf;
 global $JSINFO;
+global $INPUT;
 
 $JSINFO['id']        = '';
 $JSINFO['namespace'] = '';
 
+$NS = cleanID($INPUT->str('ns'));
+
 $tmp = array();
 trigger_event('MEDIAMANAGER_STARTED', $tmp);
-session_write_close();  //close session
+session_write_close(); //close session
 
-if ($conf['template'] == 'bootstrap3') {
+$syntax = array();
 
-  include_once(DOKU_INC.'lib/tpl/'.$conf['template'].'/tpl_functions.php');
-  include_once(DOKU_INC.'lib/tpl/'.$conf['template'].'/tpl_global.php');
+foreach (scandir(dirname(__FILE__) . '/../syntax/') as $file) {
 
-  $syntax = array();
+    if ($file == '.' || $file == '..') {
+        continue;
+    }
 
-  foreach (scandir(dirname(__FILE__) . '/../syntax/') as $file) {
-
-    if ($file == '.' || $file == '..') continue;
-
-    $file = str_replace('.php', '', $file);
+    $file              = str_replace('.php', '', $file);
     $syntax_class_name = "syntax_plugin_bootswrapper_$file";
     $syntax_class      = new $syntax_class_name;
 
-    if ($tag_name = $syntax_class->tag_name) {
-      $tag_attributes = $syntax_class->tag_attributes;
-      if ($tag_name == 'pills' || $tag_name == 'tabs') {
-        unset($tag_attributes['type']);
-      }
-      $syntax[$tag_name] = $tag_attributes;
+    if ($file == 'macros') {
+        continue;
     }
 
-  }
-
-  ksort($syntax);
+    if ($tag_name = $syntax_class->tag_name) {
+        $tag_attributes = $syntax_class->tag_attributes;
+        if ($tag_name == 'pills' || $tag_name == 'tabs') {
+            unset($tag_attributes['type']);
+        }
+        $syntax[$tag_name] = $tag_attributes;
+    }
 
 }
+
+ksort($syntax);
 
 header('Content-Type: text/html; charset=utf-8');
 header('X-UA-Compatible: IE=edge,chrome=1');
@@ -63,91 +95,18 @@ header('X-UA-Compatible: IE=edge,chrome=1');
   <title>Bootstrap Wrapper Plugin</title>
   <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <?php
+        if (tpl_getConf('themeByNamespace')) {
+            echo '<link href="' . tpl_basedir() . 'css.php?id='. cleanID("$NS:start") .'" rel="stylesheet" />';
+        }
+  ?>
   <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
-  <?php tpl_metaheaders() ?>
+  <?php tpl_metaheaders()?>
   <!--[if lt IE 9]>
   <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-  <script type="text/javascript">
-
-    jQuery(document).ready(function() {
-
-      var $component = jQuery('#component'),
-          $output    = jQuery('#output'),
-          $preview   = jQuery('#preview');
-
-      $component.val(jQuery('ul.nav .active a').data('component'));
-
-      jQuery('ul.nav a').on('click', function() {
-
-        $component.val(jQuery(this).data('component'));
-        jQuery('.preview-box').removeClass('hide');
-
-        jQuery(document).trigger('popup:reset');
-        jQuery(document).trigger('popup:buildTag');
-
-      });
-
-      jQuery(document).on('popup:reset', function() {
-        jQuery('form').each(function(){
-          jQuery(this)[0].reset();
-        });
-        $output.val('');
-        $preview.text('');
-      });
-
-      jQuery(document).on('popup:buildTag', function() {
-
-        var component = $component.val(),
-            tag       = [ '<', component ];
-
-        jQuery('#tab-'+component+' .attribute').each(function() {
-
-          var $attribute = jQuery(this),
-              data       = $attribute.data();
-
-          if (data.attributeType == 'boolean') {
-            if ($attribute.find('input:checked').val()) {
-              tag.push(' '+ data.attributeName + '="true"');
-            }
-          } else {
-            if ($attribute.find('input,select').val()) {
-              tag.push(' '+ data.attributeName + '="' + $attribute.find('input,select').val() + '"');
-            }
-          }
-
-        });
-
-        tag.push('></'+component+'>');
-
-        $output.val(tag.join(''));
-        $preview.text(tag.join(''));
-
-      });
-
-      jQuery('#btn-reset').on('click', function() {
-        jQuery(document).trigger('popup:reset');
-        jQuery(document).trigger('popup:buildTag');
-      });
-
-      jQuery('form input,form select').on('change', function() {
-        jQuery(document).trigger('popup:buildTag');
-      });
-
-      jQuery('#btn-preview, #btn-insert').on('click', function() {
-
-        jQuery(document).trigger('popup:buildTag');
-
-        if (jQuery(this).attr('id') === 'btn-insert') {
-          opener.insertAtCarret('wiki__text', $output.val());
-          opener.focus();
-        }
-
-      });
-
-    });
-  </script>
+  <script type="text/javascript" src="popup.js" <?php echo ((isset($conf['defer_js']) && $conf['defer_js']) ? 'defer="defer"' : '') ?>></script>
   <style>
     body { padding-top: 10px; }
     footer { padding-top: 100px; }
@@ -162,21 +121,30 @@ header('X-UA-Compatible: IE=edge,chrome=1');
     <aside class="small col-xs-2">
       <ul class="nav nav-pills nav-stacked" role="tablist">
 
-        <?php foreach (array_keys($syntax) as $tag) :?>
+        <?php foreach (array_keys($syntax) as $tag): ?>
         <li>
-          <a data-toggle="tab" href="#tab-<?php echo $tag ?>" data-component="<?php echo $tag ?>"><?php echo $tag ?></a>
+          <a data-toggle="tab" href="#tab-<?php echo $tag ?>" data-component="<?php echo $tag ?>"><?php echo ucfirst($tag) ?></a>
         </li>
-        <?php endforeach ?>
+        <?php endforeach?>
 
       </ul>
     </aside>
 
     <main class="col-xs-10 tab-content">
 
-      <?php foreach ($syntax as $tag => $item) :?>
+      <?php foreach ($syntax as $tag => $item): ?>
       <div id="tab-<?php echo $tag ?>" class="tab-pane fade">
 
-        <h3><?php echo $tag ?></h3>
+        <?php if (file_exists(dirname(__FILE__) . '/help/' . $tag . '.txt')): ?>
+        <div class="text-right">
+          <button title="Help <?php echo $tag ?>" type="button" data-help="help.php?syntax=<?php echo $tag ?>" data-toggle="modal" data-target="#help-modal" class="btn btn-xs btn-primary help-btn">
+            <i class="fa fa-question-circle"></i>
+        </button>
+        </div>
+        <?php endif;?>
+
+        <h3><?php echo ucfirst($tag) ?></h3>
+        <p>&nbsp;</p>
 
         <form class="form-horizontal">
           <?php foreach ($item as $type => $data): ?>
@@ -184,38 +152,37 @@ header('X-UA-Compatible: IE=edge,chrome=1');
               <label class="col-sm-2 control-label"><?php echo $type ?></label>
               <div class="col-sm-10 attribute" data-attribute-type="<?php echo $data['type'] ?>" data-attribute-name="<?php echo $type ?>">
                 <?php
-                  switch ($data['type']) {
+                    switch ($data['type']) {
 
-                    case 'string':
-                      if (is_array($data['values'])) {
-                        echo '<select class="form-control">';
-                        echo '<option></option>';
-                        foreach ($data['values'] as $value) {
-                          echo '<option '.(($data['default'] == $value) ? 'selected="selected"' : '').' value="'. $value .'" class="text-'. $value .'">'. $value .'</option>';
-                        }
-                        echo '</select>';
-                      } else {
-                        echo '<input type="text" class="form-control" />';
-                      }
-                      break;
+                        case 'string':
+                            if (is_array($data['values'])) {
+                                echo '<select class="form-control">';
+                                echo '<option></option>';
+                                foreach ($data['values'] as $value) {
+                                    echo '<option ' . (($data['default'] == $value) ? 'selected="selected"' : '') . ' value="' . $value . '" class="text-' . $value . '">' . $value . '</option>';
+                                }
+                                echo '</select>';
+                            } else {
+                                echo '<input type="text" class="form-control" />';
+                            }
+                            break;
 
-                    case 'boolean':
-                      echo '<input type="checkbox" class="checkbox-inline" />';
-                      break;
+                        case 'boolean':
+                            echo '<input type="checkbox" class="checkbox-inline" />';
+                            break;
 
-                    case 'integer':
-                      echo '<input type="number" min="'. $data['min'] .'" max="'. $data['max'] .'" value="'. $data['default'] .'" class="form-control" />';
-                      break;
-                  }
+                        case 'integer':
+                            echo '<input type="number" min="' . @$data['min'] . '" max="' . @$data['max'] . '" value="' . $data['default'] . '" class="form-control" />';
+                            break;
+                    }
                 ?>
-
               </div>
             </div>
-          <?php endforeach; ?>
+          <?php endforeach;?>
         </form>
 
       </div>
-      <?php endforeach; ?>
+      <?php endforeach;?>
 
       <div class="preview-box hide">
 
@@ -243,6 +210,23 @@ header('X-UA-Compatible: IE=edge,chrome=1');
       </div>
     </nav>
   </footer>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="help-modal">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><i class="fa fa-question-circle"></i> Help</h4>
+        </div>
+        <div class="modal-body px-5"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-primary" data-dismiss="modal">
+            <i class="fa fa-times"></i> Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

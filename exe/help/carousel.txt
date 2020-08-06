@@ -1,0 +1,76 @@
+====== Carousel ======
+
+===== Basic Syntax =====
+
+<code html><carousel>
+{{:wiki:plugin:bootswrapper:image-placeholder-big.jpg?nolink|}}
+{{:wiki:plugin:bootswrapper:image-placeholder-big.jpg?nolink|}}
+{{:wiki:plugin:bootswrapper:image-placeholder-big.jpg?nolink|}}
+</carousel></code>
+
+=== OR ===
+
+<code html><carousel>
+<slide>{{:wiki:plugin:bootswrapper:image-placeholder-big.jpg?nolink|}}</slide>
+<slide>{{:wiki:plugin:bootswrapper:image-placeholder-big.jpg?nolink|}}</slide>
+<slide>{{:wiki:plugin:bootswrapper:image-placeholder-big.jpg?nolink|}}</slide>
+</carousel></code>
+
+\\
+
+<carousel>
+{{:wiki:plugin:bootswrapper:image-placeholder-big.jpg?nolink|}}
+{{:wiki:plugin:bootswrapper:image-placeholder-big.jpg?nolink|}}
+{{:wiki:plugin:bootswrapper:image-placeholder-big.jpg?nolink|}}
+</carousel>
+
+===== Caption =====
+
+<code html><carousel>
+<slide>
+{{:wiki:plugin:bootswrapper:image-placeholder-big.jpg?nolink|}}
+<caption>
+=== First slide label ===
+Nulla vitae elit libero, a pharetra augue mollis interdum.
+</caption>
+</slide>
+[...]
+</carousel></code>
+
+\\
+
+<carousel>
+<slide>
+{{:wiki:plugin:bootswrapper:image-placeholder-big.jpg?nolink|}}
+<caption>
+=== First slide label ===
+Nulla vitae elit libero, a pharetra augue mollis interdum.
+</caption>
+</slide>
+<slide>
+{{:wiki:plugin:bootswrapper:image-placeholder-big.jpg?nolink|}}
+<caption>
+=== Second slide label ===
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+</caption>
+</slide>
+<slide>
+{{:wiki:plugin:bootswrapper:image-placeholder-big.jpg?nolink|}}
+<caption>
+=== Third slide label ===
+Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+</caption>
+</slide>
+</carousel>
+
+\\
+
+===== Attributes ======
+
+<datatable info="false" paging="false" searching="true">
+^ Attibute ^ Type ^ Default Value ^ Description ^
+| ''interval'' | number | ''5000'' | The amount of time to delay between automatically cycling an item. If false, carousel will not automatically cycle. |
+| ''pause''    | string | ''hover'' | Pauses the cycling of the carousel on mouseenter and resumes the cycling of the carousel on mouseleave. |
+| ''wrap''     | boolean | ''true'' | Whether the carousel should cycle continuously or have hard stops. |
+| ''keyboard'' | boolean | ''true'' | Whether the carousel should react to keyboard events. |
+</datatable>

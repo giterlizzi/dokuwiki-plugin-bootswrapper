@@ -1,0 +1,12 @@
+====== Tooltips ======
+
+<code html><tooltip title="Sample Text" location="bottom">Lorem ipsum</tooltip> dolor sit amet...</code>
+
+<tooltip title="Sample Text" location="bottom">Lorem ipsum</tooltip> dolor sit amet...
+
+==== Attributes ====
+
+^ Attribute    ^ Default Value ^ Allowed Values ^ Description ^
+| ''title''    | required | | Title of tooltip |
+| ''location'' | ''top'' | ''top'', ''bottom'', ''left'', ''right'', ''auto'' | Location of tooltip |
+| ''html''     | ''false'' | ''true'', ''false'' | Enable DokuWiki syntax inside the ''title'' |

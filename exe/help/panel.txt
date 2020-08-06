@@ -1,0 +1,132 @@
+====== Panels ======
+
+===== Basic example =====
+
+<panel type="default">Basic panel example</panel>
+\\
+<code html5><panel type="default">Basic panel example</panel></code>
+
+===== Panel with heading =====
+
+<panel type="default" title="Panel title">
+Panel content
+</panel>
+\\
+<code html5><panel type="default" title="Panel title">
+Panel content
+</panel></code>
+
+===== Panel with subtitle =====
+
+<panel type="default" title="Panel title" subtitle="Panel subtitle">
+Panel content
+</panel>
+\\
+<code html5><panel type="default" title="Panel title" subtitle="Panel subtitle">
+Panel content
+</panel></code>
+
+===== Contextual alternatives =====
+
+Like other components, easily make a panel more meaningful to a particular context by adding any of the contextual state classes.
+
+<panel type="primary" title="Panel title">Panel content</panel>
+<panel type="success" title="Panel title">Panel content</panel>
+<panel type="info" title="Panel title">Panel content</panel>
+<panel type="warning" title="Panel title">Panel content</panel>
+<panel type="danger" title="Panel title">Panel content</panel>
+\\
+<code html5>
+<panel type="primary" title="Panel title">Panel content</panel>
+<panel type="success" title="Panel title">Panel content</panel>
+<panel type="info" title="Panel title">Panel content</panel>
+<panel type="warning" title="Panel title">Panel content</panel>
+<panel type="danger" title="Panel title">Panel content</panel>
+</code>
+
+===== With tables =====
+
+Add any non-bordered table within a panel for a seamless design. If there is a ''no-body'' attribute, we add an extra border to the top of the table for separation.
+
+<panel type="default" title="Panel title" no-body="true">
+<panel-body>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</panel-body>
+^ # ^ First Name ^ Last Name ^ Username ^
+^ 1 | Mark       | Otto	     | @mdo     |
+^ 2 | Jacob      | Thornton  | @fat     |
+^ 3 | Larry      | the Bird  | @twitter |
+</panel>
+
+\\
+
+<code html5><panel type="default" title="Panel title" no-body="true">
+<panel-body>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</panel-body>
+^ # ^ First Name ^ Last Name ^ Username ^
+^ 1 | Mark       | Otto	     | @mdo     |
+^ 2 | Jacob      | Thornton  | @fat     |
+^ 3 | Larry      | the Bird  | @twitter |
+</panel></code>
+
+If there is no panel body, the component moves from panel header to table without interruption.
+
+<panel type="default" title="Panel title" no-body="true">
+^ # ^ First Name ^ Last Name ^ Username ^
+^ 1 | Mark       | Otto	     | @mdo     |
+^ 2 | Jacob      | Thornton  | @fat     |
+^ 3 | Larry      | the Bird  | @twitter |
+</panel>
+
+\\
+
+<code html5><panel type="default" title="Panel title" no-body="true">
+^ # ^ First Name ^ Last Name ^ Username ^
+^ 1 | Mark       | Otto	     | @mdo     |
+^ 2 | Jacob      | Thornton  | @fat     |
+^ 3 | Larry      | the Bird  | @twitter |
+</panel></code>
+
+===== With list groups =====
+
+Easily include full-width [[list-group|list groups]] within any panel.
+
+<panel type="default" title="Panel title" no-body="true">
+<panel-body>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</panel-body>
+<list-group>
+  * Cras justo odio
+  * Dapibus ac facilisis in
+  * Morbi leo risus
+  * Porta ac consectetur ac
+  * Vestibulum at eros
+</list-group></panel>
+
+\\
+
+<code html5><panel type="default" title="Panel title" no-body="true">
+<panel-body>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</panel-body>
+<list-group>
+  * Cras justo odio
+  * Dapibus ac facilisis in
+  * Morbi leo risus
+  * Porta ac consectetur ac
+  * Vestibulum at eros
+</list-group></panel></code>
+
+
+===== With icons =====
+
+<panel type="default" title="Panel title" subtitle="Panel subtitle" icon="glyphicon glyphicon-home">
+Panel content
+</panel>
+\\
+<code html5><panel type="default" title="Panel title" subtitle="Panel subtitle" icon="glyphicon glyphicon-home">
+Panel content
+</panel></code>
+
+
+==== Attributes ====
+
+^ Attribute    ^ Default Value ^ Allowed Values ^ Description ^
+| ''type''     | ''default'' | ''default'', ''primary'', ''success'', ''info'', ''warning'', ''danger'' | Type of panel |
+| ''title''    | optional | | Title of panel |
+| ''subtitle'' | optional | | Subtitle of panel |
+| ''icon''     | optional | | Font icon class (eg. Glyphicon or Font-Awesome) |
+| ''no-body''  | optional | | Don't add a panel body. Useful to add other particular tags (or tables) inside a panels |

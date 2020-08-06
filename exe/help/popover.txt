@@ -1,0 +1,80 @@
+====== Popovers ======
+
+Add small overlays of content, like those on the iPad, to any element for housing secondary information.
+
+Popovers whose both title and content are zero-length are never displayed.
+
+===== Examples =====
+
+<popover title="Popover title" content="And here's some amazing content. It's very engaging. Right?"><btn type="danger" size="lg">Click to toggle popover</btn></popover>
+
+<code html5>
+<popover title="Popover title" content="And here's some amazing content. It's very engaging. Right?"><btn type="danger" size="lg">Click to toggle popover</btn></popover>
+</code>
+
+==== Four directions ====
+
+Four options are available: ''top'', ''right'', ''bottom'', and ''left'' aligned.
+
+<popover placement="right" content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+<btn>Popover on right</btn>
+</popover>
+<popover placement="top" content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+<btn>Popover on top</btn>
+</popover>
+<popover placement="bottom" content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+<btn>Popover on bottom</btn>
+</popover>
+<popover placement="left" content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+<btn>Popover on left</btn>
+</popover>
+
+<code html5>
+<popover placement="right" content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+<btn>Popover on right</btn>
+</popover>
+
+<popover placement="top" content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+<btn>Popover on top</btn>
+</popover>
+
+<popover placement="bottom" content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+<btn>Popover on bottom</btn>
+</popover>
+
+<popover placement="left" content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+<btn>Popover on left</btn>
+</popover>
+</code>
+
+==== Dismiss on next click ====
+
+Use the ''focus'' trigger to dismiss popovers on the next click that the user makes.
+
+<popover trigger="focus" title="Dismissible popover" content="And here's some amazing content. It's very engaging. Right?"><btn type="danger" size="lg">Dismissible popover</btn></popover>
+
+<code html5>
+<popover trigger="focus" title="Dismissible popover" content="And here's some amazing content. It's very engaging. Right?"><btn type="danger" size="lg">Dismissible popover</btn></popover>
+</code>
+
+==== DokuWiki syntax ====
+
+<popover html="true" title="**Dismissible** popover" content="And here's some amazing content. \\ **It's very engaging**. \\ Right?">Dismissible Popover</popover>
+
+<code html5>
+<popover html="true" title="**Dismissible** popover" content="And here's some amazing content. \\ **It's very engaging**. \\ Right?">Dismissible Popover</popover>
+</code>
+
+
+===== Options =====
+
+<datatable info="false" paging="false" searching="true">
+^ Name ^ Default ^ Values ^ Description ^
+| ''animation'' | ''true'' | ''true'' ''false'' | Apply a CSS fade transition to the popover |
+| ''content''   | NULL | | The content value |
+| ''title''     | NULL | | The title value |
+| ''html''      | ''false'' | ''true'' ''false'' | Insert DokuWiki syntax into the popover |
+| ''placement'' | ''right'' | ''top'' ''bottom'' ''left'' ''right'' ''auto'' | How to position the popover. \\ When ''auto'' is specified, it will dynamically reorient the popover. For example, if placement is ''auto left'', the popover will display to the left when possible, otherwise it will display right. |
+| ''trigger''   | ''click'' | ''click'' ''hover'' ''focus'' ''manual'' | How popover is triggered. You may pass multiple triggers; separate them with a space. ''manual'' cannot be combined with any other trigger. |
+| ''delay'' \\ ''delay-show'' \\ ''delay-hide'' | ''0'' | | Delay showing and hiding the popover (ms) - does not apply to manual trigger type \\ If a number is supplied, delay is applied to both hide/show. |
+</datatable>

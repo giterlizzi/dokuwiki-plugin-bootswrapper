@@ -1,60 +1,56 @@
 <?php
 /**
  * Bootstrap Wrapper Plugin: Well
- * 
+ *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2020, Giuseppe Di Terlizzi
  */
- 
-// must be run within Dokuwiki
-if(!defined('DOKU_INC')) die();
 
-require_once(dirname(__FILE__).'/bootstrap.php');
+class syntax_plugin_bootswrapper_well extends syntax_plugin_bootswrapper_bootstrap
+{
 
-class syntax_plugin_bootswrapper_well extends syntax_plugin_bootswrapper_bootstrap {
+    public $p_type         = 'normal';
+    public $pattern_start  = '<well.*?>(?=.*?</well>)';
+    public $pattern_end    = '</well>';
+    public $tag_name       = 'well';
+    public $tag_attributes = array(
 
-  public $pattern_start  = '<well.*?>(?=.*?</well>)';
-  public $pattern_end    = '</well>';
-  public $tag_name       = 'well';
-  public $tag_attributes = array(
+        'size' => array(
+            'type'     => 'string',
+            'values'   => array('lg', 'sm'),
+            'required' => false,
+            'default'  => null),
 
-    'size' => array('type'     => 'string',
-                    'values'   => array('lg', 'sm'),
-                    'required' => false,
-                    'default'  => null),
+    );
 
-  );
+    public function render($mode, Doku_Renderer $renderer, $data)
+    {
 
-  function getPType() { return 'normal'; }
+        if (empty($data)) {
+            return false;
+        }
 
+        if ($mode !== 'xhtml') {
+            return false;
+        }
 
-  function render($mode, Doku_Renderer $renderer, $data) {
+        /** @var Doku_Renderer_xhtml $renderer */
+        list($state, $match, $pos, $attributes) = $data;
 
-    if (empty($data)) return false;
-    if ($mode !== 'xhtml') return false;
+        if ($state == DOKU_LEXER_ENTER) {
+            $size   = ($attributes['size']) ? 'well-' . $attributes['size'] : '';
+            $markup = '<div class="bs-wrap bs-wrap-well well ' . $size . ">";
 
-    /** @var Doku_Renderer_xhtml $renderer */
-    list($state, $match, $attributes) = $data;
+            $renderer->doc .= $markup;
+            return true;
+        }
 
-    switch($state) {
+        if ($state == DOKU_LEXER_EXIT) {
+            $renderer->doc .= '</div>';
+            return true;
+        }
 
-      case DOKU_LEXER_ENTER:
-
-        $size   = ($attributes['size']) ? 'well-'.$attributes['size'] : '';
-        $markup = sprintf('<div class="bs-wrap bs-wrap-well well %s">', $size);
-
-        $renderer->doc .= $markup;
         return true;
-
-      case DOKU_LEXER_EXIT:
-        $renderer->doc .= '</div>';
-        return true;
-
     }
-
-    return true;
-
-  }
-
 }

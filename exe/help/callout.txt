@@ -1,0 +1,150 @@
+======= Callouts ======
+
+~~NOTOC~~
+
+<callout type="question" icon="true">
+=== What is the Callout component ? ===
+The Bootstrap documentation has really nice callouts to draw attention to important information, but for some reason these callouts are not included in the actual Bootstrap distribution.
+
+This plugin include the original Callout from Bootstrap documentation for //info//, //warning// and //danger// and the extension for //default//, //success// and //primary// from http://cpratt.co/twitter-bootstrap-callout-css-styles.
+</callout>
+
+===== Basic usage =====
+
+<code html5>
+<callout>
+=== Default Callout ===
+This is a default callout.
+</callout>
+</code>
+
+OR
+
+<code html5>
+<callout title="Default Callout">
+This is a default callout.
+</callout>
+</code>
+
+<callout>
+=== Default Callout ===
+This is a default callout.
+</callout>
+
+===== Contextual colors =====
+
+<callout type="primary">
+=== Primary Callout ===
+This is a primary callout.
+</callout>
+
+<callout type="success">
+=== Success Callout ===
+This is a success callout.
+</callout>
+
+<callout type="info">
+=== Info Callout ===
+This is an info callout.
+</callout>
+
+<callout type="warning">
+=== Warning Callout ===
+This is a warning callout.
+</callout>
+
+<callout type="danger">
+=== Danger Callout ===
+This is a danger callout.
+</callout>
+
+
+===== Contextual Icons =====
+
+Create a contextual colors callout by adding ''icon="true"'' attribute.
+
+<callout type="primary" icon="true">
+=== Primary Callout ===
+This is a primary callout.
+</callout>
+
+<callout type="success" icon="true">
+=== Success Callout ===
+This is a success callout.
+</callout>
+
+<callout type="info" icon="true">
+=== Info Callout ===
+This is an info callout.
+</callout>
+
+<callout type="warning" icon="true">
+=== Warning Callout ===
+This is a warning callout.
+</callout>
+
+<callout type="danger" icon="true">
+=== Danger Callout ===
+This is a danger callout.
+</callout>
+
+<code html5>
+<callout type="primary" icon="true"> [...] </callout>
+<callout type="success" icon="true"> [...] </callout>
+<callout type="info" icon="true"> [...] </callout>
+<callout type="warning" icon="true"> [...] </callout>
+<callout type="danger" icon="true"> [...] </callout>
+</code>
+
+==== Additional contextual icons ====
+
+<callout type="question" icon="true">
+=== Question Callout ===
+This is a question callout (alias of ''important'').
+</callout>
+
+<callout type="tip" icon="true">
+=== Tip Callout ===
+This is a tip callout (alias of ''warning'').
+</callout>
+
+<code html5>
+<callout type="question" icon="true"> [...] </callout>
+<callout type="tip" icon="true"> [...] </callout>
+</code>
+
+===== Custom icons =====
+
+Add custom icon via ''icon'' attribute.
+
+<callout icon="fa fa-user">
+This is default callout with ''fa fa-user'' icon
+</callout>
+
+<code html5><callout icon="fa fa-user"> [...] </callout></code>
+
+<callout type="success" icon="fa fa-plus">
+This is success callout with ''fa fa-plus'' icon
+</callout>
+
+<code html5><callout type="success" icon="fa fa-plus"> [...] </callout></code>
+
+===== Custom colors =====
+
+<callout icon="fa fa-user" color="blue" title="Custom color + icon">
+This is callout with custom color (''blue'') and icon (''fa fa-user'')
+</callout>
+
+<code html5>
+<callout icon="fa fa-user" color="blue" title="Custom color + icon"> [...] </callout>
+</code>
+
+===== Options =====
+
+<datatable info="false" paging="false" searching="true">
+^ Attribute ^ Default Value ^ Allowed Values ^ Description ^
+| ''type''  | ''default'' | ''default'' ''primary'' ''success'' ''info'' ''warning'' ''danger'' (''question'' ''tip'') | Type of callout  \\ \\ ''question'' and ''tip'' are available only for ''icon'' attribute. |
+| ''title'' |  |  | Title of callout |
+| ''icon'' |  | ''true'' or icon class from Glyphicon or FontAwesome (eg. ''fa fa-plus'') | Icon of callout |
+| ''color'' | | W3C Color name (eg. ''blue'', ''orange'', etc) or HEX (eg. ''#FF3300'', ''#777'') | Color of callout |
+</datatable>

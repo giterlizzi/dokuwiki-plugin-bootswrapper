@@ -1,0 +1,33 @@
+====== Labels ======
+
+<callout type="tip" icon="true">
+This tag have two version (lowercase and uppercase).
+
+  * The //lowercase// version ''<nowiki><label></nowiki>'' create a __inline__ element (''<nowiki><span></nowiki>'').
+  * The //uppercase// version ''<nowiki><LABEL></nowiki>'' create a __block__ element (''<nowiki><div></nowiki>'').
+
+See the samples.
+</callout>
+
+<label type="default">default</label>
+<label type="primary">primary</label>
+<label type="success">success</label>
+<label type="info">info</label>
+<label type="warning">warning</label>
+<label type="danger">danger</label>
+
+<code html5>
+<label type="default">default</label>
+<label type="primary">primary</label>
+<label type="success">success</label>
+<label type="info">info</label>
+<label type="warning">warning</label>
+<label type="danger">danger</label>
+</code>
+
+
+==== Attributes ====
+
+^ Attribute ^ Default Value ^ Allowed Values ^ Description ^
+| ''type''  | ''info'' | ''default'', ''primary'', ''success'', ''info'', ''warning'', ''danger'' | Type of label |
+| ''icon''  | optional | | Font icon class (eg. Glyphicon or Font-Awesome) |

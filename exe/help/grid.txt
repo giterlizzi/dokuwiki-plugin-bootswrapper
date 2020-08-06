@@ -1,0 +1,45 @@
+====== Grids ======
+
+\\
+**Note:** Instead of ''<nowiki><grid></nowiki>'' you can use ''<nowiki><row></nowiki>'' alias.
+\\
+
+<code html><grid>
+<col sm="6">.col-sm-6</col>
+<col sm="6">.col-sm-6</col>
+</grid></code>
+
+\\
+\\
+
+<grid>
+<col sm="6">.col-sm-6</col>
+<col sm="6">.col-sm-6</col>
+</grid>
+
+\\
+\\
+
+<code html><grid>
+<col xs="12" sm="6" lg="8">.col-xs-12 .col-sm-6 .col-lg-8</col>
+<col xs="6" lg="4">.col-xs-6 .col-lg-4</col>
+</grid></code>
+
+\\
+\\
+
+<grid>
+<col xs="12" sm="6" lg="8">.col-xs-12 .col-sm-6 .col-lg-8</col>
+<col xs="6" lg="4">.col-xs-6 .col-lg-4</col>
+</grid>
+
+\\
+\\
+
+==== Attributes for "col" ====
+
+^ Attribute ^ Description |
+| ''xs'' | Column size (1 ~ 12) |
+| ''sm'' | Column size (1 ~ 12) |
+| ''lg'' | Column size (1 ~ 12) |
+| ''md'' | Column size (1 ~ 12) |

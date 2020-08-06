@@ -1,59 +1,65 @@
 <?php
 /**
  * Bootstrap Wrapper Plugin: Pane
- * 
+ *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @copyright  (C) 2015, Giuseppe Di Terlizzi
+ * @copyright  (C) 2015-2020, Giuseppe Di Terlizzi
  */
- 
-// must be run within Dokuwiki
-if(!defined('DOKU_INC')) die();
 
-require_once(dirname(__FILE__).'/bootstrap.php');
+class syntax_plugin_bootswrapper_pane extends syntax_plugin_bootswrapper_bootstrap
+{
 
-class syntax_plugin_bootswrapper_pane extends syntax_plugin_bootswrapper_bootstrap {
+    public $p_type         = 'block';
+    public $pattern_start  = '<pane[\s].*?>(?=.*?</pane>)';
+    public $pattern_end    = '</pane>';
+    public $tag_name       = 'pane';
+    public $tag_attributes = array(
 
-  public $pattern_start  = '<pane[\s].*?>(?=.*?</pane>)';
-  public $pattern_end    = '</pane>';
-  public $tag_name       = 'pane';
-  public $tag_attributes = array(
+        'id' => array(
+            'type'     => 'string',
+            'values'   => null,
+            'required' => true,
+            'default'  => null),
 
-    'id' => array('type'     => 'string',
-                  'values'   => null,
-                  'required' => true,
-                  'default'  => null),
+    );
 
-  );
+    public function render($mode, Doku_Renderer $renderer, $data)
+    {
 
-  function getPType(){ return 'block'; }
+        if (empty($data)) {
+            return false;
+        }
 
-  function render($mode, Doku_Renderer $renderer, $data) {
+        if ($mode !== 'xhtml') {
+            return false;
+        }
 
-    if (empty($data)) return false;
-    if ($mode !== 'xhtml') return false;
+        /** @var Doku_Renderer_xhtml $renderer */
+        list($state, $match, $pos, $attributes) = $data;
 
-    /** @var Doku_Renderer_xhtml $renderer */
-    list($state, $match, $attributes) = $data;
+        if ($state == DOKU_LEXER_ENTER) {
+            $id     = $attributes['id'];
+            $markup = '<div role="tabpanel" class="bs-wrap bs-wrap-tab-pane tab-pane" id="' . $id . '">';
 
-    switch($state) {
+            $renderer->doc .= $markup;
 
-      case DOKU_LEXER_ENTER:
+            if (defined('SEC_EDIT_PATTERN')) { // for DokuWiki Greebo and more recent versions
+                $renderer->startSectionEdit($pos, array('target' => 'plugin_bootswrapper_pane', 'name' => $state));
+            } else {
+                $renderer->startSectionEdit($pos, 'plugin_bootswrapper_pane', $state);
+            }
 
-        $id     = $attributes['id'];
-        $markup = sprintf('<div role="tabpanel" class="bs-wrap bs-wrap-tab-pane tab-pane" id="%s">', $id);
+            return true;
+        }
 
-        $renderer->doc .= $markup;
+        if ($state == DOKU_LEXER_EXIT) {
+            $renderer->finishSectionEdit($pos + strlen($match));
+            $renderer->doc .= '</div>';
+
+            return true;
+        }
+
         return true;
-
-      case DOKU_LEXER_EXIT:
-        $renderer->doc .= '</div>';
-        return true;
-
     }
-
-    return true;
-
-  }
-
 }

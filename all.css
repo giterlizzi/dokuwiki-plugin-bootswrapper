@@ -92,15 +92,20 @@ aside ul.dropdown-menu {
   color: #5bc0de;
 }
 
+.bs-callout {
+  overflow: hidden;
+}
 
 
 i.bs-callout-icon { font-size: 2em; }
-.bs-callout-info    i.bs-callout-icon { color: #5bc0de; }
-.bs-callout-warning i.bs-callout-icon { color: #f0ad4e; }
-.bs-callout-danger  i.bs-callout-icon { color: #d9534f; }
-.bs-callout-success i.bs-callout-icon { color: #5cb85c; }
-.bs-callout-primary i.bs-callout-icon { color: #428bca; }
-.bs-callout-default i.bs-callout-icon { color: #777; }
+
+
+.bs-callout-info    .bs-callout-icon { color: #5bc0de; }
+.bs-callout-warning .bs-callout-icon { color: #f0ad4e; }
+.bs-callout-danger  .bs-callout-icon { color: #d9534f; }
+.bs-callout-success .bs-callout-icon { color: #5cb85c; }
+.bs-callout-primary .bs-callout-icon { color: #428bca; }
+.bs-callout-default .bs-callout-icon { color: #777; }
 
 
 @media print {
