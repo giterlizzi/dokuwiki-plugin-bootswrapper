@@ -62,6 +62,7 @@ jQuery(document).ready(function () {
         $nav.find('div.li > *').unwrap();
         $nav.find('li').attr('role', 'presentation');
         $nav.find('.curid').parent('li').addClass('active');
+        $nav.find('.curid').contents().unwrap(); // Unwrap for Hogfater release
 
         // Drop-down menu
         $nav.find('li ul')
