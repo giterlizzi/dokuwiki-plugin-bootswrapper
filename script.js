@@ -37,7 +37,7 @@ jQuery(document).ready(function () {
             nav_data = $nav_wrap.data(),
             nav_class = ['nav'];
 
-        for (key in nav_data) {
+        for (var key in nav_data) {
 
             var value = nav_data[key];
 
@@ -97,6 +97,17 @@ jQuery(document).ready(function () {
 
             $nav.find('a:first').tab('show');
 
+        }
+
+        var $icon_links = $nav.find('li .dw-icons + a');
+
+        if ($icon_links.length) {
+            jQuery.each($icon_links, function () {
+                var $link = jQuery(this),
+                    $icon = $link.prev();
+                $icon.prependTo($link);
+                $icon.after(' ');
+            });
         }
 
         jQuery(window).on('hashchange', function () {
