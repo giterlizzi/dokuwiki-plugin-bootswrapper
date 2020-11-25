@@ -223,6 +223,9 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin
                 break;
 
             case DOKU_LEXER_ENTER:
+                if (strstr($match, '&')) {
+                    $match = str_replace('&', '&amp;', $match);
+                }
                 $attributes = array();
                 $xml        = simplexml_load_string(str_replace('>', '/>', $match));
 
