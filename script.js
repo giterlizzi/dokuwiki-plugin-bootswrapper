@@ -308,9 +308,10 @@ jQuery(document).ready(function () {
         var $panel = jQuery(this),
             $panel_body = $panel.find('.panel-body'),
             $panel_heading = $panel.find('.panel-heading'),
-            $first_title = $panel_body.find('> h4:first');
+            $first_title = $panel_body.find('> h4:first'),
+            no_title = $panel.hasClass('bs-wrap-panel-no-title');
 
-        if ($first_title.length && !$panel_heading.length) {
+        if (! no_title && $first_title.length && !$panel_heading.length) {
 
             var $panel_heading = jQuery('<div class="panel-heading"></div>');
 

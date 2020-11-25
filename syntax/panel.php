@@ -14,7 +14,6 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
     public $pattern_end    = '</panel>';
     public $tag_name       = 'panel';
     public $tag_attributes = array(
-
         'type'     => array(
             'type'     => 'string',
             'values'   => array('default', 'primary', 'success', 'info', 'warning', 'danger'),
@@ -51,6 +50,11 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
             'required' => false,
             'default'  => false),
 
+        'no-title' => array(
+            'type'     => 'boolean',
+            'values'   => array(0, 1),
+            'required' => false,
+            'default'  => false),
     );
 
     public function render($mode, Doku_Renderer $renderer, $data)
@@ -76,10 +80,11 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
             $subtitle = (isset($attributes['subtitle']) ? $attributes['subtitle'] : false);
             $icon     = (isset($attributes['icon']) ? $attributes['icon'] : false);
             $nobody   = (isset($attributes['no-body']) ? $attributes['no-body'] : false);
+            $notitle  = (isset($attributes['no-title']) ? $attributes['no-title'] : false);
 
-            $markup = '<div class="bs-wrap bs-wrap-panel panel panel-' . $type . '">';
+            $markup = '<div class="bs-wrap bs-wrap-panel '. ($notitle ? 'bs-wrap-panel-no-title' : '') .' panel panel-' . $type . '">';
 
-            if ($title || $subtitle) {
+            if (($title || $subtitle) && ! $notitle) {
 
                 if ($icon) {
                     $title = '<i class="' . $icon . '"></i> ' . $title;
@@ -93,7 +98,7 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
                 $markup .= '<div class="panel-body">';
             }
 
-            if (defined('SEC_EDIT_PATTERN')) { // for DokuWiki Greebo and more recent versions
+            if (defined('SEC_EDIT_PATTERN')) { // for Greebo and more recent DokuWiki releases
                 $renderer->startSectionEdit($pos, array('target' => 'plugin_bootswrapper_panel', 'name' => $state));
             } else {
                 $renderer->startSectionEdit($pos, 'plugin_bootswrapper_panel', $state);

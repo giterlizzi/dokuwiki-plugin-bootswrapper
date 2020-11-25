@@ -122,7 +122,22 @@ Panel content
 </panel></code>
 
 
-==== Attributes ====
+===== No title =====
+
+<panel type="warning" no-title="true">
+=== No title ? ===
+
+Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.
+</panel>
+\\
+<code html5><panel type="warning" no-title="true">
+=== No title ? ===
+
+Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.
+</panel></code>
+
+
+===== Attributes =====
 
 ^ Attribute    ^ Default Value ^ Allowed Values ^ Description ^
 | ''type''     | ''default'' | ''default'', ''primary'', ''success'', ''info'', ''warning'', ''danger'' | Type of panel |
@@ -130,3 +145,4 @@ Panel content
 | ''subtitle'' | optional | | Subtitle of panel |
 | ''icon''     | optional | | Font icon class (eg. Glyphicon or Font-Awesome) |
 | ''no-body''  | optional | | Don't add a panel body. Useful to add other particular tags (or tables) inside a panels |
+| ''no-title'' | optional | | Disable panel title |
