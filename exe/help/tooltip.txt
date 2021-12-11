@@ -1,8 +1,8 @@
 ====== Tooltips ======
 
-<code html><tooltip title="Sample Text" location="bottom">Lorem ipsum</tooltip> dolor sit amet...</code>
+<code html><tooltip title="Sample Text" placement="bottom">Lorem ipsum</tooltip> dolor sit amet...</code>
 
-<tooltip title="Sample Text" location="bottom">Lorem ipsum</tooltip> dolor sit amet...
+<tooltip title="Sample Text" placement="bottom">Lorem ipsum</tooltip> dolor sit amet...
 
 ==== Attributes ====
 
