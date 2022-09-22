@@ -35,7 +35,8 @@ class action_plugin_bootswrapper extends DokuWiki_Action_Plugin
     {
         $controller->register_hook('TOOLBAR_DEFINE', 'AFTER', $this, '_insert_button');
         $controller->register_hook('HTML_SECEDIT_BUTTON', 'BEFORE', $this, '_secedit_button');
-        $controller->register_hook('HTML_EDIT_FORMSELECTION', 'BEFORE', $this, '_editform');
+        $controller->register_hook('HTML_EDIT_FORMSELECTION', 'BEFORE', $this, '_editform'); // deprecated
+        $controller->register_hook('EDIT_FORM_ADDTEXTAREA', 'BEFORE', $this, '_editform'); // replacement
     }
 
     /**
