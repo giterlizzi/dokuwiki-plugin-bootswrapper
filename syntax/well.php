@@ -39,7 +39,10 @@ class syntax_plugin_bootswrapper_well extends syntax_plugin_bootswrapper_bootstr
         list($state, $match, $pos, $attributes) = $data;
 
         if ($state == DOKU_LEXER_ENTER) {
-            $size   = ($attributes['size']) ? 'well-' . $attributes['size'] : '';
+            $size = '';
+            if (is_array($attributes) && isset($attributes['size'])) {
+                $size = 'well-' . $attributes['size'];
+            }
             $markup = '<div class="bs-wrap bs-wrap-well well ' . $size . '">';
 
             $renderer->doc .= $markup;
