@@ -60,6 +60,7 @@ class syntax_plugin_bootswrapper_text extends syntax_plugin_bootswrapper_bootstr
         }
 
         /** @var Doku_Renderer_xhtml $renderer */
+        $data = array_pad($data, 5, null);
         list($state, $match, $pos, $attributes, $is_block) = $data;
 
         global $text_tag;
