@@ -42,18 +42,19 @@ class syntax_plugin_bootswrapper_label extends syntax_plugin_bootswrapper_bootst
         }
 
         /** @var Doku_Renderer_xhtml $renderer */
+        $data = array_pad($data, 5, null);
         list($state, $match, $pos, $attributes, $is_block) = $data;
 
         global $label_tag;
 
         if ($state == DOKU_LEXER_ENTER) {
             $label_tag = (($is_block) ? 'div' : 'span');
-            $type      = $attributes['type'];
-            $icon      = $attributes['icon'];
+            $type      = $attributes['type'] ?? '';
+            $icon      = $attributes['icon'] ?? '';
 
             $markup = '<' . $label_tag . ' class="bs-wrap bs-wrap-label label label-' . $type . '">';
 
-            if ($icon) {
+            if (isset($icon)) {
                 $markup .= '<i class="' . $icon . '"></i> ';
             }
 
