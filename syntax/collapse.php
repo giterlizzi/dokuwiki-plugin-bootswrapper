@@ -42,6 +42,7 @@ class syntax_plugin_bootswrapper_collapse extends syntax_plugin_bootswrapper_boo
         }
 
         /** @var Doku_Renderer_xhtml $renderer */
+        $data = array_pad($data, 4, null);
         list($state, $match, $pos, $attributes) = $data;
 
         if ($state == DOKU_LEXER_ENTER) {
