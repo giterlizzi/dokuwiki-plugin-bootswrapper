@@ -1,6 +1,6 @@
 <?php
 /**
- * Bootstrap Wrapper Plugin: Alert
+ * Bootstrap Wrapper Plugin: Modal
  *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
@@ -85,38 +85,39 @@ class syntax_plugin_bootswrapper_modal extends syntax_plugin_bootswrapper_bootst
         }
 
         /** @var Doku_Renderer_xhtml $renderer */
+        $data = array_pad($data, 4, null);
         list($state, $match, $pos, $attributes) = $data;
 
         if ($state == DOKU_LEXER_ENTER) {
-            $id       = $attributes['id'];
-            $size     = $attributes['size'];
-            $title    = $attributes['title'];
-            $keyboard = $attributes['keyboard'];
-            $dismiss  = $attributes['dismiss'];
-            $show     = $attributes['show'];
+            $id       = $attributes['id'] ?? '';
+            $size     = $attributes['size'] ?? '';
+            $title    = $attributes['title'] ?? '';
+            $keyboard = $attributes['keyboard'] ?? '';
+            $dismiss  = $attributes['dismiss'] ?? '';
+            $show     = $attributes['show'] ?? '';
             $fade     = $attributes['fade'] === true ? 'fade' : '';
-            $backdrop = $attributes['backdrop'];
-            $remote   = $attributes['remote'];
+            $backdrop = $attributes['backdrop'] ?? '';
+            $remote   = $attributes['remote'] ?? '';
 
             $html5_attributes = array();
 
-            if ($remote) {
+            if (isset($remote)) {
                 $html5_attributes['data-remote'] = wl($remote, array('do' => 'export_xhtmlbody'), true);
             }
 
-            if ($title) {
+            if (isset($title)) {
                 $html5_attributes['data-labelledby'] = $title;
             }
 
-            if ($show) {
+            if (isset($show)) {
                 $html5_attributes['data-show'] = $show;
             }
 
-            if ($backdrop) {
+            if (isset($backdrop)) {
                 $html5_attributes['data-backdrop'] = $backdrop;
             }
 
-            if ($keyboard) {
+            if (isset($keyboard)) {
                 $html5_attributes['data-keyboard'] = $keyboard;
             }
 

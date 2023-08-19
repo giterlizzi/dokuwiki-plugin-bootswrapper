@@ -76,17 +76,18 @@ class syntax_plugin_bootswrapper_affix extends syntax_plugin_bootswrapper_bootst
         }
 
         /** @var Doku_Renderer_xhtml $renderer */
+        $data = array_pad($data, 4, null);
         list($state, $match, $pos, $attributes) = $data;
 
         if ($state == DOKU_LEXER_ENTER) {
-            $top             = $attributes['offset-top'];
-            $bottom          = $attributes['offset-bottom'];
-            $target          = $attributes['target'];
-            $position        = $attributes['position'];
-            $position_top    = $attributes['position-top'];
-            $position_bottom = $attributes['position-bottom'];
-            $position_right  = $attributes['position-right'];
-            $position_left   = $attributes['position-left'];
+            $top             = $attributes['offset-top'] ?? '';
+            $bottom          = $attributes['offset-bottom'] ?? '';
+            $target          = $attributes['target'] ?? '';
+            $position        = $attributes['position'] ?? '';
+            $position_top    = $attributes['position-top'] ?? '';
+            $position_bottom = $attributes['position-bottom'] ?? '';
+            $position_right  = $attributes['position-right'] ?? '';
+            $position_left   = $attributes['position-left'] ?? '';
 
             $html5_data = array();
             $styles     = array();

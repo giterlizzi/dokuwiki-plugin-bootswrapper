@@ -47,6 +47,7 @@ class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootst
         }
 
         /** @var Doku_Renderer_xhtml $renderer */
+        $data = array_pad($data, 4, null);
         list($state, $match, $pos, $attributes) = $data;
 
         if ($state == DOKU_LEXER_ENTER) {
@@ -57,17 +58,17 @@ class syntax_plugin_bootswrapper_alert extends syntax_plugin_bootswrapper_bootst
             $html_attributes['class'][] = "alert-$type";
             $html_attributes['role']    = 'alert';
 
-            if ($dismiss) {
+            if (isset($dismiss)) {
                 $html_attributes['class'][] = 'alert-dismissible';
             }
 
             $markup = '<div ' . $this->buildAttributes($html_attributes) . '>';
 
-            if ($dismiss) {
+            if (isset($dismiss)) {
                 $markup .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
             }
 
-            if ($icon) {
+            if (isset($icon)) {
                 $markup .= '<i class="' . $icon . '"></i> ';
             }
 
