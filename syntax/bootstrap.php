@@ -218,7 +218,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin
                 $title = trim($title, '=');
                 $title = trim($title);
 
-                $handler->_addCall('header', array($title, $level, $pos), $pos);
+                $handler->addCall('header', array($title, $level, $pos), $pos);
 
                 break;
 
@@ -255,7 +255,7 @@ class syntax_plugin_bootswrapper_bootstrap extends DokuWiki_Syntax_Plugin
                 return array($state, $match, $pos, $checked_attributes, $is_block);
 
             case DOKU_LEXER_UNMATCHED:
-                $handler->_addCall('cdata', array($match), $pos, null);
+                $handler->addCall('cdata', array($match), $pos, null);
                 break;
 
             case DOKU_LEXER_EXIT:
