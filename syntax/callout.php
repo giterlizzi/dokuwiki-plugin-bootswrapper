@@ -54,6 +54,7 @@ class syntax_plugin_bootswrapper_callout extends syntax_plugin_bootswrapper_boot
         }
 
         /** @var Doku_Renderer_xhtml $renderer */
+        $data = array_pad($data, 4, null);
         list($state, $match, $pos, $attributes) = $data;
 
         global $icon;
@@ -115,7 +116,7 @@ class syntax_plugin_bootswrapper_callout extends syntax_plugin_bootswrapper_boot
                 $icon_class = $icon;
             }
 
-            if ($color) {
+            if (isset($color)) {
                 $html_attributes['style']['border-left-color'] = $color;
                 $text_color                                    = ' style="color:' . $color . '"';
             }
