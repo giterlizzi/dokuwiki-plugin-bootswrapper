@@ -36,6 +36,7 @@ class syntax_plugin_bootswrapper_well extends syntax_plugin_bootswrapper_bootstr
         }
 
         /** @var Doku_Renderer_xhtml $renderer */
+        $data = array_pad($data, 4, null);
         list($state, $match, $pos, $attributes) = $data;
 
         if ($state == DOKU_LEXER_ENTER) {
