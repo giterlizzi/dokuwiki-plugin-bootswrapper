@@ -1,6 +1,6 @@
 <?php
 /**
- * Bootstrap Wrapper Plugin: Tooltip
+ * Bootstrap Wrapper Plugin: Popover
  *
  * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
  * @author     Jos Roossien <mail@jroossien.com>
@@ -85,6 +85,7 @@ class syntax_plugin_bootswrapper_popover extends syntax_plugin_bootswrapper_boot
         }
 
         /** @var Doku_Renderer_xhtml $renderer */
+        $data = array_pad($data, 4, null);
         list($state, $match, $pos, $attributes) = $data;
 
         if ($state == DOKU_LEXER_ENTER) {
@@ -92,36 +93,37 @@ class syntax_plugin_bootswrapper_popover extends syntax_plugin_bootswrapper_boot
 
             extract($attributes);
 
-            if ($html) {
+            if (isset($html)) {
                 $title   = hsc(p_render('xhtml', p_get_instructions($title), $info));
                 $content = hsc(p_render('xhtml', p_get_instructions($content), $info));
             }
 
-            if ($trigger) {
+            if (isset($trigger)) {
                 $html5_data[] = 'data-trigger="' . $trigger . '"';
             }
 
-            if ($animation) {
+            if (isset($animation)) {
                 $html5_data[] = 'data-animation="' . $animation . '"';
             }
 
-            if ($html) {
+            if (isset($html)) {
                 $html5_data[] = 'data-html="' . $html . '"';
             }
 
-            if ($placement) {
+            if (isset($placement)) {
                 $html5_data[] = 'data-placement="' . $placement . '"';
             }
 
-            if ($content) {
+            if (isset($content)) {
                 $html5_data[] = 'data-content="' . $content . '"';
             }
 
-            if ($delay) {
+            if (isset($delay)) {
                 $html5_data[] = 'data-delay="' . $delay . '"';
             }
 
-            if (!$delay && ($attributes['delay-hide'] || $attributes['delay-show'])) {
+            $delay = null;
+            if (!$delay && is_array($attributes) && (isset($attributes['delay-hide']) || isset($attributes['delay-show']))) {
                 $delays = array();
                 $show   = $attributes['delay-show'];
                 $hide   = $attributes['delay-hide'];
