@@ -2,16 +2,17 @@
 
 ## Author
 
-  * Giuseppe Di Terlizzi ([LotarProject](https://github.com/LotarProject)) <giuseppe.diterlizzi@gmail.com>
+  * Giuseppe Di Terlizzi ([giterlizzi](https://github.com/giterlizzi)) <giuseppe.diterlizzi@gmail.com>
 
 ## Contributors
 
+  * [Miro-Collas](https://github.com/Miro-Collas)
   * Jos ([Rojoss](https://github.com/Rojoss))
   * HavocKKS ([HavocKKS](https://github.com/HavocKKS))
   * Hideaki SAWADA ([sawachan](https://github.com/sawachan))
   * Dominik Reichardt ([Soeldner](https://github.com/Soeldner))
 
-*For a list of people who have contributed to the template, see [GitHub's list of contributors](https://github.com/LotarProject/dokuwiki-plugin-bootswrapper/contributors).*
+*For a list of people who have contributed to the plugin, see [GitHub's list of contributors](https://github.com/giterlizzi/dokuwiki-plugin-bootswrapper/contributors).*
 
 ## Translators
 
