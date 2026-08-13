@@ -241,7 +241,7 @@ jQuery(document).ready(function () {
     jQuery('.bs-wrap-accordion').each(function () {
 
         var $accordion = jQuery(this),
-            accordion_id = Math.random().toString(36).substr(2, 9),
+            accordion_id = 'e_' + Math.random().toString(36).substr(2, 9),
             is_collapsed = $accordion.hasClass('bs-wrap-accordion-collapsed');
 
         $accordion.find('.panel').each(function () {

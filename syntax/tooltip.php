@@ -47,14 +47,15 @@ class syntax_plugin_bootswrapper_tooltip extends syntax_plugin_bootswrapper_boot
         }
 
         /** @var Doku_Renderer_xhtml $renderer */
+        $data = array_pad($data, 4, null);
         list($state, $match, $pos, $attributes) = $data;
 
         if ($state == DOKU_LEXER_ENTER) {
-            $placement = $attributes['placement'];
-            $title     = $attributes['title'];
-            $html      = $attributes['html'];
+            $placement = $attributes['placement'] ?? '';
+            $title = $attributes['title'] ?? '';
+            $html = $attributes['html'] ?? '';
 
-            if ($html) {
+            if (isset($html)) {
                 $title = hsc(p_render('xhtml', p_get_instructions($title), $info));
             }
 
