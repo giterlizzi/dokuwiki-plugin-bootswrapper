@@ -15,6 +15,8 @@ $doku_inc_dirs = array(
     realpath(dirname(__FILE__) . '/../../../../'), # Default DokuWiki path
 );
 
+use dokuwiki\Extension\Event;
+
 # Load doku_inc.php file
 #
 if (file_exists(dirname(__FILE__) . '/../doku_inc.php')) {
@@ -53,7 +55,7 @@ $JSINFO['namespace'] = '';
 $NS = cleanID($INPUT->str('ns'));
 
 $tmp = array();
-trigger_event('MEDIAMANAGER_STARTED', $tmp);
+Event::createAndTrigger('MEDIAMANAGER_STARTED',  $tmp);
 session_write_close(); //close session
 
 $syntax = array();

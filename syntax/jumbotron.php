@@ -41,19 +41,24 @@ class syntax_plugin_bootswrapper_jumbotron extends syntax_plugin_bootswrapper_bo
         }
 
         /** @var Doku_Renderer_xhtml $renderer */
+        $data = array_pad($data, 5, null);
         list($state, $match, $pos, $attributes, $is_block) = $data;
 
         if ($state == DOKU_LEXER_ENTER) {
-            $background = $attributes['background'];
-            $color      = $attributes['color'];
+            if (isset($attributes['background'])) {
+                $background = $attributes['background'];
+            }
+            if (isset($attributes['color'])) {
+                $color      = $attributes['color'];
+            }
 
             $styles = array();
 
-            if ($background) {
+            if (isset($background)) {
                 $styles[] = 'background-image:url(' . ml($background) . ')';
             }
 
-            if ($color) {
+            if (isset($color)) {
                 $styles[] = 'color:' . hsc($color);
             }
 
