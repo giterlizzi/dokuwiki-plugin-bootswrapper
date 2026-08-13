@@ -43,9 +43,7 @@ Build on any alert by adding an optional ''dismiss'' option.
 
 ===== Options =====
 
-<datatable info="false" paging="false" searching="true">
 ^ Name ^ Default ^ Values ^ Description ^
 | ''type''     | ''info'' | ''success'' ''info'' ''warning'' ''danger'' | Type of alert |
 | ''dismiss''  | optional | ''true'' | Create a dismissible alert |
 | ''icon''     | optional | | Font icon class (eg. Glyphicon or Font-Awesome) |
-</datatable>

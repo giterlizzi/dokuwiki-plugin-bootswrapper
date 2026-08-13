@@ -67,10 +67,8 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur.
 
 ===== Attributes ======
 
-<datatable info="false" paging="false" searching="true">
 ^ Attibute ^ Type ^ Default Value ^ Description ^
 | ''interval'' | number | ''5000'' | The amount of time to delay between automatically cycling an item. If false, carousel will not automatically cycle. |
 | ''pause''    | string | ''hover'' | Pauses the cycling of the carousel on mouseenter and resumes the cycling of the carousel on mouseleave. |
 | ''wrap''     | boolean | ''true'' | Whether the carousel should cycle continuously or have hard stops. |
 | ''keyboard'' | boolean | ''true'' | Whether the carousel should react to keyboard events. |
-</datatable>

@@ -141,10 +141,8 @@ This is callout with custom color (''blue'') and icon (''fa fa-user'')
 
 ===== Options =====
 
-<datatable info="false" paging="false" searching="true">
 ^ Attribute ^ Default Value ^ Allowed Values ^ Description ^
 | ''type''  | ''default'' | ''default'' ''primary'' ''success'' ''info'' ''warning'' ''danger'' (''question'' ''tip'') | Type of callout  \\ \\ ''question'' and ''tip'' are available only for ''icon'' attribute. |
 | ''title'' |  |  | Title of callout |
 | ''icon'' |  | ''true'' or icon class from Glyphicon or FontAwesome (eg. ''fa fa-plus'') | Icon of callout |
 | ''color'' | | W3C Color name (eg. ''blue'', ''orange'', etc) or HEX (eg. ''#FF3300'', ''#777'') | Color of callout |
-</datatable>

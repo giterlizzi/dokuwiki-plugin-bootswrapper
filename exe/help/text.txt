@@ -115,11 +115,9 @@ Similar to the contextual text color attributes, easily set the background of an
 
 ===== Options =====
 
-<datatable info="false" paging="false" searching="true">
 ^ Attribute      ^ Allowed Values ^ Description ^
 | ''type''       | ''muted'' ''primary'' ''success'' ''info'' ''warning'' ''danger'' | Contextual color of text |
 | ''background'' | ''primary'' ''success'' ''info'' ''warning'' ''danger'' | Contextual background of text |
 | ''align''      | ''left'' ''right'' ''center'', ''justify'' ''nowrap'' | Text align |
 | ''transform''  | ''lowercase'' ''uppercase'' ''capitalize'' | Text transformation |
 | ''size''       | ''medium'' ''xx-small'' ''x-small'' ''small'' ''large'' ''x-large'' ''xx-large'' ''smaller'' ''larger'' //''length''// //(%, em, px, etc.)// | Text sizes |
-</datatables>

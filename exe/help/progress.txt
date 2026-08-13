@@ -158,10 +158,8 @@ Place multiple bars into the same ''<nowiki><progress/></nowiki>'' tag to stack 
 
 ===== Options =====
 
-<datatable info="false" paging="false" searching="true">
 ^ Attribute     ^ Default Value ^ Allowed Values ^ Description ^
 | ''type''      | ''info'' | ''success'' ''info'' ''warning'' ''danger'' | Type of progress bar |
 | ''animate''   | optional | ''true'' | Animate the progress bar |
 | ''striped''   | optional | ''true'' | Add a striped effect to progress bar |
 | ''showvalue'' | optional | ''true'' | Display current value of progress bar |
-</datatable>

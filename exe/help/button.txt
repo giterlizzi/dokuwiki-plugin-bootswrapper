@@ -108,7 +108,6 @@ Make buttons look unclickable by fading them back with ''opacity''.
 
 ===== Options =====
 
-<datatable info="false" paging="false" searching="true">
 ^ Attribute ^ Default Value ^ Allowed Values ^ Description ^
 | ''type'' | ''default'' | ''default'' ''primary'' ''success'' ''info'' ''warning'' ''danger'' ''link'' | Type of button |
 | ''icon'' | optional | | Font icon class (eg. Glyphicon or Font-Awesome) |
@@ -117,4 +116,3 @@ Make buttons look unclickable by fading them back with ''opacity''.
 | ''collapse'' | optional | | Target element selector to collapse (see [[collapse]]) |
 | ''disabled'' | optional | ''true'' ''false'' | Disable the button |
 | ''modal'' | optional | | Modal ID (see [[modal]]) |
-</datatable>

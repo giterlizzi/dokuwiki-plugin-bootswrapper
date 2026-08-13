@@ -116,7 +116,6 @@ Use ''remote'' attribute to display DokuWiki pages inside a modal window.
 
 ===== Options =====
 
-<datatable info="false" paging="false" searching="true">
 ^ Name ^ Default ^ Values ^ Description ^
 | ''backdrop'' | ''true'' | ''true'' ''false'' ''static'' | Includes a modal-backdrop element. Alternatively, specify ''static'' for a backdrop which doesn't close the modal on click. |
 | ''keyboard'' | ''true'' | ''true'' ''false'' | Closes the modal when escape key is pressed |
@@ -127,4 +126,3 @@ Use ''remote'' attribute to display DokuWiki pages inside a modal window.
 | ''id''   | NULL | | Modal ID (see [[button]]) |
 | ''title'' | NULL | | Modal title |
 | ''remote'' | NULL | | Display DokuWiki pages inside a Modal window |
-</datatable>

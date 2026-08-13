@@ -22,8 +22,6 @@ See [[accordion]] example page.
 
 ===== Options =====
 
-<datatable info="false" paging="false" searching="true">
 ^ Attribute ^ Default Value ^ Allowed values ^ Description ^
 | ''id''        | | | Target id of collapsed element |
 | ''collapsed'' | ''false'' | ''true'' ''false'' | Enable/Disable collapsed status |
-</datatable>

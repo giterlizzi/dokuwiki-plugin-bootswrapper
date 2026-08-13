@@ -68,7 +68,6 @@ Use the ''focus'' trigger to dismiss popovers on the next click that the user ma
 
 ===== Options =====
 
-<datatable info="false" paging="false" searching="true">
 ^ Name ^ Default ^ Values ^ Description ^
 | ''animation'' | ''true'' | ''true'' ''false'' | Apply a CSS fade transition to the popover |
 | ''content''   | NULL | | The content value |
@@ -77,4 +76,3 @@ Use the ''focus'' trigger to dismiss popovers on the next click that the user ma
 | ''placement'' | ''right'' | ''top'' ''bottom'' ''left'' ''right'' ''auto'' | How to position the popover. \\ When ''auto'' is specified, it will dynamically reorient the popover. For example, if placement is ''auto left'', the popover will display to the left when possible, otherwise it will display right. |
 | ''trigger''   | ''click'' | ''click'' ''hover'' ''focus'' ''manual'' | How popover is triggered. You may pass multiple triggers; separate them with a space. ''manual'' cannot be combined with any other trigger. |
 | ''delay'' \\ ''delay-show'' \\ ''delay-hide'' | ''0'' | | Delay showing and hiding the popover (ms) - does not apply to manual trigger type \\ If a number is supplied, delay is applied to both hide/show. |
-</datatable>
