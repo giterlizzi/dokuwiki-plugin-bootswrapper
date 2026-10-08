@@ -93,6 +93,24 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
                 $markup .= '<div class="panel-body">';
             }
 
+            if ($this->getConf('panelSectionEdit')) {
+                if (defined('SEC_EDIT_PATTERN')) {
+                    $renderer->startSectionEdit(
+                        $pos,
+                        array(
+                            'target' => 'plugin_bootswrapper_panel',
+                            'name' => $state
+                        )
+                    );
+                } else {
+                    $renderer->startSectionEdit(
+                        $pos,
+                        'plugin_bootswrapper_panel',
+                        $state
+                    );
+                }
+            }
+
             if (defined('SEC_EDIT_PATTERN')) { // for DokuWiki Greebo and more recent versions
                 $renderer->startSectionEdit($pos, array('target' => 'plugin_bootswrapper_panel', 'name' => $state));
             } else {
@@ -118,8 +136,9 @@ class syntax_plugin_bootswrapper_panel extends syntax_plugin_bootswrapper_bootst
             $markup .= '</div>';
             $renderer->doc .= $markup;
 
-            $renderer->finishSectionEdit($pos + strlen($match));
-
+            if ($this->getConf('panelSectionEdit')) {
+                $renderer->finishSectionEdit($pos + strlen($match));
+            }
             return true;
         }
 

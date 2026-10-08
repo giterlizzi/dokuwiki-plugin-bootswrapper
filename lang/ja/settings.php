@@ -7,3 +7,4 @@
  
 // 設定管理画面用
 $lang['loadBootstrap'] = "Bootstrap vanilla CSS を読み込む。Bootstrap を基にしたテンプレートをインストールした場合、無効にします。";
+$lang['panelSectionEdit'] = 'パネルのセクション編集を有効にする';

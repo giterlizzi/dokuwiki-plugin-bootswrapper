@@ -9,3 +9,4 @@
  
 // for the configuration manager
 $lang['loadBootstrap'] = "Load the Bootstrap vanilla CSS. Załaduj Bootstrap vanilla CSS. Wyłącz, jeśli masz zainstalowany szablon oparty o Bootstrap.";
+$lang['panelSectionEdit'] = 'Włącz edycję sekcji dla paneli';

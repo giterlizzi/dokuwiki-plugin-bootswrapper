@@ -8,3 +8,4 @@
  
 // for the configuration manager
 $lang['loadBootstrap'] = "부트스트랩 바닐라 CSS 불러오기. 부트스트랩 바탕의 템플릿이 설치되어 있다면 비활성화하세요.";
+$lang['panelSectionEdit'] = '패널의 섹션 편집 기능 활성화';

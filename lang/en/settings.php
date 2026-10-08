@@ -8,3 +8,4 @@
  
 // for the configuration manager
 $lang['loadBootstrap'] = "Load the Bootstrap vanilla CSS. Disable it if you have installed a Bootstrap based template.";
+$lang['panelSectionEdit'] = 'Enable section editing for panels';

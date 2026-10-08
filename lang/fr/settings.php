@@ -8,3 +8,4 @@
 
 // for the configuration manager
 $lang['loadBootstrap'] = "Télécharger le CSS de Bootstrap vanilla. Désactivez le si vous avez installé un thème basé sur Bootstrap.";
+$lang['panelSectionEdit'] = 'Activer la modification des sections pour les panneaux' ;

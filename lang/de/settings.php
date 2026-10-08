@@ -9,3 +9,4 @@
  
 // Für die Konfiguration
 $lang['loadBootstrap'] = "Lade die Bootstrap vanilla css. Deaktiviere diese Option wenn ein Bootstrap Basis Template installiert ist.";
+$lang['panelSectionEdit'] = 'Abschnittsbearbeitung für Panels aktivieren';
